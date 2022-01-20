@@ -1,7 +1,7 @@
 """create_users_table
 
 Revision ID: ffdc0a98111c
-Revises: 
+Revises:
 Create Date: 2020-11-20 15:06:02.230689
 
 """
@@ -22,6 +22,9 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
+    sa.Column('firstname', sa.String(length=40), nullable=False),
+    sa.Column('lastname', sa.String(length=40), nullable=False),
+    sa.Column('profilePic', sa.String(length=280)),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
