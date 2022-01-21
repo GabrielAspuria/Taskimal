@@ -1,13 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
 import React, {useEffect} from 'react';
-// import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { allTasks } from '../store/tasks';
 
 const MainPage = () => {
     const tasksObj = useSelector(state => state.tasks)
-    console.log("TASKS:", tasksObj)
     const dispatch = useDispatch();
-
 
     useEffect(() => {
         dispatch(allTasks())
@@ -17,6 +15,14 @@ const MainPage = () => {
 
     return (
         <div>
+            {tasks?.length > 0 && (
+                tasks.map((task) => (
+                    <div>
+                        <p> {task.name} </p>
+                        <img src={task?.pictures} />
+                    </div>
+                )
+            ))}
         </div>
     )
 }

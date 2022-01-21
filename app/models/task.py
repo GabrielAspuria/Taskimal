@@ -19,7 +19,7 @@ class Task(db.Model):
             'userId' : self.userId,
             'name' : self.name,
             'description' : self.description,
-            'price' : self.price,
+            'price' : float(self.price),
             'category' : self.category,
             'pictures' : self.pictures
         }

@@ -6,9 +6,9 @@ const getAllTasks = (tasks) => ({
 })
 
 export const allTasks = () => async (dispatch) => {
-    const res = await fetch ('/api/tasks');
-    const data = await res.json();
-    dispatch(getAllTasks(data))
+    const response = await fetch("/api/tasks");
+    const data = await response.json();
+    dispatch(getAllTasks(data));
     return data;
 }
 
@@ -18,7 +18,7 @@ const tasksReducer = (state = {}, action) => {
         case GET_ALL_TASKS:
             newState = { ...state };
             action.tasks.tasks.forEach((task) => {
-                newState[task.id] = task
+                newState[task.id] = task;
             });
             return newState;
 

@@ -9,3 +9,11 @@ task_routes = Blueprint('tasks', __name__)
 def index():
     tasks = Task.query.all()
     return {'tasks': [task.to_dict() for task in tasks]}
+
+@task_routes.route('/exercise')
+
+@task_routes.route('/training')
+
+@task_routes.route('/boarding')
+
+@task_routes.route('/misc')
