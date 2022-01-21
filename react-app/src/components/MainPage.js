@@ -1,13 +1,23 @@
-import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { NavLink } from 'react-router-dom';
-import App from '../App';
-import LogoutButton from './auth/LogoutButton';
+import React, {useEffect} from 'react';
+// import { NavLink } from 'react-router-dom';
+import { allTasks } from '../store/tasks';
 
 const MainPage = () => {
+    const tasksObj = useSelector(state => state.tasks)
+    console.log("TASKS:", tasksObj)
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        dispatch(allTasks())
+    }, [dispatch])
+
+    const tasks = Object.values(tasksObj)
 
     return (
-        <h1> Taskimal </h1>
+        <div>
+        </div>
     )
 }
 

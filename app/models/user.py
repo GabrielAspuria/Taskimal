@@ -14,6 +14,8 @@ class User(db.Model, UserMixin):
     profilePic = db.Column(db.String(280))
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    tasks = db.relationship('Task', back_populates='user')
+
     @property
     def password(self):
         return self.hashed_password
