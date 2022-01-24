@@ -11,6 +11,8 @@ def index():
     return {'tasks': [task.to_dict() for task in tasks]}
 
 @task_routes.route('/exercise')
+def exercise():
+    
 
 @task_routes.route('/training')
 
