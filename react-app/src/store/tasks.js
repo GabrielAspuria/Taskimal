@@ -1,48 +1,61 @@
 const GET_ALL_TASKS = 'tasks/GET_ALL_TASKS';
-const GET_EXERCISES = 'tasks/GET_EXERCISES';
-const GET_TRAINING = 'tasks/GET_TRAINING';
-const GET_BOARDING = 'tasks/GET_BOARDING';
-const GET_MISC = 'tasks/GET_MISC';
+const ADD_TASK = 'tasks/ADD_TASK'
+// const ADD_EXERCISE = 'tasks/ADD_EXERCISE'
+// const ADD_TRAINING = 'tasks/ADD_TRAINING'
+// const ADD_BOARDING = 'tasks/ADD_BOARDING'
+// const ADD_MISC = 'tasks/ADD_MISC'
+// const EDIT_EXERCISE
 
 const getAllTasks = (tasks) => ({
     type: GET_ALL_TASKS,
     tasks
 })
 
-// const getExercises = (exercises) => ({
-//     type: GET_EXERCISES,
-//     exercises
+const addTask = task => ({
+    type: ADD_TASK,
+    task
+})
+
+// const addExercise = exercise => ({
+//     type: ADD_EXERCISE,
+//     exercise
 // })
 
-// const getTraining = (trainings) => ({
-//     type: GET_TRAINING,
-//     trainings
+
+// const addTraining = training => ({
+//     type: ADD_TRAINING,
+//     training
 // })
 
-// const getBoarding = (boardings) => ({
-//     type: GET_BOARDING,
-//     boardings
+// const addBoarding = boarding => ({
+//     type: ADD_BOARDING,
+//     boarding
 // })
 
-// const getMisc = (miscs) => ({
-//     type: GET_MISC,
-//     miscs
+// const addMisc = misc => ({
+//     type: ADD_MISC,
+//     misc
 // })
 
 export const allTasks = () => async (dispatch) => {
-    const response = await fetch("/api/tasks");
+    const response = await fetch("/api/tasks/");
     const data = await response.json();
     dispatch(getAllTasks(data));
     return data;
 }
 
-// export const allExercises = () => async (dispatch) => {
-//     const res = await fetch ('api/exercise')
-//     const data = await res.json();
-//     dispatch(getExercises(data));
-//     return data
-// }
-
+export const createTask = (task) => async (dispatch) => {
+    const res = await fetch('/api/tasks/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(task)
+    });
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(addTask(data))
+        return data
+    }
+}
 
 const tasksReducer = (state = {}, action) => {
     let newState;
@@ -53,6 +66,9 @@ const tasksReducer = (state = {}, action) => {
                 newState[task.id] = task;
             });
             return newState;
+
+        case ADD_TASK:
+            return { ...state, [action.task.id]: action.task }
 
         default:
             return state;

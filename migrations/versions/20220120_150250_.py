@@ -33,6 +33,7 @@ def upgrade():
     op.create_table('tasks',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=True),
+    sa.Column('animal', sa.String(length=50), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('description', sa.String(length=300), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),

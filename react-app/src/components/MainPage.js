@@ -22,25 +22,25 @@ const MainPage = () => {
         <div>
             <div>
                 {exercises?.category}
-                <NavLink to='/tasks/Exercise'>
+                <NavLink to='/tasks/exercise'>
                     <img src={exercises?.pictures}></img>
                 </NavLink>
             </div>
             <div>
                 <p>{trainings?.category}</p>
-                <NavLink to='/tasks/Training'>
+                <NavLink to='/tasks/training'>
                     <img src={trainings?.pictures}></img>
                 </NavLink>
             </div>
             <div>
                 <p>{boardings?.category}</p>
-                <NavLink to='/tasks/Boarding'>
+                <NavLink to='/tasks/boarding'>
                     <img src={boardings?.pictures}></img>
                 </NavLink>
             </div>
             <div>
                 <p>{miscs?.category}</p>
-                <NavLink to='/tasks/Misc'>
+                <NavLink to='/tasks/misc'>
                     <img src={miscs?.pictures}></img>
                 </NavLink>
             </div>

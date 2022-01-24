@@ -9,6 +9,9 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import MainPage from './components/MainPage';
 import Exercises from './components/Categories/Exercises';
+import Trainings from './components/Categories/Trainings';
+import Boardings from './components/Categories/Boardings';
+import Miscs from './components/Categories/Miscs';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -32,8 +35,17 @@ function App() {
         <Route path ='/' exact={true}>
           <MainPage />
         </Route>
-        <Route path='/tasks/Exercise' exact={true}>
+        <Route path='/tasks/exercise' exact={true}>
           <Exercises />
+        </Route>
+        <Route path='/tasks/training' exact={true}>
+          <Trainings />
+        </Route>
+        <Route path='/tasks/boarding' exact={true}>
+          <Boardings />
+        </Route>
+        <Route path='/tasks/misc' exact={true}>
+          <Miscs />
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
