@@ -35,11 +35,21 @@ def seed_tasks():
         pictures='https://res.cloudinary.com/gabrielaspuria/image/upload/v1642789053/Taskimal/Puppy_playdate_zzsynf.png'
     )
 
+    bird_running = Task(
+        userId=1,
+        name='Bird Running',
+        description='Looking for friends to run with my bird and me! $1 a session because I just need birds to help my bird not feel alone when we run!',
+        price=1,
+        category='Exercise',
+        pictures='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643045580/Taskimal/bird_running_g4wivi.png'
+    )
+
 
     db.session.add(walking_all)
     db.session.add(crate_training_all)
     db.session.add(boarding_cats)
     db.session.add(puppy_playdate)
+    db.session.add(bird_running)
     db.session.commit()
 
 def undo_tasks():

@@ -8,6 +8,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import User from './components/User';
 import { authenticate } from './store/session';
 import MainPage from './components/MainPage';
+import Exercises from './components/Categories/Exercises';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -30,6 +31,9 @@ function App() {
       <Switch>
         <Route path ='/' exact={true}>
           <MainPage />
+        </Route>
+        <Route path='/tasks/Exercise' exact={true}>
+          <Exercises />
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
