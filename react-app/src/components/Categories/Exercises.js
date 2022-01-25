@@ -46,7 +46,8 @@ const Exercises = () => {
 
 
     const tasks = Object.values(tasksObj)
-    const exercises = tasks.filter((task) => task.category === 'Exercise')
+    const exercises = tasks.filter((task) => task?.category === 'Exercise')
+    console.log(exercises)
 
     return (
         <div>
@@ -54,7 +55,7 @@ const Exercises = () => {
                 <div>
                     {exercise?.animal} {exercise?.name} ${exercise?.price}
                     <div>
-                        <NavLink to={`/tasks/exercise/${exercise?.id}`}>
+                        <NavLink to={`/tasks/${exercise?.id}`}>
                             <img src={exercise.pictures} />
                         </NavLink>
                     </div>

@@ -40,15 +40,13 @@ def edit_task(id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        task = Task(
-            task.animal=form.data['animal'],
-            task.name=form.data['name'],
-            task.description=form.data['description'],
-            task.price=form.data['price'],
-            task.category=form.data['category'],
-            task.pictures=form.data['pictures'],
-            task.userId=current_user.id
-            db.session.commit()
-            return task.to_dict()
-        )
-        return form.errors
+        task.animal=form.data['animal'],
+        task.name=form.data['name'],
+        task.description=form.data['description'],
+        task.price=form.data['price'],
+        task.category=form.data['category'],
+        task.pictures=form.data['pictures'],
+        task.userId=current_user.id
+        
+        db.session.commit()
+        return task.to_dict()
