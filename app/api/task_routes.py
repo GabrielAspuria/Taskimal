@@ -11,16 +11,10 @@ def index():
     return {'tasks': [task.to_dict() for task in tasks]}
 
 @task_routes.route('/', methods=['POST'])
+@login_required
 def add_task():
     form = AddTaskForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    json = request.json
-    form.data['animal'] = json['animal']
-    form.data['name'] = json['name']
-    form.data['description'] = json['description']
-    form.data['price'] = json['price']
-    form.data['category'] = json['category']
-    form.data['pictures'] = json['pictures']
 
     if form.validate_on_submit():
         task = Task(
@@ -35,5 +29,26 @@ def add_task():
 
         db.session.add(task)
         db.session.commit()
-        return jsonify(task.to_dict())
-    return jsonify(form.errors)
+        return task.to_dict()
+    return form.errors
+
+@task_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def edit_task(id):
+    task = Task.query.get(id)
+    form = AddTaskForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        task = Task(
+            task.animal=form.data['animal'],
+            task.name=form.data['name'],
+            task.description=form.data['description'],
+            task.price=form.data['price'],
+            task.category=form.data['category'],
+            task.pictures=form.data['pictures'],
+            task.userId=current_user.id
+            db.session.commit()
+            return task.to_dict()
+        )
+        return form.errors

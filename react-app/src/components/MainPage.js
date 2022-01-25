@@ -21,14 +21,14 @@ const MainPage = () => {
     return (
         <div>
             <div>
-                {exercises?.category}
+                <p>{exercises?.category === 'Exercise'}</p>
                 <NavLink to='/tasks/exercise'>
                     <img src={exercises?.pictures}></img>
                 </NavLink>
             </div>
             <div>
                 <p>{trainings?.category}</p>
-                <NavLink to='/tasks/training'>
+                <NavLink to={`/tasks/training`}>
                     <img src={trainings?.pictures}></img>
                 </NavLink>
             </div>

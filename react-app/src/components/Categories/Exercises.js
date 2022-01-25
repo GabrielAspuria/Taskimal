@@ -6,7 +6,7 @@ import { allTasks, createTask } from '../../store/tasks';
 const Exercises = () => {
     const tasksObj = useSelector(state => state.tasks)
     const dispatch = useDispatch();
-    const signedInUser = useSelector(state => state.session.user)
+    const sessionUser = useSelector(state => state.session.user)
 
     const [animal, setAnimal] = useState('Any')
     const [name,setName] = useState('')
@@ -38,7 +38,7 @@ const Exercises = () => {
             price,
             category,
             pictures,
-            userId: signedInUser.id
+            userId: sessionUser.id
         }
         await dispatch(createTask(newExercise))
         resetForm()
@@ -61,7 +61,7 @@ const Exercises = () => {
 
                 </div>
             ))}
-            {signedInUser !== null &&
+            {sessionUser !== null &&
                 <form onSubmit={handleSubmit}>
                     <label> Animal: </label>
                     <select>

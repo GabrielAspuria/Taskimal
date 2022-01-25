@@ -1,10 +1,6 @@
 const GET_ALL_TASKS = 'tasks/GET_ALL_TASKS';
 const ADD_TASK = 'tasks/ADD_TASK'
-// const ADD_EXERCISE = 'tasks/ADD_EXERCISE'
-// const ADD_TRAINING = 'tasks/ADD_TRAINING'
-// const ADD_BOARDING = 'tasks/ADD_BOARDING'
-// const ADD_MISC = 'tasks/ADD_MISC'
-// const EDIT_EXERCISE
+const EDIT_TASK = 'tasks/EDIT_TASK'
 
 const getAllTasks = (tasks) => ({
     type: GET_ALL_TASKS,
@@ -16,26 +12,10 @@ const addTask = task => ({
     task
 })
 
-// const addExercise = exercise => ({
-//     type: ADD_EXERCISE,
-//     exercise
-// })
-
-
-// const addTraining = training => ({
-//     type: ADD_TRAINING,
-//     training
-// })
-
-// const addBoarding = boarding => ({
-//     type: ADD_BOARDING,
-//     boarding
-// })
-
-// const addMisc = misc => ({
-//     type: ADD_MISC,
-//     misc
-// })
+const updateTask = task => ({
+    type: EDIT_TASK,
+    task
+})
 
 export const allTasks = () => async (dispatch) => {
     const response = await fetch("/api/tasks/");
@@ -57,6 +37,20 @@ export const createTask = (task) => async (dispatch) => {
     }
 }
 
+export const editTask = (task, id) => async(dispatch) => {
+    const res = await fetch(`/api/tasks/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(task)
+    })
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(updateTask(data))
+        return data
+    }
+}
+
+
 const tasksReducer = (state = {}, action) => {
     let newState;
     switch (action.type) {
@@ -69,6 +63,10 @@ const tasksReducer = (state = {}, action) => {
 
         case ADD_TASK:
             return { ...state, [action.task.id]: action.task }
+
+        case EDIT_TASK:
+            newState = { ...state }
+            newState[action.task.id] = action.task
 
         default:
             return state;
