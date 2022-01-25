@@ -12,6 +12,8 @@ import Exercises from './components/Categories/Exercises';
 import Trainings from './components/Categories/Trainings';
 import Boardings from './components/Categories/Boardings';
 import Miscs from './components/Categories/Miscs';
+import TaskDetail from './components/Categories/Detail/TaskDetail';
+import UserPage from './components/Users/UserPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -35,6 +37,9 @@ function App() {
         <Route path ='/' exact={true}>
           <MainPage />
         </Route>
+        <Route path='/user/:id' exact={true}>
+          <UserPage />
+        </Route>
         <Route path='/tasks/exercise' exact={true}>
           <Exercises />
         </Route>
@@ -46,6 +51,9 @@ function App() {
         </Route>
         <Route path='/tasks/misc' exact={true}>
           <Miscs />
+        </Route>
+        <Route path='/tasks/:id'>
+          <TaskDetail />
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />

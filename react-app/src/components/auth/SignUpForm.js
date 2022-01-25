@@ -9,7 +9,7 @@ const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastName] = useState('')
-  const [profilePic, setProfilePic] = useState('')
+  const [profilePic, setProfilePic] = useState('https://res.cloudinary.com/gabrielaspuria/image/upload/v1643131788/Taskimal/paw_goc9fo.png')
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);

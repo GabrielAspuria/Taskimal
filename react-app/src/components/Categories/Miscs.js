@@ -54,7 +54,7 @@ const Miscs = () => {
                 <div>
                     {misc?.animal} {misc?.name} ${misc?.price}
                     <div>
-                        <NavLink to={`/tasks/misc/${misc?.id}`}>
+                        <NavLink to={`/tasks/${misc?.id}`}>
                             <img src={misc.pictures} />
                         </NavLink>
                     </div>

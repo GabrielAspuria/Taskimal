@@ -54,8 +54,8 @@ const Trainings = () => {
                 <div>
                     {training?.animal} {training?.name} ${training?.price}
                     <div>
-                        <NavLink to={`/tasks/training/${training?.id}`}>
-                            <img src={training.pictures} />
+                        <NavLink to={`/tasks/${training?.id}`}>
+                            <img src={training.pictures}/>
                         </NavLink>
                     </div>
 

@@ -54,7 +54,7 @@ const Boardings = () => {
                 <div>
                     {boarding?.animal} {boarding?.name} ${boarding?.price}
                     <div>
-                        <NavLink to={`/tasks/boarding/${boarding?.id}`}>
+                        <NavLink to={`/tasks/${boarding?.id}`}>
                             <img src={boarding.pictures} />
                         </NavLink>
                     </div>

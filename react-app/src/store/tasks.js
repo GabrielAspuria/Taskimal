@@ -50,7 +50,6 @@ export const editTask = (task, id) => async(dispatch) => {
     }
 }
 
-
 const tasksReducer = (state = {}, action) => {
     let newState;
     switch (action.type) {

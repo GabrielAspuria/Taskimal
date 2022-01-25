@@ -1,6 +1,7 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
+const GET_USERS = 'session/GET_USERS';
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -11,7 +12,13 @@ const removeUser = () => ({
   type: REMOVE_USER,
 })
 
-const initialState = { user: null };
+const getUsers = (users) => ({
+  type: GET_USERS,
+  users
+})
+
+const initialState = { user: null, users: {} };
+
 
 export const authenticate = () => async (dispatch) => {
   const response = await fetch('/api/auth/', {
@@ -69,7 +76,6 @@ export const logout = () => async (dispatch) => {
   }
 };
 
-
 export const signUp = (username, email, firstname, lastname, profilePic, password) => async (dispatch) => {
   const response = await fetch('/api/auth/signup', {
     method: 'POST',
@@ -100,12 +106,28 @@ export const signUp = (username, email, firstname, lastname, profilePic, passwor
   }
 }
 
+export const allUsers = () => async (dispatch) => {
+  const response = await fetch('/api/users/')
+  if (response.ok) {
+    const data = await response.json()
+    dispatch(getUsers(data))
+    return data
+  }
+}
+
 export default function reducer(state = initialState, action) {
+  let newState;
   switch (action.type) {
     case SET_USER:
       return { user: action.payload }
     case REMOVE_USER:
       return { user: null }
+    case GET_USERS:
+      newState = { ...state, users: { ...state.users } }
+      action.users.users.forEach(user => {
+        newState.users[user.id] = user
+      })
+      return newState;
     default:
       return state;
   }

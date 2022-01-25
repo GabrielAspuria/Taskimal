@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     firstname = db.Column(db.String(40), nullable=False)
     lastname = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    profilePic = db.Column(db.String(280))
+    profilePic = db.Column(db.String(500))
     hashed_password = db.Column(db.String(255), nullable=False)
 
     tasks = db.relationship('Task', back_populates='user')
