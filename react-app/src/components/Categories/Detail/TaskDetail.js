@@ -1,18 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { allTasks } from '../../../store/tasks'
 import { allUsers } from '../../../store/users'
+import { editTask } from '../../../store/tasks'
+import { removeTask } from '../../../store/tasks'
 import '../../CSS/TaskDetail.css'
 
-const TaskDetail = ({users}) => {
+const TaskDetail = ({animal, name, description, price, category, pictures}) => {
     const tasksObj = useSelector(state => state.tasks)
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
-    const usersObj = useSelector(state => state.users)
-    console.log(usersObj)
+    const usersObj = useSelector(state => state.users.users)
     const { id } = useParams();
-    // const [name, setName] = useState('')
+    const history = useHistory()
+    const [editAnimal, setAnimal] = useState(animal?.animal)
+    const [editDescription, setDescription] = useState(description?.description)
+    const [editPrice, setPrice] = useState(price)
+    const [editCategory, setCategory] = useState(category?.category)
+    const [editPictures, setPictures] = useState(pictures?.pictures)
 
     useEffect(() => {
         dispatch(allTasks())
@@ -22,16 +28,38 @@ const TaskDetail = ({users}) => {
         dispatch(allUsers())
     }, [dispatch])
 
-    const task = tasksObj[id]
-    const user = Object.values(usersObj)
-    console.log("USER",user)
+    const handleEdit = async (e) => {
+        e.preventDefault()
+        const editedTask = {
+            animal: editAnimal,
+            description: editDescription,
+            price: +editPrice,
+            category: editCategory,
+            pictures: editPictures,
+            userId: sessionUser.id
+        }
+        await dispatch(editTask(editedTask, task?.id))
+    }
 
+    const handleDelete = async (e) => {
+        e.preventDefault()
+        await dispatch(removeTask(id))
+        history.push('/')
+    }
+
+    const task = tasksObj[id]
+    console.log(task)
+    const tasks = Object.values(tasksObj)
 
     return (
         <div>
             <div>
-                {}
-                <img src='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643130440/Taskimal/vaccination_mixxfz.png' className='profile-pic' />
+                {task?.profilePic === null && (
+                    <img src='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643131788/Taskimal/paw_goc9fo.png' className='profile-pic' />
+                )}
+                {task?.profilePic && (
+                    <img src={task?.profilePic}/>
+                )}
                 <img src={task?.pictures} className='task-img'></img>
             </div>
             <div>
@@ -41,7 +69,14 @@ const TaskDetail = ({users}) => {
                 <p> Animal: {task?.animal} </p>
             </div>
             <div>
+                <button>Edit</button>
+                <button
+                    onClick={handleDelete}
+                    id={id}
 
+                    >
+                    Delete
+                </button>
             </div>
         </div>
     )

@@ -5,24 +5,24 @@ const getUsers = (users) => ({
     users
   })
 
+const initialState = { users: {} };
+
 export const allUsers = () => async (dispatch) => {
   const response = await fetch('/api/users/')
-  if (response.ok) {
-    const data = await response.json()
-    dispatch(getUsers(data))
-    return data
-  }
+  const data = await response.json()
+  dispatch(getUsers(data))
+  return data
 }
 
-const userReducer = (state = {}, action) => {
+const userReducer = (state = initialState, action) => {
     let newState;
     switch(action.type){
         case GET_USERS:
-              newState = { ...state, users: { ...state.users } }
-              action.users.users.forEach(user => {
-                newState.users[user.id] = user
-              })
-              return newState;
+            newState = { ...state, users: { ...state.users} }
+            action.users.users.forEach((user) => {
+              newState.users[user.id] = user
+            })
+            return newState;
 
         default:
             return state;

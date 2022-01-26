@@ -44,10 +44,8 @@ const Exercises = () => {
         resetForm()
     }
 
-
     const tasks = Object.values(tasksObj)
     const exercises = tasks.filter((task) => task?.category === 'Exercise')
-    console.log(exercises)
 
     return (
         <div>

@@ -7,7 +7,7 @@ import './CSS/MainPage.css'
 
 const MainPage = () => {
     const tasksObj = useSelector(state => state.tasks)
-    const usersObj = useSelector(state => state.session)
+    console.log("TASKSOBJ:",tasksObj)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -19,8 +19,6 @@ const MainPage = () => {
     },[dispatch])
 
     const tasks = Object.values(tasksObj)
-    // const users = Object.values(usersObj)
-    // console.log("USERS:",users)
     const exercises = tasks.find((task) => task.category === 'Exercise')
     const trainings = tasks.find((task) => task.category === 'Training')
     const boardings = tasks.find((task) => task.category === 'Boarding')
@@ -30,22 +28,22 @@ const MainPage = () => {
     return (
         <div>
             <div className='category-links'>
-                <p>{exercises?.category === 'Exercise'}</p>
+                <p>Exercise</p>
                 <NavLink to='/tasks/exercise'>
                     <img src={exercises?.pictures} className='category-img'></img>
                 </NavLink>
 
-                <p>{trainings?.category}</p>
+                <p>Training</p>
                 <NavLink to={`/tasks/training`}>
                     <img src={trainings?.pictures} className='category-img'></img>
                 </NavLink>
 
-                <p>{boardings?.category}</p>
+                <p>Boarding</p>
                 <NavLink to='/tasks/boarding'>
                     <img src={boardings?.pictures} className='category-img'></img>
                 </NavLink>
 
-                <p>{miscs?.category}</p>
+                <p>Misc</p>
                 <NavLink to='/tasks/misc'>
                     <img src={miscs?.pictures} className='category-img'></img>
                 </NavLink>

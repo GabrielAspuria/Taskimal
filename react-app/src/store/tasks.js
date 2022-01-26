@@ -1,6 +1,7 @@
 const GET_ALL_TASKS = 'tasks/GET_ALL_TASKS';
 const ADD_TASK = 'tasks/ADD_TASK'
 const EDIT_TASK = 'tasks/EDIT_TASK'
+const DELETE_TASK = 'tasks/DELETE_TASK'
 
 const getAllTasks = (tasks) => ({
     type: GET_ALL_TASKS,
@@ -15,6 +16,11 @@ const addTask = task => ({
 const updateTask = task => ({
     type: EDIT_TASK,
     task
+})
+
+const deleteTask = id => ({
+    type: DELETE_TASK,
+    id
 })
 
 export const allTasks = () => async (dispatch) => {
@@ -50,6 +56,15 @@ export const editTask = (task, id) => async(dispatch) => {
     }
 }
 
+export const removeTask = (id) => async (dispatch) => {
+    const res = await fetch(`/api/tasks/${id}`, {
+        method: 'DELETE'
+    })
+    if (res.ok){
+        dispatch(deleteTask(id))
+    }
+}
+
 const tasksReducer = (state = {}, action) => {
     let newState;
     switch (action.type) {
@@ -61,11 +76,16 @@ const tasksReducer = (state = {}, action) => {
             return newState;
 
         case ADD_TASK:
-            return { ...state, [action.task.id]: action.task }
+            return { ...state, [action.task.userId]: action.task }
 
         case EDIT_TASK:
             newState = { ...state }
             newState[action.task.id] = action.task
+
+        case DELETE_TASK:
+            newState = { ...state }
+            delete newState[action.id]
+            return newState
 
         default:
             return state;

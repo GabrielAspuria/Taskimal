@@ -47,6 +47,14 @@ def edit_task(id):
         task.category=form.data['category'],
         task.pictures=form.data['pictures'],
         task.userId=current_user.id
-        
+
         db.session.commit()
         return task.to_dict()
+
+@task_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_task(id):
+    task = Task.query.get(id)
+    db.session.delete(task)
+    db.session.commit()
+    return {"Delete":"Success"}

@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { allUsers } from "../../store/users";
 import { allTasks } from "../../store/tasks";
+import { editTask } from "../../store/tasks";
+import { removeTask } from "../../store/tasks";
 
-const UserPage = () => {
+const UserPage = ({id}) => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const tasksObj = useSelector(state => state.tasks)
@@ -16,6 +19,12 @@ const UserPage = () => {
     useEffect(() => {
         dispatch(allTasks())
     }, [dispatch])
+
+    const onSubmit = async (e) => {
+        e.preventDefault()
+        await dispatch(removeTask(id))
+    }
+
 
     const tasks = Object.values(tasksObj)
     const userTasks = tasks.filter((task) => task.userId === user.id)
@@ -33,10 +42,19 @@ const UserPage = () => {
                 <div>
                     {userTasks?.length > 0 &&
                     userTasks.map((task) => (
+                        <div>
 
-                        <NavLink to={`/tasks/${task.id}`}>
-                            <img src={task.pictures}></img>
-                        </NavLink>
+                            <NavLink to={`/tasks/${task.id}`}>
+                                <img src={task.pictures}></img>
+                            </NavLink>
+                            <button>Edit</button>
+                            <button
+                                 onClick={onSubmit}
+                                 id={id}
+                                 >
+                                 Delete
+                                </button>
+                        </div>
                     ))}
                 </div>
             )}
