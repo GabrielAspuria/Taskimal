@@ -2,27 +2,27 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { editTask } from '../../../store/tasks'
 
-const EditTaskButton = ({ task, animal, name, description, price, pictures}) => {
+const EditTaskButton = (props) => {
     const dispatch = useDispatch()
-
-    const [editAnimal, setAnimal] = useState(animal)
-    const [editName, setName] = useState(name)
-    const [editDescription, setDescription] = useState(description)
-    const [editPrice, setPrice] = useState(price)
-    const [editPictures, setPictures] = useState(pictures)
+    const [editAnimal, setAnimal] = useState("")
+    const [editName, setName] = useState("")
+    const [editDescription, setDescription] = useState("")
+    const [editPrice, setPrice] = useState("")
+    const [editPictures, setPictures] = useState("")
 
 
     const handleEdit = async (e) => {
         e.preventDefault()
         const editedTask = {
             animal: editAnimal,
+            name: props.task.name,
+            category: props.task.category,
             description: editDescription,
             price: editPrice,
             pictures: editPictures,
         }
-        await dispatch(editTask(editedTask, task?.id))
+        await dispatch(editTask(editedTask, props.task?.id))
     }
-    console.log("ANIMAL:",animal?.animal, editAnimal)
 
     return (
         <form onSubmit={handleEdit}>

@@ -44,7 +44,7 @@ export const createTask = (task) => async (dispatch) => {
 }
 
 export const editTask = (task, id) => async(dispatch) => {
-    const res = await fetch(`/api/tasks/${id}/`, {
+    const res = await fetch(`/api/tasks/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(task)
@@ -80,7 +80,10 @@ const tasksReducer = (state = {}, action) => {
 
         case EDIT_TASK:
             newState = { ...state }
+            console.log("THIS IS THE NEWSTATE", newState)
+            console.log("THIS IS THE ACTION.TASK", action.task)
             newState[action.task.id] = action.task
+            return newState
 
         case DELETE_TASK:
             newState = { ...state }

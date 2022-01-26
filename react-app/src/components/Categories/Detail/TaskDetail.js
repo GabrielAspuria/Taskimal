@@ -30,6 +30,7 @@ const TaskDetail = () => {
     }
 
     const task = tasksObj[id]
+    console.log("TASK",task)
     const tasks = Object.values(tasksObj)
     const users = Object.values(usersObj)
     const creator = users.filter((user) => user?.id === task?.userId)
@@ -49,7 +50,10 @@ const TaskDetail = () => {
             </div>
             <div>
                 {sessionUser?.id === creator[0]?.id && (
-                    <EditTaskButton></EditTaskButton>
+                    <EditTaskButton
+                    task={task}
+                    // animal={animal} name={name} description={description} price={price} pictures={pictures}
+                    ></EditTaskButton>
 
                 )}
                 {sessionUser?.id === creator[0]?.id && (
