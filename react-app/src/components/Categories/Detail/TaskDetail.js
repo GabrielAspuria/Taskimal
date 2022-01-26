@@ -69,11 +69,10 @@ const TaskDetail = ({animal, name, description, price, category, pictures}) => {
                 <p> Animal: {task?.animal} </p>
             </div>
             <div>
-                <button>Edit</button>
+                <button onClick={{handleEdit}}>Edit</button>
                 <button
                     onClick={handleDelete}
                     id={id}
-
                     >
                     Delete
                 </button>
