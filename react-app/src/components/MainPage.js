@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import React, {useEffect} from 'react';
 import { NavLink } from 'react-router-dom';
 import { allTasks } from '../store/tasks';
-import { allUsers } from '../store/session';
+import { allUsers } from '../store/users';
 import './CSS/MainPage.css'
 
 const MainPage = () => {
@@ -19,8 +19,8 @@ const MainPage = () => {
     },[dispatch])
 
     const tasks = Object.values(tasksObj)
-    const users = Object.values(usersObj)
-    console.log("USERS:",users)
+    // const users = Object.values(usersObj)
+    // console.log("USERS:",users)
     const exercises = tasks.find((task) => task.category === 'Exercise')
     const trainings = tasks.find((task) => task.category === 'Training')
     const boardings = tasks.find((task) => task.category === 'Boarding')
