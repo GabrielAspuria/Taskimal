@@ -63,7 +63,10 @@ const Exercises = () => {
             {sessionUser !== null &&
                 <form onSubmit={handleSubmit}>
                     <label> Animal: </label>
-                    <select>
+                    <select
+                    value={animal}
+                    onChange={(e) => setAnimal(e.target.value)}
+                    >
                         <option value='Any'> Any </option>
                         <option value='Dog'> Dog </option>
                         <option value='Cat'> Cat </option>

@@ -1,11 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { allUsers } from "../../store/users";
-import { allTasks } from "../../store/tasks";
-import { editTask } from "../../store/tasks";
-import { removeTask } from "../../store/tasks";
+import { allTasks, editTask, removeTask } from "../../store/tasks";
 
 const UserPage = ({id}) => {
     const dispatch = useDispatch()
@@ -27,8 +24,7 @@ const UserPage = ({id}) => {
 
 
     const tasks = Object.values(tasksObj)
-    const userTasks = tasks.filter((task) => task.userId === user.id)
-    console.log(userTasks)
+    const userTasks = tasks.filter((task) => task?.userId === user?.id)
 
     return (
         <div>
@@ -47,13 +43,6 @@ const UserPage = ({id}) => {
                             <NavLink to={`/tasks/${task.id}`}>
                                 <img src={task.pictures}></img>
                             </NavLink>
-                            <button>Edit</button>
-                            <button
-                                 onClick={onSubmit}
-                                 id={id}
-                                 >
-                                 Delete
-                                </button>
                         </div>
                     ))}
                 </div>

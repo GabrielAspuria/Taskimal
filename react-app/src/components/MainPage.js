@@ -7,7 +7,6 @@ import './CSS/MainPage.css'
 
 const MainPage = () => {
     const tasksObj = useSelector(state => state.tasks)
-    console.log("TASKSOBJ:",tasksObj)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -48,16 +47,6 @@ const MainPage = () => {
                     <img src={miscs?.pictures} className='category-img'></img>
                 </NavLink>
             </div>
-            {/* <div>
-                {users?.length > 0 &&
-                users.map((user) => (
-                    <div>
-                        <NavLink to={`/user/${user.id}`}>
-                            <img src={user.profilePic}></img>
-                        </NavLink>
-                    </div>
-                ))}
-            </div> */}
         </div>
     )
 }

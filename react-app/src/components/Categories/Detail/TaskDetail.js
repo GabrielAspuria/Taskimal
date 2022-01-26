@@ -1,24 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 import { allTasks } from '../../../store/tasks'
 import { allUsers } from '../../../store/users'
-import { editTask } from '../../../store/tasks'
 import { removeTask } from '../../../store/tasks'
+import EditTaskButton from '../Edit/EditTaskButton'
 import '../../CSS/TaskDetail.css'
 
-const TaskDetail = ({animal, name, description, price, category, pictures}) => {
+const TaskDetail = () => {
     const tasksObj = useSelector(state => state.tasks)
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
     const usersObj = useSelector(state => state.users.users)
     const { id } = useParams();
     const history = useHistory()
-    const [editAnimal, setAnimal] = useState(animal?.animal)
-    const [editDescription, setDescription] = useState(description?.description)
-    const [editPrice, setPrice] = useState(price)
-    const [editCategory, setCategory] = useState(category?.category)
-    const [editPictures, setPictures] = useState(pictures?.pictures)
 
     useEffect(() => {
         dispatch(allTasks())
@@ -28,19 +23,6 @@ const TaskDetail = ({animal, name, description, price, category, pictures}) => {
         dispatch(allUsers())
     }, [dispatch])
 
-    const handleEdit = async (e) => {
-        e.preventDefault()
-        const editedTask = {
-            animal: editAnimal,
-            description: editDescription,
-            price: +editPrice,
-            category: editCategory,
-            pictures: editPictures,
-            userId: sessionUser.id
-        }
-        await dispatch(editTask(editedTask, task?.id))
-    }
-
     const handleDelete = async (e) => {
         e.preventDefault()
         await dispatch(removeTask(id))
@@ -48,18 +30,15 @@ const TaskDetail = ({animal, name, description, price, category, pictures}) => {
     }
 
     const task = tasksObj[id]
-    console.log(task)
     const tasks = Object.values(tasksObj)
+    const users = Object.values(usersObj)
+    const creator = users.filter((user) => user?.id === task?.userId)
 
     return (
         <div>
             <div>
-                {task?.profilePic === null && (
-                    <img src='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643131788/Taskimal/paw_goc9fo.png' className='profile-pic' />
-                )}
-                {task?.profilePic && (
-                    <img src={task?.profilePic}/>
-                )}
+                <p> {creator[0]?.firstname} {creator[0]?.lastname} </p>
+                <img src={creator[0]?.profilePic}/>
                 <img src={task?.pictures} className='task-img'></img>
             </div>
             <div>
@@ -69,13 +48,18 @@ const TaskDetail = ({animal, name, description, price, category, pictures}) => {
                 <p> Animal: {task?.animal} </p>
             </div>
             <div>
-                <button onClick={{handleEdit}}>Edit</button>
-                <button
-                    onClick={handleDelete}
-                    id={id}
-                    >
-                    Delete
-                </button>
+                {sessionUser?.id === creator[0]?.id && (
+                    <EditTaskButton></EditTaskButton>
+
+                )}
+                {sessionUser?.id === creator[0]?.id && (
+                    <button
+                        onClick={handleDelete}
+                        id={id}
+                        >
+                        Delete
+                    </button>
+                )}
             </div>
         </div>
     )

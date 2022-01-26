@@ -37,7 +37,7 @@ function App() {
         <Route path ='/' exact={true}>
           <MainPage />
         </Route>
-        <Route path='/user/:id' exact={true}>
+        <Route path='/user/:userId' exact={true}>
           <UserPage />
         </Route>
         <Route path='/tasks/exercise' exact={true}>

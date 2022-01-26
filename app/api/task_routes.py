@@ -33,23 +33,24 @@ def add_task():
     return form.errors
 
 @task_routes.route('/<int:id>', methods=['PUT'])
-@login_required
 def edit_task(id):
-    task = Task.query.get(id)
+    edited_task = Task.query.get(id)
+    print(edited_task)
     form = AddTaskForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        task.animal=form.data['animal'],
-        task.name=form.data['name'],
-        task.description=form.data['description'],
-        task.price=form.data['price'],
-        task.category=form.data['category'],
-        task.pictures=form.data['pictures'],
-        task.userId=current_user.id
+        edited_task.animal=form.data['animal'],
+        edited_task.name=form.data['name'],
+        edited_task.description=form.data['description'],
+        edited_task.price=form.data['price'],
+        edited_task.category=form.data['category'],
+        edited_task.pictures=form.data['pictures'],
+        edited_task.userId=current_user.id
 
         db.session.commit()
-        return task.to_dict()
+        return edited_task.to_dict()
+    return form.errors
 
 @task_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
