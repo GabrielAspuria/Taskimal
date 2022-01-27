@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: 49020ea24619
-Revises: 
+Revises:
 Create Date: 2022-01-26 16:39:26.189300
 
 """
@@ -46,8 +46,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=True),
     sa.Column('taskId', sa.Integer(), nullable=True),
-    sa.Column('date', sa.DateTime(), nullable=False),
-    sa.Column('time', sa.DateTime(), nullable=False),
+    sa.Column('appointmentDate', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['taskId'], ['tasks.id'], ),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')

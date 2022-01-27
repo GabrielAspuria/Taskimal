@@ -6,8 +6,7 @@ class Appointment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     taskId = db.Column(db.Integer, db.ForeignKey('tasks.id'))
-    date = db.Column(db.DateTime, nullable=False)
-    time = db.Column(db.DateTime, nullable=False)
+    appointmentDate = db.Column(db.DateTime, nullable=False)
 
     user = db.relationship('User', back_populates='appointments')
     tasks = db.relationship('Task', back_populates='appointments')
@@ -17,6 +16,5 @@ class Appointment(db.Model):
             'id': self.id,
             'userId': self.userId,
             'taskId': self.taskId,
-            'date': self.date,
-            'time': self.time
+            'appointmentDate': self.appointmentDate
         }
