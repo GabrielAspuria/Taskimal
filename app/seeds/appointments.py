@@ -1,8 +1,38 @@
 from app.models.appointment import db, Appointment
 
 def seed_appointments():
-    pass
-    
+    cat_boarding_appointment = Appointment(
+        userId=1,
+        taskId=3,
+        month='Jan',
+        day='29',
+        time=12,
+        ap='PM'
+    )
+
+    puppy_playdate_appointment = Appointment(
+        userId=1,
+        taskId=4,
+        month='Jan',
+        day='30',
+        time=10,
+        ap='AM'
+    )
+
+    puppy_playdate_appointment_2 = Appointment(
+        userId=1,
+        taskId=4,
+        month='Jan',
+        day='31',
+        time=10,
+        ap='AM'
+    )
+
+    db.session.add(cat_boarding_appointment)
+    db.session.add(puppy_playdate_appointment)
+    db.session.add(puppy_playdate_appointment_2)
+    db.session.commit()
+
 def undo_appointments():
     db.session.execute('TRUNCATE tasks RESTART IDENTITY CASCADE;')
     db.session.commit()
