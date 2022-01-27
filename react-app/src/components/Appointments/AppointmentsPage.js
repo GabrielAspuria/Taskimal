@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useParams, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { allAppointments, cancelAppointment } from "../../store/appointments";
 import { allTasks } from "../../store/tasks";
 
@@ -27,7 +27,7 @@ const AppointmentsPage = () => {
     const handleDelete = async (e) => {
         e.preventDefault()
         await dispatch(cancelAppointment())
-        history.push('/appointments')
+        // history.push('/appointments')
     }
 
 

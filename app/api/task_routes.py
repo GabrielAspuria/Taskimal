@@ -73,7 +73,6 @@ def add_appointment():
     return form.errors
 
 
-
 @task_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_task(id):
