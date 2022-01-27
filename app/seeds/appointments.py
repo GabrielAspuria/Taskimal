@@ -12,7 +12,7 @@ def seed_appointments():
         userId=1,
         taskId=4,
         date='Feb 20 2022',
-        time='10:00'
+        time=10:00
     )
 
     dog_playdate_two_appointment = Appointment(
