@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { allUsers } from "../../store/users";
-import { allTasks, editTask, removeTask } from "../../store/tasks";
+import { allTasks, removeTask } from "../../store/tasks";
 
 const UserPage = ({id}) => {
     const dispatch = useDispatch()

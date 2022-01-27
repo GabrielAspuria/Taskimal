@@ -24,8 +24,8 @@ export const allAppointments = () => async (dispatch) => {
     return data
 }
 
-export const bookAppointment = (appointment) => async (dispatch) => {
-    const res = await fetch('/api/appointments/', {
+export const bookAppointment = (appointment, taskId) => async (dispatch) => {
+    const res = await fetch(`/api/tasks/${taskId}/appointments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(appointment)
@@ -38,7 +38,7 @@ export const bookAppointment = (appointment) => async (dispatch) => {
 }
 
 export const cancelAppointment = (id) => async (dispatch) => {
-    const res = await fetch(`/api/tasks/${id}`, {
+    const res = await fetch(`/api/appointments/${id}`, {
         method: 'DELETE'
     })
     if (res.ok){

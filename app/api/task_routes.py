@@ -51,6 +51,29 @@ def edit_task(id):
         return edited_task.to_dict()
     return form.errors
 
+@task_routes.route('/<int:taskId>/appointments', methods=['POST'])
+def add_appointment():
+    form = AddAppointmentForm()
+    task = Task.query.get(id)
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        appointment = Appointment(
+            userId=current_user.id,
+            taskId=task.id,
+            month=form.data['month'],
+            day=form.data['day'],
+            time=form.data['time'],
+            ap=form.data['ap']
+        )
+
+        db.session.add(appointment)
+        db.session.commit()
+        return appointment.to_dict()
+    return form.errors
+
+
+
 @task_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_task(id):
