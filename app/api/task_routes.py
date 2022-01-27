@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_login import current_user, login_required
-from app.models import Task, db
+from app.models import Task, db, Appointment
 from app.forms import AddTaskForm
 
 task_routes = Blueprint('tasks', __name__)
@@ -50,6 +50,29 @@ def edit_task(id):
         db.session.commit()
         return edited_task.to_dict()
     return form.errors
+
+@task_routes.route('/<int:taskId>/appointments', methods=['POST'])
+def add_appointment():
+    form = AddAppointmentForm()
+    task = Task.query.get(id)
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        appointment = Appointment(
+            userId=current_user.id,
+            taskId=task.id,
+            month=form.data['month'],
+            day=form.data['day'],
+            time=form.data['time'],
+            ap=form.data['ap']
+        )
+
+        db.session.add(appointment)
+        db.session.commit()
+        return appointment.to_dict()
+    return form.errors
+
+
 
 @task_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
