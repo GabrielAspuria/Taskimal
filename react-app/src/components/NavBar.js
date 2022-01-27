@@ -23,6 +23,13 @@ const NavBar = () => {
             </NavLink>
           </li>
         )}
+        {sessionUser && (
+          <li>
+            <NavLink to='/appointments'>
+              Appointments
+            </NavLink>
+          </li>
+        )}
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
             Home

@@ -5,6 +5,7 @@ import { allTasks } from '../../../store/tasks'
 import { allUsers } from '../../../store/users'
 import { removeTask } from '../../../store/tasks'
 import EditTaskButton from '../Edit/EditTaskButton'
+import BookAppointmentButton from '../../Appointments/BookAppointmentButton'
 import '../../CSS/TaskDetail.css'
 
 const TaskDetail = () => {
@@ -30,7 +31,6 @@ const TaskDetail = () => {
     }
 
     const task = tasksObj[id]
-    console.log("TASK",task)
     const tasks = Object.values(tasksObj)
     const users = Object.values(usersObj)
     const creator = users.filter((user) => user?.id === task?.userId)
@@ -49,12 +49,17 @@ const TaskDetail = () => {
                 <p> Animal: {task?.animal} </p>
             </div>
             <div>
+                {sessionUser && sessionUser?.id !== creator[0]?.id && (
+                    <BookAppointmentButton
+                    task={task}
+                    ></BookAppointmentButton>
+                )}
+            </div>
+            <div>
                 {sessionUser?.id === creator[0]?.id && (
                     <EditTaskButton
                     task={task}
-                    // animal={animal} name={name} description={description} price={price} pictures={pictures}
                     ></EditTaskButton>
-
                 )}
                 {sessionUser?.id === creator[0]?.id && (
                     <button
