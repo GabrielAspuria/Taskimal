@@ -25,7 +25,7 @@ const AppointmentsPage = () => {
 
     const handleDelete = async (e) => {
         e.preventDefault()
-        await dispatch(cancelAppointment())
+        await dispatch(cancelAppointment(e.target.id))
         // history.push('/appointments')
     }
 
@@ -45,6 +45,7 @@ const AppointmentsPage = () => {
                             <div>Appointment: {app?.month} {app?.day} {app.time} {app.ap}</div>
                         <button
                             onClick={handleDelete}
+                            id={app.id}
                             >
                             Cancel
                         </button>

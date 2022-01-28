@@ -61,7 +61,7 @@ const appointmentsReducer = (state = {}, action) => {
 
         case DELETE_APPOINTMENT:
             newState = { ...state };
-            delete newState(action.id);
+            delete newState[action.appointment];
             return newState;
 
         default:

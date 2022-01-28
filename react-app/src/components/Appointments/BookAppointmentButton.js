@@ -32,7 +32,6 @@ const BookAppointmentButton = (props) => {
             taskId: props.task.id
         }
         await dispatch(bookAppointment(newAppointment))
-        resetForm()
         history.push('/appointments')
     }
 
