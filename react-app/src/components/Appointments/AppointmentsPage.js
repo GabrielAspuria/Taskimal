@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { allAppointments, cancelAppointment } from "../../store/appointments";
 import { allTasks } from "../../store/tasks";
-import CancelAppointmentButton from "./CancelAppointmentButton";
+import '../CSS/AppointmentsPage.css'
+
 
 const AppointmentsPage = () => {
     const appsObj = useSelector(state => state.appointments)
@@ -37,7 +38,7 @@ const AppointmentsPage = () => {
                 {apps?.map((app) => (
                     <div>
                         <NavLink to={`/tasks/${app?.taskId}`}>
-                            <img src={app?.task?.pictures}/>
+                            <img src={app?.task?.pictures} className="app-img"/>
                         </NavLink>
                         <div>
                             <div>{app?.task?.name}</div>
@@ -47,7 +48,7 @@ const AppointmentsPage = () => {
                             onClick={handleDelete}
                             id={app.id}
                             >
-                            Cancel
+                            Cancel Appointment
                         </button>
                         </div>
                     </div>

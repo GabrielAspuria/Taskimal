@@ -39,7 +39,7 @@ const TaskDetail = () => {
         <div>
             <div>
                 <p> {creator[0]?.firstname} {creator[0]?.lastname} </p>
-                <img src={creator[0]?.profilePic}/>
+                <img src={creator[0]?.profilePic} className='profile-pic'/>
                 <img src={task?.pictures} className='task-img'></img>
             </div>
             <div>

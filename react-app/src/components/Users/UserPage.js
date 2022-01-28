@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { allUsers } from "../../store/users";
 import { allTasks, editTask, removeTask } from "../../store/tasks";
+import '../CSS/UserPage.css'
 
 const UserPage = ({id}) => {
     const dispatch = useDispatch()
@@ -29,10 +30,10 @@ const UserPage = ({id}) => {
     return (
         <div>
             {user?.profilePic === null && (
-                <img src='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643131788/Taskimal/paw_goc9fo.png'></img>
+                <img src='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643131788/Taskimal/paw_goc9fo.png' className="profile-pic"></img>
             )}
             {user?.profilePic && (
-                <img src={user.profilePic}/>
+                <img src={user.profilePic} className="profile-pic"/>
             )}
             {user?.id && (
                 <div>
@@ -41,7 +42,7 @@ const UserPage = ({id}) => {
                         <div>
 
                             <NavLink to={`/tasks/${task.id}`}>
-                                <img src={task.pictures}></img>
+                                <img src={task.pictures} className="task-img"></img>
                             </NavLink>
                         </div>
                     ))}

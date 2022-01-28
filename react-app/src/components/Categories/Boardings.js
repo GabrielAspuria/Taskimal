@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import React, {useState, useEffect} from 'react';
 import { NavLink } from 'react-router-dom';
 import { allTasks, createTask } from '../../store/tasks';
+import '../CSS/Category.css'
 
 const Boardings = () => {
     const tasksObj = useSelector(state => state.tasks)
@@ -55,7 +56,7 @@ const Boardings = () => {
                     {boarding?.animal} {boarding?.name} ${boarding?.price}
                     <div>
                         <NavLink to={`/tasks/${boarding?.id}`}>
-                            <img src={boarding.pictures} />
+                            <img src={boarding.pictures} className='pictures'/>
                         </NavLink>
                     </div>
 
@@ -63,41 +64,55 @@ const Boardings = () => {
             ))}
             {signedInUser !== null &&
                 <form onSubmit={handleSubmit}>
-                    <label> Animal: </label>
-                    <select
-                        value={animal}
-                        onChange={(e) => setAnimal(e.target.value)}
-                    >
-                        <option value='Any'> Any </option>
-                        <option value='Dog'> Dog </option>
-                        <option value='Cat'> Cat </option>
-                        <option value='Bird'> Bird </option>
-                        <option value='Reptile'> Reptile </option>
-                        <option value='Misc'> Misc </option>
-                    </select>
-                    <label> Name: </label>
-                    <input
-                        type='text'
-                        value={name}
-                        onChange={e => setName(e.target.value)}
-                    />
-                    <textarea
-                        placeholder='Add a description of your task'
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                    <label> Price: </label>
-                    <input
-                        type='text'
-                        value={price}
-                        onChange={e => setPrice(e.target.value)}
-                    />
-                    <label> Pictures: </label>
-                    <input
-                        type='text'
-                        value={pictures}
-                        onChange={e => setPictures(e.target.value)}
-                    />
+                    <div>
+                        <label> Animal </label>
+                        <select
+                            value={animal}
+                            onChange={(e) => setAnimal(e.target.value)}
+                        >
+                            <option value='Any'> Any </option>
+                            <option value='Dog'> Dog </option>
+                            <option value='Cat'> Cat </option>
+                            <option value='Bird'> Bird </option>
+                            <option value='Reptile'> Reptile </option>
+                            <option value='Misc'> Misc </option>
+                        </select>
+                    </div>
+                    <div>
+                        <label> Name </label>
+                        <input
+                            placeholder='Name of your task'
+                            type='text'
+                            value={name}
+                            onChange={e => setName(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label> Description </label>
+                        <textarea
+                            placeholder='Description of your task'
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label> Price </label>
+                        <input
+                            placeholder='Price'
+                            type='text'
+                            value={price}
+                            onChange={e => setPrice(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label> Upload Image </label>
+                        <input
+                            placeholder='Image URL'
+                            type='text'
+                            value={pictures}
+                            onChange={e => setPictures(e.target.value)}
+                        />
+                    </div>
                     <button>
                         Submit
                     </button>
