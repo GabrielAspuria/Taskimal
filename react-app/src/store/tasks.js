@@ -80,8 +80,6 @@ const tasksReducer = (state = {}, action) => {
 
         case EDIT_TASK:
             newState = { ...state }
-            console.log("THIS IS THE NEWSTATE", newState)
-            console.log("THIS IS THE ACTION.TASK", action.task)
             newState[action.task.id] = action.task
             return newState
 

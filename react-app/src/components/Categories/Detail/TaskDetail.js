@@ -31,7 +31,7 @@ const TaskDetail = () => {
     }
 
     const task = tasksObj[id]
-    const tasks = Object.values(tasksObj)
+    console.log("TASK", task)
     const users = Object.values(usersObj)
     const creator = users.filter((user) => user?.id === task?.userId)
 

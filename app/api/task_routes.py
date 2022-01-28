@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_login import current_user, login_required
-from app.models import Task, db
-from app.forms import AddTaskForm
+from app.models import Task, db, Appointment
+from app.forms import AddTaskForm, AddAppointmentForm
 
 task_routes = Blueprint('tasks', __name__)
 
@@ -51,8 +51,8 @@ def edit_task(id):
         return edited_task.to_dict()
     return form.errors
 
-@task_routes.route('/<int:taskId>/appointments', methods=['POST'])
-def add_appointment():
+@task_routes.route('/<int:id>/appointments', methods=['POST'])
+def add_appointment(id):
     form = AddAppointmentForm()
     task = Task.query.get(id)
     form['csrf_token'].data = request.cookies['csrf_token']

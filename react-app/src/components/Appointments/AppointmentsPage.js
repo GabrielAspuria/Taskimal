@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { allAppointments, cancelAppointment } from "../../store/appointments";
 import { allTasks } from "../../store/tasks";
+import CancelAppointmentButton from "./CancelAppointmentButton";
 
 const AppointmentsPage = () => {
     const appsObj = useSelector(state => state.appointments)
@@ -13,8 +14,6 @@ const AppointmentsPage = () => {
     apps.forEach((app) => {
         app.task = tasksObj[app?.taskId];
     });
-    const date = new Date()
-    const today = date.getHours()
 
     useEffect(() => {
         dispatch(allAppointments())

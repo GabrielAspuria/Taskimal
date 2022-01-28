@@ -8,7 +8,6 @@ const BookAppointmentButton = (props) => {
     const date = new Date()
     const signedInUser = useSelector(state => state.session.user)
     const history = useHistory()
-    console.log(date.getHours())
 
     const [month, setMonth] = useState("Jan")
     const [day, setDay] = useState(date.getDate())
@@ -34,7 +33,7 @@ const BookAppointmentButton = (props) => {
         }
         await dispatch(bookAppointment(newAppointment))
         resetForm()
-        // history.push('/appointments')
+        history.push('/appointments')
     }
 
     return (

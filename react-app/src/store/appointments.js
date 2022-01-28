@@ -24,8 +24,8 @@ export const allAppointments = () => async (dispatch) => {
     return data
 }
 
-export const bookAppointment = (appointment, taskId) => async (dispatch) => {
-    const res = await fetch(`/api/tasks/${taskId}/appointments`, {
+export const bookAppointment = (appointment, id) => async (dispatch) => {
+    const res = await fetch(`/api/tasks/${appointment.taskId}/appointments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(appointment)
