@@ -8,10 +8,11 @@ const BookAppointmentButton = (props) => {
     const date = new Date()
     const signedInUser = useSelector(state => state.session.user)
     const history = useHistory()
+    console.log("DATE",date.getDate() === 27)
 
     const [month, setMonth] = useState("Jan")
-    const [day, setDay] = useState(date.getDate())
-    const [time, setTime] = useState(date.getHours())
+    const [day, setDay] = useState('1')
+    const [time, setTime] = useState(1)
     const [ap, setAp] = useState('AM')
 
     const resetForm = () => {
