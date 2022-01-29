@@ -26,37 +26,40 @@ const MainPage = () => {
 
     return (
         <div className='main'>
-            <div>
-                <h2> From your chicken's morning walks, to brushing your hippo's teeth, book an appointment for that task today! </h2>
+            <div className='header-background'>
+                <img src='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643416678/Taskimal/background_omaeag.png' className='background-img'></img>
+                    <h2 className='header'> From your chicken's morning walks, to brushing your hippo's teeth, book an appointment for that task today! </h2>
+                <div className='header-container'>
+                </div>
             </div>
             <h1 className='title'> Task Categories</h1>
             <div className='category-links'>
-                <div>
-                    <div className='category'> Exercise </div>
+                <div className='category'>
                     <NavLink to='/tasks/exercise'>
-                            <img src={exercises?.pictures} className='category-img'></img>
+                        <img src={exercises?.pictures} className='category-img'></img>
                     </NavLink>
+                    <div className='category-name'> Exercise </div>
                 </div>
 
-                <div>
-                    <div className='category'>Training</div>
+                <div className='category'>
                     <NavLink to={`/tasks/training`}>
                         <img src={trainings?.pictures} className='category-img'></img>
                     </NavLink>
+                    <div className='category-name'>Training</div>
                 </div>
 
-                <div>
-                    <div className='category'>Boarding</div>
+                <div className='category'>
                     <NavLink to='/tasks/boarding'>
                         <img src={boardings?.pictures} className='category-img'></img>
                     </NavLink>
+                    <div className='category-name'>Boarding</div>
                 </div>
 
-                <div>
-                    <div className='category'>Misc</div>
+                <div className='category'>
                     <NavLink to='/tasks/misc'>
                         <img src={miscs?.pictures} className='category-img'></img>
                     </NavLink>
+                    <div className='category-name'>Misc</div>
                 </div>
             </div>
         </div>

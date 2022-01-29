@@ -6,16 +6,22 @@ import './CSS/NavBar.css'
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user)
+  console.log("USER", sessionUser)
 
   return (
     <nav>
-      <ul>
-        {sessionUser && (
-          <h1>Hello {sessionUser.username}! </h1>
-        )}
-        <li>
+      <ul className='nav-buttons'>
+        <li className='about-me'>
           <a href='https://github.com/GabrielAspuria'><img src='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643134862/Taskimal/GitHub-Mark-64px_xby25n.png'></img></a>
           <a href='https://www.linkedin.com/in/gabriel-aspuria-032398226/'><img src='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643135711/Taskimal/linkedin_black_logo_icon_147114_3_goqfve.png'></img></a>
+        </li>
+        {sessionUser && (
+          <h1 className='greeting'>Hello {sessionUser.username}! </h1>
+        )}
+        <li>
+          <NavLink to='/' exact={true} activeClassName='active'>
+            Home
+          </NavLink>
         </li>
         {sessionUser && (
           <li>
@@ -31,11 +37,6 @@ const NavBar = () => {
             </NavLink>
           </li>
         )}
-        <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            Home
-          </NavLink>
-        </li>
         {!sessionUser && (
           <li>
             <NavLink to='/login' exact={true} activeClassName='active'>
