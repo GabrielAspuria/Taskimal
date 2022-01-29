@@ -31,7 +31,6 @@
 .your-task {
     display: flex;
     justify-content: center;
-    /* margin-right: 100px; */
     padding-right: 70px;
 }
 

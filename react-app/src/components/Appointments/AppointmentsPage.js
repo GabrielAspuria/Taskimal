@@ -30,23 +30,24 @@ const AppointmentsPage = () => {
         // history.push('/appointments')
     }
 
-
     return (
         <div>
-            <h1> Appointments </h1>
-            <div>
+            <h1 className="title"> Appointments </h1>
+            <div className="app-box">
                 {apps?.map((app) => (
-                    <div>
+                    <div className="app-container">
                         <NavLink to={`/tasks/${app?.taskId}`}>
                             <img src={app?.task?.pictures} className="app-img"/>
                         </NavLink>
-                        <div>
+                        <div className="app-info">
                             <div>{app?.task?.name}</div>
                             <div> Payment: ${app?.task?.price}</div>
-                            <div>Appointment: {app?.month} {app?.day} {app.time} {app.ap}</div>
+                            <div>Day: {app?.month} {app?.day}</div>
+                            <div>Time: {app.time} {app.ap} </div>
                         <button
                             onClick={handleDelete}
                             id={app.id}
+                            className="delete"
                             >
                             Cancel Appointment
                         </button>

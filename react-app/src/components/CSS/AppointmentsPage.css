@@ -1,4 +1,39 @@
 .app-img {
-    width: 600px;
-    height: 400px
+    width: 500px;
+    height: 300px;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+.app-container {
+    display:grid;
+    grid-template-columns: 600px 400px 100px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 6px 6px #bdd5ea;
+    border: #ceeaf7 1px solid;
+    width: 40%;
+    align-self: center;
+    margin: 10px;
+    flex-direction: row;
+}
+
+.app-info {
+    padding-top: 10px;
+}
+
+.app-box {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-direction: column;
+}
+
+.delete {
+    grid-column: 2 / 3;
+    grid-row: 2 / 1;
+    height: 50px;
+    width: 100px;
+    margin-top: 162px;
 }
