@@ -39,3 +39,42 @@ nav {
 a {
     text-decoration: none;
 }
+
+a:link {
+    text-decoration: none;
+    padding-right: 50px;
+    color: #577399;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #577399;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #577399;
+}
+
+button {
+    text-decoration: none;
+    padding: 5px ;
+    width: 60px;
+    margin-right: 25px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    color: #577399;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    border-color: #577399;;
+}
+
+input {
+    margin-left: 25px;
+    width: 150px;
+    font-family: 'Quicksand', sans-serif;
+    /* border: none; */
+    border-radius: 5px;
+    border-color: #577399;;
+}

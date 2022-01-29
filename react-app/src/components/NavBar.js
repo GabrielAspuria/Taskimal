@@ -18,6 +18,9 @@ const NavBar = () => {
         {sessionUser && (
           <h1 className='greeting'>Hello {sessionUser.username}! </h1>
         )}
+        {!sessionUser && (
+          <h1 className='greeting'>Welcome to Taskimal! </h1>
+        )}
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
             Home

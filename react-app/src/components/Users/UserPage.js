@@ -29,20 +29,38 @@ const UserPage = ({id}) => {
 
     return (
         <div>
-            {user?.profilePic === null && (
-                <img src='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643131788/Taskimal/paw_goc9fo.png' className="profile-pic"></img>
-            )}
-            {user?.profilePic && (
-                <img src={user.profilePic} className="profile-pic"/>
-            )}
+            <div className="user-info">
+                {user?.profilePic === null && (
+                    <img src='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643131788/Taskimal/paw_goc9fo.png' className="profile-pic"></img>
+                )}
+                {user?.profilePic && (
+                    <img src={user.profilePic} className="profile-pic"/>
+                )}
+                <div className="bio">
+                    <h2> Bio </h2>
+                    <div>
+                        Name: {user.firstname} {user.lastname}
+                    </div>
+                    <div>
+                        Specialty: All animals
+                    </div>
+                    <div> Tasker: Yes </div>
+                </div>
+                <div className="contact">
+                    <h2> Contact Info </h2>
+                    <div> Email: {user.email} </div>
+                    <div> Phone: (123)456-7890</div>
+                </div>
+            </div>
+            <h1 className="title"> Your Tasks </h1>
             {user?.id && (
-                <div>
+                <div className="category-links">
                     {userTasks?.length > 0 &&
                     userTasks.map((task) => (
                         <div>
-
+                            <div className="your-task"> {task.animal}: {task.name} </div>
                             <NavLink to={`/tasks/${task.id}`}>
-                                <img src={task.pictures} className="task-img"></img>
+                                <img src={task.pictures} className="category"></img>
                             </NavLink>
                         </div>
                     ))}
