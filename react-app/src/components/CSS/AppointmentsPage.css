@@ -12,10 +12,11 @@
     box-sizing: border-box;
     box-shadow: 6px 6px #bdd5ea;
     border: #ceeaf7 1px solid;
-    width: 35%;
+    width: 40%;
     align-self: center;
     margin: 10px;
     flex-direction: row;
+    margin-left: 120px;
 }
 
 .app-info {

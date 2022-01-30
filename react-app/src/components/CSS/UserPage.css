@@ -24,7 +24,7 @@
     justify-content: center;
     display: flex;
     width:1800px;
-    margin-left: 134px;
+    margin-left: 90px;
 }
 
 .your-task {
@@ -57,5 +57,5 @@
 .carousel {
     grid-column: 3;
     grid-row: 1;
-    margin-left: 400px;
+    margin-left: 330px;
 }
