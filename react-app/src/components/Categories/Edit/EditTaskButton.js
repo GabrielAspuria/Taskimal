@@ -4,6 +4,7 @@ import { editTask } from '../../../store/tasks'
 
 const EditTaskButton = (props) => {
     const dispatch = useDispatch()
+    const [errors, setErrors] = useState([])
     const [editAnimal, setAnimal] = useState(props.task.animal)
     const [editName, setName] = useState(props.task.name)
     const [editDescription, setDescription] = useState(props.task.description)
@@ -12,6 +13,18 @@ const EditTaskButton = (props) => {
 
     const handleEdit = async (e) => {
         e.preventDefault()
+
+        const validationErrors = []
+        const priceRegex = /^[0-9]+(\.[0-9][0-9])?$/;
+        const imgRegex = /(http(s?):)|([/|.|\w|\s])*\.(?:jpg|gif|png)/;
+        if (!editName) validationErrors.push('Please provide a name for this task')
+        if (!priceRegex.test(editPrice) && editPrice) validationErrors.push('Please provide a numeric price')
+        if (!editPrice) validationErrors.push('Please provide a price per session')
+        if (!imgRegex.test(editPictures) && editPictures) validationErrors.push('Please enter a valid image URL for your product')
+        if (!editPictures) validationErrors.push('Please provide a picture representing your task')
+        if (!editDescription) validationErrors.push('Please describe your task')
+        setErrors(validationErrors)
+
         const editedTask = {
             animal: editAnimal,
             name: props.task.name,
@@ -26,6 +39,14 @@ const EditTaskButton = (props) => {
     return (
         <form onSubmit={handleEdit}>
             <div>
+                <div>
+                    <ul>
+                        {errors.length > 0 &&
+                        errors.map(error => (
+                            <li key={error}> {error} </li>
+                        ))}
+                    </ul>
+                </div>
                 <div>
                     <div><label> Animal </label></div>
                     {/* <select
