@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import React, {useState, useEffect} from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink,useHistory } from 'react-router-dom';
 import { allTasks, createTask } from '../../store/tasks';
 import '../CSS/Category.css'
 
@@ -8,6 +8,7 @@ const Miscs = () => {
     const tasksObj = useSelector(state => state.tasks)
     const dispatch = useDispatch();
     const signedInUser = useSelector(state => state.session.user)
+    const history = useHistory()
 
     const [errors, setErrors] = useState([])
     const [animal, setAnimal] = useState('')
@@ -57,6 +58,7 @@ const Miscs = () => {
             }
             await dispatch(createTask(newTraining))
             resetForm()
+            history.push(`/user/${signedInUser.id}`)
         }
     }
 

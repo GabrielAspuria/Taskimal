@@ -22,10 +22,10 @@ const SignUpForm = () => {
     const validationErrors = []
     const regex = /^\S+@\S+\.\S+$/;
     if (!regex.test(email)) validationErrors.push('Please enter a valid email')
-    if (password !== repeatPassword) validationErrors.push('Password and Repeat Password inputs must match')
     if (firstname.length < 1) validationErrors.push('Please enter your First Name')
     if (lastname.length < 1) validationErrors.push('Please enter your Last Name')
     if (username.length < 1) validationErrors.push('Please enter a User Name')
+    if (password !== repeatPassword) validationErrors.push('Password and Repeat Password inputs must match')
     if (validationErrors.length === 0) {
     const data = await dispatch(signUp(username, email, firstname, lastname, profilePic, password));
       if (data) {
