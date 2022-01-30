@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 import { editTask, removeTask } from '../../../store/tasks'
 import '../../CSS/TaskDetail.css'
@@ -7,6 +7,7 @@ import '../../CSS/TaskDetail.css'
 const EditTaskButton = (props) => {
     const dispatch = useDispatch()
     const history = useHistory()
+    const sessionUser = useSelector(state => state.session.user)
     const [errors, setErrors] = useState([])
     const [editAnimal, setAnimal] = useState(props.task.animal)
     const [editName, setName] = useState(props.task.name)
@@ -18,7 +19,7 @@ const EditTaskButton = (props) => {
     const handleDelete = async (e) => {
         e.preventDefault()
         await dispatch(removeTask(id))
-        history.push('/')
+        history.push(`/user/${sessionUser.id}`)
     }
 
 
