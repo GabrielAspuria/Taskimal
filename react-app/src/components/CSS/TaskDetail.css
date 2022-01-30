@@ -11,3 +11,75 @@
     box-shadow: 6px 6px #bdd5ea;
     border: #ceeaf7 1px solid;
 }
+
+.edit-task-form {
+    width: 500px;
+    height: 450px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 6px 6px #bdd5ea;
+    border: #ceeaf7 1px solid;
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: -300px;
+    margin-left: 50px;
+}
+
+.submit-edit-button {
+    height: 30px;
+    margin-left: 50px;
+}
+
+.delete-task-button {
+    margin-left: 280px;
+}
+
+.edit-buttons {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 100px 100px;
+}
+
+h2 {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+h3 {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.task-info-container {
+    width: 300px;
+}
+
+.task-detail {
+    display: grid;
+    grid-template-columns: 600px 600px 600px;
+    grid-template-rows: 600px 600px;
+    justify-content: center;
+    align-items: center;
+}
+
+.day {
+    margin-left: 115px;
+}
+
+.time {
+    margin-left: 143px;
+}
+
+.month {
+    margin-left: 80px;
+}
+
+.month-button {
+    width: 50px;
+    height: 25px;
+    border-radius: 5px;
+    border-color: #bdd5ea;
+    margin-left: 65px;
+}

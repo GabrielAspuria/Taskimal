@@ -36,20 +36,28 @@ const UserPage = ({id}) => {
                 {user?.profilePic && (
                     <img src={user.profilePic} className="profile-pic"/>
                 )}
+                {user?.profilePic === null && (
+                    <img src='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643131788/Taskimal/paw_goc9fo.png' className="profile-pic"></img>
+                )}
+                <div className="carousel">
+                    {user?.profilePic && (
+                        <img src={user.profilePic} className="profile-pic"/>
+                    )}
+                </div>
                 <div className="bio">
-                    <h2> Bio </h2>
-                    <div>
+                    <h2 className="bio-header"> Bio </h2>
+                    <div className="bio-info">
                         Name: {user?.firstname} {user?.lastname}
                     </div>
-                    <div>
+                    <div className="bio-info">
                         Specialty: All animals
                     </div>
-                    <div> Tasker: Yes </div>
+                    <div className="bio-info"> Tasker: Yes </div>
                 </div>
                 <div className="contact">
-                    <h2> Contact Info </h2>
-                    <div> Email: {user?.email} </div>
-                    <div> Phone: (123)456-7890</div>
+                    <h2 className="bio-header">  Contact Info </h2>
+                    <div className="bio-info"> Email: {user?.email} </div>
+                    <div className="bio-info"> Phone: (123)456-7890</div>
                 </div>
             </div>
             <h1 className="title"> Your Tasks </h1>

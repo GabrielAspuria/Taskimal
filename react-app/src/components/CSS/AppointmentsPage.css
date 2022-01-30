@@ -7,12 +7,12 @@
 
 .app-container {
     display:grid;
-    grid-template-columns: 600px 400px 100px;
+    grid-template-columns: 600px 400px;
     border-radius: 5px;
     box-sizing: border-box;
     box-shadow: 6px 6px #bdd5ea;
     border: #ceeaf7 1px solid;
-    width: 40%;
+    width: 35%;
     align-self: center;
     margin: 10px;
     flex-direction: row;

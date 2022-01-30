@@ -3,6 +3,72 @@
     height: 300px;
     border-radius: 5px;
     box-sizing: border-box;
+    border: #ceeaf7 1px solid;
+}
+
+ul {
+    border-radius: 5px;
+    box-sizing: border-box;
+    border-bottom: 6px 6px #bdd5ea;
+    border-top: #ceeaf7 1px solid;
+    box-shadow: 6px 6px #bdd5ea;
+}
+
+
+.category-container {
+    display: grid;
+    grid-template-columns: 800px;
+    grid-template-rows: 500px;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.add-task-form {
+    width: 500px;
+    height: 450px;
+    border-radius: 5px;
+    box-sizing: border-box;
     box-shadow: 6px 6px #bdd5ea;
     border: #ceeaf7 1px solid;
+    grid-column: 2 / 2;
+    grid-row: 1 / 2;
+    margin-top: 90px;
+}
+
+.task {
+    display: flex;
+    flex-direction: column;
+    grid-column: 1;
+    margin-top: 10px;
+    width: 550px;
+    height: 370px;
+    box-shadow: 6px 6px #bdd5ea;
+    border: #ceeaf7 1px solid;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-radius: 5px;
+}
+
+.add-task-button {
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-left: 200px;
+}
+
+input {
+    width: 450px;
+}
+
+textarea {
+    resize: none;
+    width: 450px;
+    height: 100px;
+    border-radius: 5px;
+}
+
+.add-task-input {
+    margin-left: 20px;
 }

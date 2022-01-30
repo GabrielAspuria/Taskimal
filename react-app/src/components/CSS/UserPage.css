@@ -24,7 +24,7 @@
     justify-content: center;
     display: flex;
     width:1800px;
-    margin-left: 30px;
+    margin-left: 134px;
 }
 
 .your-task {
@@ -35,7 +35,7 @@
 
 .user-info {
     display: grid;
-    grid-template-columns: 600px 400px 400px;
+    grid-template-columns: 600px 400px 400px 400px;
     border-radius: 5px;
     box-sizing: border-box;
     margin: 10px;
@@ -43,6 +43,19 @@
     border: #ceeaf7 1px solid;
 }
 
-.bio {
-    margin-left: 50px;
+.bio-header {
+    grid-column: 3;
+    grid-row: 1;
+    justify-content: flex-start;
+}
+
+.contact {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.carousel {
+    grid-column: 3;
+    grid-row: 1;
+    margin-left: 400px;
 }

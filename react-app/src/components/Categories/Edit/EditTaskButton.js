@@ -1,15 +1,26 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { editTask } from '../../../store/tasks'
+import { useParams, useHistory } from 'react-router-dom'
+import { editTask, removeTask } from '../../../store/tasks'
+import '../../CSS/TaskDetail.css'
 
 const EditTaskButton = (props) => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const [errors, setErrors] = useState([])
     const [editAnimal, setAnimal] = useState(props.task.animal)
     const [editName, setName] = useState(props.task.name)
     const [editDescription, setDescription] = useState(props.task.description)
     const [editPrice, setPrice] = useState(props.task.price)
     const [editPictures, setPictures] = useState(props.task.pictures)
+    const { id } = useParams();
+
+    const handleDelete = async (e) => {
+        e.preventDefault()
+        await dispatch(removeTask(id))
+        history.push('/')
+    }
+
 
     const handleEdit = async (e) => {
         e.preventDefault()
@@ -37,7 +48,8 @@ const EditTaskButton = (props) => {
     }
 
     return (
-        <form onSubmit={handleEdit}>
+        <form onSubmit={handleEdit} className='edit-task-form'>
+            <h2> Edit Task </h2>
             <div>
                 <div>
                     <ul>
@@ -47,29 +59,31 @@ const EditTaskButton = (props) => {
                         ))}
                     </ul>
                 </div>
-                <div>
-                    <div><label> Animal </label></div>
-                    {/* <select
-                    value={editAnimal}
-                    onChange={(e) => setAnimal(e.target.value)}
-                    >
-                        <option value='Any'> Any </option>
-                        <option value='Dog'> Dog </option>
-                        <option value='Cat'> Cat </option>
-                        <option value='Bird'> Bird </option>
-                        <option value='Reptile'> Reptile </option>
-                        <option value='Misc'> Misc </option>
-                    </select> */}
-                    <input
-                                placeholder='What kind of animal(s)?'
-                                type='text'
-                                value={editAnimal}
-                                onChange={e => setAnimal(e.target.value)}
-                            ></input>
-                </div>
+
+            <div className='add-task-input'>
+                <div><label> Animal </label></div>
+                {/* <select
+                value={editAnimal}
+                onChange={(e) => setAnimal(e.target.value)}
+                >
+                    <option value='Any'> Any </option>
+                    <option value='Dog'> Dog </option>
+                    <option value='Cat'> Cat </option>
+                    <option value='Bird'> Bird </option>
+                    <option value='Reptile'> Reptile </option>
+                    <option value='Misc'> Misc </option>
+                </select> */}
+                <input
+                            placeholder='What kind of animal(s)?'
+                            type='text'
+                            value={editAnimal}
+                            onChange={e => setAnimal(e.target.value)}
+                        ></input>
             </div>
 
-            <div>
+            </div>
+
+            <div className='add-task-input'>
                 <div>
                     <div><label> Name </label></div>
                     <input
@@ -80,7 +94,7 @@ const EditTaskButton = (props) => {
                 </div>
             </div>
 
-            <div>
+            <div className='add-task-input'>
                 <div><label> Price: </label></div>
                 <input
                     type='text'
@@ -89,7 +103,7 @@ const EditTaskButton = (props) => {
                 />
             </div>
 
-            <div>
+            <div className='add-task-input'>
                 <div><label> Picture </label></div>
                 <input
                     type='text'
@@ -98,7 +112,7 @@ const EditTaskButton = (props) => {
                 />
             </div>
 
-            <div>
+            <div className='add-task-input'>
                 <div><label> Description </label></div>
                 <textarea
                     type='text'
@@ -106,8 +120,16 @@ const EditTaskButton = (props) => {
                     onChange={e => setDescription(e.target.value)}
                 />
             </div>
-
-            <button>Submit</button>
+                <div className='edit-buttons'>
+                <button
+                    className='delete-task-button'
+                    onClick={handleDelete}
+                    id={id}
+                    >
+                    Delete
+                </button>
+                <button className='submit-edit-button'>Submit</button>
+                </div>
         </form>
     )
 }

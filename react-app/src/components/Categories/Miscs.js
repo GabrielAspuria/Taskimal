@@ -65,16 +65,15 @@ const Miscs = () => {
     const miscs = tasks.filter((task) => task.category === 'Misc')
 
     return (
-        <div>
+        <div className='category-container'>
             {miscs.map((misc) => (
-                <div>
-                    <h3>{misc?.animal} {misc?.name} ${misc?.price}</h3>
+                <div className='task'>
                     <div>
                         <NavLink to={`/tasks/${misc?.id}`}>
                             <img src={misc.pictures} className='pictures' />
                         </NavLink>
                     </div>
-
+                    <h3>{misc?.animal} {misc?.name} ${misc?.price}</h3>
                 </div>
             ))}
             <div>
@@ -92,7 +91,7 @@ const Miscs = () => {
                         </ul>
                     </div>
                     <div>
-                        <div>
+                        <div className='add-task-input'>
                             <div><label> Animal </label></div>
                             {/* <select
                                 value={animal}
@@ -115,7 +114,7 @@ const Miscs = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='add-task-input'>
                         <div>
                             <div><label> Name </label></div>
                             <input
@@ -127,7 +126,7 @@ const Miscs = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='add-task-input'>
                         <div>
                             <div><label> Price </label></div>
                             <input
@@ -139,7 +138,7 @@ const Miscs = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='add-task-input'>
                         <div>
                             <div><label> Upload Image </label></div>
                             <input
@@ -151,7 +150,7 @@ const Miscs = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='add-task-input'>
                         <div>
                             <div><label> Description </label></div>
                             <textarea
@@ -162,7 +161,7 @@ const Miscs = () => {
                         </div>
                     </div>
 
-                    <button>
+                    <button className='add-task-button'>
                         Submit
                     </button>
                 </form>

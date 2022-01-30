@@ -4,7 +4,6 @@ import { useParams, useHistory } from 'react-router-dom'
 import { allTasks } from '../../../store/tasks'
 import { allUsers } from '../../../store/users'
 import { removeTask } from '../../../store/tasks'
-import { cancelAppointment } from '../../../store/appointments'
 import EditTaskButton from '../Edit/EditTaskButton'
 import BookAppointmentButton from '../../Appointments/BookAppointmentButton'
 import '../../CSS/TaskDetail.css'
@@ -36,17 +35,16 @@ const TaskDetail = () => {
     const creator = users.filter((user) => user?.id === task?.userId)
 
     return (
-        <div>
+        <div className='task-detail'>
+            <div> <img src={creator[0]?.profilePic} className='profile-pic'/></div>
             <div>
-                {/* <img src={creator[0]?.profilePic} className='profile-pic'/> */}
                 <img src={task?.pictures} className='task-img'></img>
             </div>
-            <div>
-                <h2> {task?.animal} {task?.name}</h2>
-                <h2> Price: ${task?.price} </h2>
+            <div className='task-info-container'>
+                <p> {task?.animal} {task?.name}</p>
+                <p> Price: ${task?.price} </p>
                 <p> Tasker: {creator[0]?.firstname} {creator[0]?.lastname} </p>
                 <p> Description: {task?.description} </p>
-                {/* <p> Animal: {task?.animal} </p> */}
             </div>
             <div>
                 {sessionUser && sessionUser?.id !== creator[0]?.id && (
@@ -55,21 +53,13 @@ const TaskDetail = () => {
                     ></BookAppointmentButton>
                     )}
             </div>
-            <div>
-                {/* {sessionUser && (
-                    )} */}
+            <div className='edit-task-button'>
                 {sessionUser?.id === creator[0]?.id && (
-                    <EditTaskButton
-                    task={task}
-                    ></EditTaskButton>
-                )}
-                {sessionUser?.id === creator[0]?.id && (
-                    <button
-                        onClick={handleDelete}
-                        id={id}
-                        >
-                        Delete
-                    </button>
+                    <p className='edit-delete-buttons'>
+                        <EditTaskButton
+                        task={task}
+                        ></EditTaskButton>
+                    </p>
                 )}
             </div>
         </div>

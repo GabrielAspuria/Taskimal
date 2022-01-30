@@ -1,0 +1,49 @@
+.appointment-container {
+    width: 550px;
+    height: 350px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 6px 6px #bdd5ea;
+    border: #ceeaf7 1px solid;
+    margin-left: 600px;
+    margin-top: -400px;
+    display: grid;
+    /* grid-template-columns: 100px 100px 100px; */
+}
+
+.app-form-info {
+    margin-left: 10px;
+}
+
+.book-app {
+    width: 100px;
+    margin-top: 20px;
+    margin-left: 225px;
+}
+
+.book-appointment-header {
+    justify-content: center;
+    display: flex;
+}
+
+.app-input {
+    width: 100px;
+    margin-left: 95px;
+    border-radius: 5px;
+    border-color: #bdd5ea;
+}
+
+.time-input {
+    width: 80px;
+    height: 25px;
+    border-radius: 5px;
+    border-color: #bdd5ea;
+    margin-left: 60px;
+}
+
+.ap-input {
+    width: 50px;
+    height: 25px;
+    border-radius: 5px;
+    border-color: #bdd5ea;
+}

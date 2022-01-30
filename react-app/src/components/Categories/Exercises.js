@@ -64,14 +64,14 @@ const Exercises = () => {
     const exercises = tasks.filter((task) => task?.category === 'Exercise')
 
     return (
-        <div>
+        <div className='category-container'>
             {exercises.map((exercise) => (
-                <div>
-                    <h3>{exercise?.animal} {exercise?.name} ${exercise?.price}</h3>
+                <div className='task'>
                     <div>
                         <NavLink to={`/tasks/${exercise?.id}`}>
                             <img src={exercise.pictures} className='pictures' />
                         </NavLink>
+                        <h3>{exercise?.animal} {exercise?.name} ${exercise?.price}</h3>
                     </div>
 
                 </div>
@@ -87,7 +87,7 @@ const Exercises = () => {
                             ))}
                         </ul>
                     </div>
-                    <div>
+                    <div className='add-task-input'>
                         <div><label> Animal </label></div>
                         <div>
                             {/* <select
@@ -111,7 +111,7 @@ const Exercises = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='add-task-input'>
                         <div>
                             <div><label> Name </label></div>
                             <input
@@ -123,7 +123,7 @@ const Exercises = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='add-task-input'>
                         <div>
                             <div><label> Price </label></div>
                             <input
@@ -135,7 +135,7 @@ const Exercises = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='add-task-input'>
                         <div>
                             <div><label> Upload Image </label></div>
                             <input
@@ -147,7 +147,7 @@ const Exercises = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='add-task-input'>
                         <div>
                             <div><label> Description </label></div>
                             <textarea
@@ -157,7 +157,7 @@ const Exercises = () => {
                             />
                         </div>
                     </div>
-                    <button>
+                    <button className='add-task-button'>
                         Submit
                     </button>
                 </form>

@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import React, {useState } from "react";
 import { bookAppointment } from "../../store/appointments";
 import { useHistory } from "react-router-dom";
+import '../CSS/BookAppointment.css'
 
 const BookAppointmentButton = (props) => {
     const dispatch = useDispatch()
@@ -49,7 +50,8 @@ const BookAppointmentButton = (props) => {
     }
 
     return (
-        <div>
+        <div className="appointment-container">
+            <h1 className="book-appointment-header"> Book Appointment </h1>
             <div>
                 <ul>
                     {errors.length > 0 &&
@@ -58,13 +60,13 @@ const BookAppointmentButton = (props) => {
                     ))}
                 </ul>
             </div>
-            <h1> Book Appointment </h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <div>
-                        <div><label> Month:</label></div>
+                    <div className='app-form-info'>
+                        <div><label className="month"> Month </label> <label className="day"> Day </label> <label className="time"> Time </label></div>
                         <div>
                             <select
+                            className="month-button"
                             value={month}
                             onChange={(e) => setMonth(e.target.value)}
                             >
@@ -81,52 +83,43 @@ const BookAppointmentButton = (props) => {
                                 <option value='Nov'> Nov </option>
                                 <option value='Dec'> Dec </option>
                             </select>
+                            <input
+                                className="app-input"
+                                type='text'
+                                value={day}
+                                onChange={(e) => setDay(e.target.value)}
+                            />
+                            <select
+                                className="time-input"
+                                value={time}
+                                onChange={(e) => setTime(e.target.value)}
+                            >
+                                <option value={1}> 1 </option>
+                                <option value={2}> 2 </option>
+                                <option value={3}> 3 </option>
+                                <option value={4}> 4 </option>
+                                <option value={5}> 5 </option>
+                                <option value={6}> 6 </option>
+                                <option value={7}> 7 </option>
+                                <option value={8}> 8 </option>
+                                <option value={9}> 9 </option>
+                                <option value={10}> 10 </option>
+                                <option value={11}> 11 </option>
+                                <option value={12}> 12 </option>
+                            </select>
+                            <select
+                                className="ap-input"
+                                value={ap}
+                                onChange={(e) => setAp(e.target.value)}
+                            >
+                                <option value='AM'> AM </option>
+                                <option value='PM'> PM </option>
+                            </select>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label> Day </label>
-                    </div>
-                    <div>
-                        <input
-                            type='text'
-                            value={day}
-                            onChange={(e) => setDay(e.target.value)}
-                        />
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <label> Time </label>
-                    </div>
-                    <select
-                        value={time}
-                        onChange={(e) => setTime(e.target.value)}
-                    >
-                        <option value={1}> 1 </option>
-                        <option value={2}> 2 </option>
-                        <option value={3}> 3 </option>
-                        <option value={4}> 4 </option>
-                        <option value={5}> 5 </option>
-                        <option value={6}> 6 </option>
-                        <option value={7}> 7 </option>
-                        <option value={8}> 8 </option>
-                        <option value={9}> 9 </option>
-                        <option value={10}> 10 </option>
-                        <option value={11}> 11 </option>
-                        <option value={12}> 12 </option>
-                    </select>
-                    <select
-                        value={ap}
-                        onChange={(e) => setAp(e.target.value)}
-                    >
-                        <option value='AM'> AM </option>
-                        <option value='PM'> PM </option>
-                    </select>
-                </div>
                 <button className="book-app">
-                    Book
+                    Book Appointment
                 </button>
             </form>
         </div>

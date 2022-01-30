@@ -67,14 +67,13 @@ const Boardings = () => {
     return (
         <div className='category-container'>
             {boardings.map((boarding) => (
-                <div>
-                    <h3>{boarding?.animal} {boarding?.name} ${boarding?.price}</h3>
+                <div className='task'>
                     <div>
                         <NavLink to={`/tasks/${boarding?.id}`}>
                             <img src={boarding.pictures} className='pictures'/>
                         </NavLink>
+                        <h3>{boarding?.animal} {boarding?.name} ${boarding?.price}</h3>
                     </div>
-
                 </div>
             ))}
             {signedInUser !== null &&
@@ -89,7 +88,7 @@ const Boardings = () => {
                         </ul>
                     </div>
                     <div>
-                        <div>
+                        <div className='add-task-input'>
                             <div><label> Animal </label></div>
                             {/* <select
                                 value={animal}
@@ -112,7 +111,7 @@ const Boardings = () => {
                         </div>
                     </div>
                     <div>
-                        <div>
+                        <div className='add-task-input'>
                             <div><label> Name </label></div>
                             <input
                                 placeholder='Name of your task'
@@ -123,7 +122,7 @@ const Boardings = () => {
                         </div>
                     </div>
                     <div>
-                        <div>
+                        <div className='add-task-input'>
                             <div><label> Price </label></div>
                             <input
                                 placeholder='Price'
@@ -134,7 +133,7 @@ const Boardings = () => {
                         </div>
                     </div>
                     <div>
-                        <div>
+                        <div className='add-task-input'>
                             <div><label> Upload Image </label></div>
                             <input
                                 placeholder='Image URL'
@@ -144,7 +143,7 @@ const Boardings = () => {
                             />
                         </div>
                     <div>
-                        <div>
+                        <div className='add-task-input'>
                             <div><label> Description </label></div>
                             <textarea
                                 placeholder='Description of your task'
@@ -154,7 +153,7 @@ const Boardings = () => {
                         </div>
                     </div>
                     </div>
-                    <button>
+                    <button className='add-task-button'>
                         Submit
                     </button>
                 </form>

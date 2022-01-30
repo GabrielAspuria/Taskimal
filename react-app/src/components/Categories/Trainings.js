@@ -67,12 +67,12 @@ const Trainings = () => {
     return (
         <div className='category-container'>
             {trainings.map((training) => (
-                <div>
-                    <h3>{training?.animal} {training?.name} ${training?.price}</h3>
+                <div className='task'>
                     <div>
                         <NavLink to={`/tasks/${training?.id}`}>
                             <img src={training.pictures} className='pictures'/>
                         </NavLink>
+                        <h3>{training?.animal} {training?.name} ${training?.price}</h3>
                     </div>
 
                 </div>
@@ -88,7 +88,7 @@ const Trainings = () => {
                             ))}
                         </ul>
                     </div>
-                    <div>
+                    <div className='add-task-input'>
                         <div>
                             <div><label> Animal </label></div>
                             {/* <select
@@ -112,7 +112,7 @@ const Trainings = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='add-task-input'>
                         <div>
                             <div><label> Name </label></div>
                             <input
@@ -124,7 +124,7 @@ const Trainings = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='add-task-input'>
                         <div>
                             <div><label> Price </label></div>
                             <input
@@ -136,7 +136,7 @@ const Trainings = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='add-task-input'>
                         <div>
                             <div><label> Upload Image </label></div>
                             <input
@@ -148,7 +148,7 @@ const Trainings = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='add-task-input'>
                         <div>
                             <div><label> Description </label></div>
                             <textarea
@@ -159,7 +159,7 @@ const Trainings = () => {
                         </div>
                     </div>
 
-                    <button>
+                    <button className='add-task-button'>
                         Submit
                     </button>
                 </form>

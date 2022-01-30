@@ -71,7 +71,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <form onSubmit={onSignUp} className='signup-form'>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
@@ -82,6 +82,7 @@ const SignUpForm = () => {
         <div>
           <div><label> User Name </label></div>
           <input
+            className='signup-input'
             type='text'
             name='username'
             onChange={updateUsername}
@@ -94,6 +95,7 @@ const SignUpForm = () => {
         <div>
           <div><label> First Name</label></div>
           <input
+            className='signup-input'
             type='text'
             name='firstname'
             onChange={updateFirstname}
@@ -106,6 +108,7 @@ const SignUpForm = () => {
         <div>
           <div><label> Last Name </label></div>
           <input
+            className='signup-input'
             type='text'
             name='lastname'
             onChange={updateLastName}
@@ -118,6 +121,7 @@ const SignUpForm = () => {
         <div>
           <div><label> Email </label></div>
           <input
+            className='signup-input'
             type='text'
             name='email'
             onChange={updateEmail}
@@ -130,6 +134,7 @@ const SignUpForm = () => {
         <div>
           <div><label> Profile Pic </label></div>
           <input
+            className='signup-input'
             type='text'
             name='profilePic'
             onChange={updateProfilePic}
@@ -142,6 +147,7 @@ const SignUpForm = () => {
         <div>
           <div><label> Password </label></div>
           <input
+            className='signup-input'
             type='password'
             name='password'
             onChange={updatePassword}
@@ -154,6 +160,7 @@ const SignUpForm = () => {
         <div>
           <div><label> Repeat Password </label></div>
           <input
+            className='signup-input'
             type='password'
             name='repeat_password'
             onChange={updateRepeatPassword}

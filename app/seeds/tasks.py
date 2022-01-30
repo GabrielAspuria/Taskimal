@@ -22,7 +22,7 @@ def seed_tasks():
 
     boarding_camels = Task(
         userId=1,
-        animal='Misc',
+        animal='Camel',
         name='Housing',
         description='Love camels. Drop them off here when you need to rest up and get away from the burning sun.',
         price=40,
@@ -42,12 +42,12 @@ def seed_tasks():
 
     hippo_teeth_cleaning = Task(
         userId=1,
-        animal='Misc',
+        animal='Hippo',
         name='Teeth Cleaning',
         description='Hippos are scary and brushing their teeth is dangerous. But I will do it and do it well.',
         price=100,
         category='Misc',
-        pictures='https://res.cloudinary.com/gabrielaspuria/image/upload/v1642789053/Taskimal/Puppy_playdate_zzsynf.png'
+        pictures='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643168612/Taskimal/hippo_brush_gttqka.jpg'
     )
 
     puppy_playdate = Task(
@@ -70,13 +70,25 @@ def seed_tasks():
         pictures='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643045580/Taskimal/bird_running_g4wivi.png'
     )
 
+    puppy_fetch = Task(
+        userId=2,
+        animal='Dog',
+        name='Fetch',
+        description='Fetch and puppy is an iconic duo and I will teach your little puppy how to play fetch and do it right!',
+        price=20,
+        category='Training',
+        pictures='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643061208/Taskimal/German-Shepherd-Puppy-Fetch_uwpglz.jpg'
+    )
+
 
     db.session.add(walking_all)
     db.session.add(crate_training_all)
     db.session.add(boarding_camels)
     db.session.add(boarding_cats)
+    db.session.add(hippo_teeth_cleaning)
     db.session.add(puppy_playdate)
     db.session.add(bird_running)
+    db.session.add(puppy_fetch)
     db.session.commit()
 
 def undo_tasks():

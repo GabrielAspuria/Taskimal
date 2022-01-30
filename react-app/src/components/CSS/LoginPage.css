@@ -1,3 +1,27 @@
 .login-button {
     margin-top: 5px;
+    margin-left: 35px;
+}
+
+.login-form {
+    width: 300px;
+    height: 200px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 6px 6px #bdd5ea;
+    border: #ceeaf7 1px solid;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 950px;
+}
+
+.login-input {
+    width: 250px;
+}
+
+.demo-button {
+    margin-left: 40px;
 }

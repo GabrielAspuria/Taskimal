@@ -1,4 +1,20 @@
 .sign-up-button {
     width: 80px;
-    margin-top: 5px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.signup-form {
+    width: 500px;
+    height: 500px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 6px 6px #bdd5ea;
+    border: #ceeaf7 1px solid;
+    margin-left: 900px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
 }
