@@ -8,7 +8,7 @@ const Trainings = () => {
     const tasksObj = useSelector(state => state.tasks)
     const dispatch = useDispatch();
     const signedInUser = useSelector(state => state.session.user)
-    const history = useHisory()
+    const history = useHistory()
 
     const [errors, setErrors] = useState([])
     const [animal, setAnimal] = useState('')
