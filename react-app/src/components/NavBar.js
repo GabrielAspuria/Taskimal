@@ -6,7 +6,6 @@ import './CSS/NavBar.css'
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user)
-  console.log("USER", sessionUser)
 
   return (
     <nav>

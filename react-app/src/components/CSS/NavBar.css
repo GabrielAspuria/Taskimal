@@ -22,8 +22,8 @@ nav {
 
 .nav-buttons > li {
     margin: 20px;
-    font-family: 'Audiowide', cursive;
     color: #E2E3E5;
+    font-weight: bold;
     text-decoration: none;
 }
 
