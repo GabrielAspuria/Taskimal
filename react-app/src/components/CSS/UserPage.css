@@ -1,9 +1,8 @@
-.category-links {
+.your-task-links {
     box-sizing: border-box;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    justify-content: center;
     margin: 10px;
     margin-left: 20px;
     width: 100%;
@@ -11,7 +10,7 @@
 }
 
 .category {
-    width: 500px;
+    width: 550px;
     height: 300px;
     border-radius: 5px;
     box-sizing: border-box;

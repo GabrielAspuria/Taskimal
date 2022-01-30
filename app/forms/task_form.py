@@ -3,7 +3,8 @@ from wtforms import StringField, TextAreaField, SelectField, DecimalField
 from wtforms.validators import DataRequired
 
 class AddTaskForm(FlaskForm):
-    animal = SelectField('animal', choices=('Any', 'Dog', 'Cat', 'Bird', 'Reptile', 'Misc'), validators=[DataRequired()])
+    # animal = SelectField('animal', choices=('Any', 'Dog', 'Cat', 'Bird', 'Reptile', 'Misc'), validators=[DataRequired()])
+    animal = StringField('animal', validators=[DataRequired()])
     name = StringField('name', validators=[DataRequired()])
     description = TextAreaField('description', validators=[DataRequired()])
     price = DecimalField('price', validators=[DataRequired()])

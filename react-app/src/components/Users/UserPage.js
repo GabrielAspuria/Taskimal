@@ -39,7 +39,7 @@ const UserPage = ({id}) => {
                 <div className="bio">
                     <h2> Bio </h2>
                     <div>
-                        Name: {user.firstname} {user.lastname}
+                        Name: {user?.firstname} {user?.lastname}
                     </div>
                     <div>
                         Specialty: All animals
@@ -48,13 +48,13 @@ const UserPage = ({id}) => {
                 </div>
                 <div className="contact">
                     <h2> Contact Info </h2>
-                    <div> Email: {user.email} </div>
+                    <div> Email: {user?.email} </div>
                     <div> Phone: (123)456-7890</div>
                 </div>
             </div>
             <h1 className="title"> Your Tasks </h1>
             {user?.id && (
-                <div className="category-links">
+                <div className="your-task-links">
                     {userTasks?.length > 0 &&
                     userTasks.map((task) => (
                         <div>

@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 
 .category-img {
-    width: 500px;
+    width: 550px;
     height: 300px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    border-radius: 5px;
 }
 
 .title {
     align-items: center;
-    justify-content: center;
     display: flex;
     width:1800px;
     margin-left: 30px;
@@ -18,12 +18,14 @@
 .category-links {
     box-sizing: border-box;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
+    align-content: center;
     margin: 10px;
     margin-left: 20px;
-    width: 80%;
+    width: 1500px;
+    height: 700px;
 }
 
 .main{
@@ -38,9 +40,9 @@
 .category {
     border-radius: 5px;
     box-sizing: border-box;
-    margin: 10px;
     box-shadow: 6px 6px #bdd5ea;
     border: #ceeaf7 1px solid;
+    margin: 10px;
 }
 
 .category-name {
@@ -64,7 +66,6 @@ body {
 
 .header-background {
     width: 100%;
-    padding-left: 100px;
     display: flex;
     align-self: center;
     justify-content: center;
@@ -91,4 +92,13 @@ body {
 .header-container {
     display: flex;
     justify-content: center;
+}
+
+p {
+    font-weight: bold;
+}
+
+.book-app {
+    padding-top: 5px;
+    margin-top: 5px;
 }

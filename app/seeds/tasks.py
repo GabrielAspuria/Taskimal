@@ -19,6 +19,17 @@ def seed_tasks():
         category='Training',
         pictures='https://res.cloudinary.com/gabrielaspuria/image/upload/v1642791348/Taskimal/alligator_crate_fvtol0.jpg'
     )
+
+    boarding_camels = Task(
+        userId=1,
+        animal='Misc',
+        name='Housing',
+        description='Love camels. Drop them off here when you need to rest up and get away from the burning sun.',
+        price=40,
+        category='Boarding',
+        pictures='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643412707/Taskimal/camel_pa8cul.jpg'
+    )
+
     boarding_cats = Task(
         userId=2,
         animal='Cat',
@@ -27,6 +38,16 @@ def seed_tasks():
         price=20,
         category='Boarding',
         pictures='https://res.cloudinary.com/gabrielaspuria/image/upload/v1642789054/Taskimal/cat_boarding_hpuool.png'
+    )
+
+    hippo_teeth_cleaning = Task(
+        userId=1,
+        animal='Misc',
+        name='Teeth Cleaning',
+        description='Hippos are scary and brushing their teeth is dangerous. But I will do it and do it well.',
+        price=100,
+        category='Misc',
+        pictures='https://res.cloudinary.com/gabrielaspuria/image/upload/v1642789053/Taskimal/Puppy_playdate_zzsynf.png'
     )
 
     puppy_playdate = Task(
@@ -52,6 +73,7 @@ def seed_tasks():
 
     db.session.add(walking_all)
     db.session.add(crate_training_all)
+    db.session.add(boarding_camels)
     db.session.add(boarding_cats)
     db.session.add(puppy_playdate)
     db.session.add(bird_running)

@@ -9,8 +9,7 @@ nav {
     justify-content: center;
     align-items: center;
     font-family: 'Quicksand', sans-serif;
-    width: 100%;
-    height: 75px;
+    width: 80%;
 }
 
 .nav-buttons {
@@ -71,10 +70,9 @@ button {
 }
 
 input {
-    margin-left: 25px;
+    /* margin-left: 25px; */
     width: 150px;
     font-family: 'Quicksand', sans-serif;
-    /* border: none; */
     border-radius: 5px;
     border-color: #577399;;
 }

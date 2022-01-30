@@ -38,7 +38,7 @@ const MainPage = () => {
                     <NavLink to='/tasks/exercise'>
                         <img src={exercises?.pictures} className='category-img'></img>
                     </NavLink>
-                        <div className='category-name'> Exercise </div>
+                    <div className='category-name'> Exercise </div>
                 </div>
 
                 <div className='category'>

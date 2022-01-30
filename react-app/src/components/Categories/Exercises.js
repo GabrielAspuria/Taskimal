@@ -9,7 +9,8 @@ const Exercises = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user)
 
-    const [animal, setAnimal] = useState('Any')
+    const [errors, setErrors] = useState([])
+    const [animal, setAnimal] = useState('')
     const [name,setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
@@ -22,7 +23,7 @@ const Exercises = () => {
     }, [dispatch])
 
     const resetForm = () => {
-        setAnimal('Any')
+        setAnimal('')
         setName('')
         setDescription('')
         setPrice('')
@@ -32,17 +33,31 @@ const Exercises = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newExercise = {
-            animal,
-            name,
-            description,
-            price,
-            category,
-            pictures,
-            userId: sessionUser.id
+
+        const validationErrors = []
+        const priceRegex = /^[0-9]+(\.[0-9][0-9])?$/;
+        const imgRegex = /(http(s?):)|([/|.|\w|\s])*\.(?:jpg|gif|png)/;
+        if (!name) validationErrors.push('Please provide a name for this task')
+        if (!priceRegex.test(price)) validationErrors.push('Please provide a numeric price')
+        if (!price) validationErrors.push('Please provide a price per session')
+        if (!imgRegex.test(pictures) && pictures) validationErrors.push('Please enter a valid image URL for your product')
+        if (!pictures) validationErrors.push('Please provide a picture representing your task')
+        if (!description) validationErrors.push('Please describe your task')
+        setErrors(validationErrors)
+
+        if (validationErrors.length === 0) {
+            const newTraining = {
+                animal,
+                name,
+                description,
+                price,
+                category,
+                pictures,
+                userId: sessionUser.id
+            }
+            await dispatch(createTask(newTraining))
+            resetForm()
         }
-        await dispatch(createTask(newExercise))
-        resetForm()
     }
 
     const tasks = Object.values(tasksObj)
@@ -52,7 +67,7 @@ const Exercises = () => {
         <div>
             {exercises.map((exercise) => (
                 <div>
-                    {exercise?.animal} {exercise?.name} ${exercise?.price}
+                    <h3>{exercise?.animal} {exercise?.name} ${exercise?.price}</h3>
                     <div>
                         <NavLink to={`/tasks/${exercise?.id}`}>
                             <img src={exercise.pictures} className='pictures' />
@@ -62,55 +77,85 @@ const Exercises = () => {
                 </div>
             ))}
             {sessionUser !== null &&
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className='add-task-form'>
+                    <h2> Add A Task </h2>
                     <div>
-                        <label> Animal </label>
-                        <select
-                        value={animal}
-                        onChange={(e) => setAnimal(e.target.value)}
-                        >
-                            <option value='Any'> Any </option>
-                            <option value='Dog'> Dog </option>
-                            <option value='Cat'> Cat </option>
-                            <option value='Bird'> Bird </option>
-                            <option value='Reptile'> Reptile </option>
-                            <option value='Misc'> Misc </option>
-                        </select>
+                        <ul>
+                            {errors.length > 0 &&
+                            errors.map(error => (
+                                <li key={error}> {error} </li>
+                            ))}
+                        </ul>
                     </div>
                     <div>
-                        <label> Name </label>
-                        <input
-                            placeholder='Name of your task'
-                            type='text'
-                            value={name}
-                            onChange={e => setName(e.target.value)}
-                        />
+                        <div><label> Animal </label></div>
+                        <div>
+                            {/* <select
+                            value={animal}
+                            onChange={(e) => setAnimal(e.target.value)}
+                            >
+                                <option value='Any'> Any </option>
+                                <option value='Dog'> Dog </option>
+                                <option value='Cat'> Cat </option>
+                                <option value='Bird'> Bird </option>
+                                <option value='Reptile'> Reptile </option>
+                                <option value='Misc'> Misc </option>
+                            </select> */}
+                            <input
+                                placeholder='What kind of animal(s)?'
+                                type='text'
+                                value={animal}
+                                onChange={e => setAnimal(e.target.value)}
+                            >
+                            </input>
+                        </div>
                     </div>
+
                     <div>
-                        <label> Description </label>
-                        <textarea
-                            placeholder='Description of your task'
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
+                        <div>
+                            <div><label> Name </label></div>
+                            <input
+                                placeholder='Name of your task'
+                                type='text'
+                                value={name}
+                                onChange={e => setName(e.target.value)}
+                            />
+                        </div>
                     </div>
+
                     <div>
-                        <label> Price </label>
-                        <input
-                            placeholder='Price'
-                            type='text'
-                            value={price}
-                            onChange={e => setPrice(e.target.value)}
-                        />
+                        <div>
+                            <div><label> Price </label></div>
+                            <input
+                                placeholder='Price'
+                                type='text'
+                                value={price}
+                                onChange={e => setPrice(e.target.value)}
+                            />
+                        </div>
                     </div>
+
                     <div>
-                        <label> Upload Image </label>
-                        <input
-                            placeholder='Image URL'
-                            type='text'
-                            value={pictures}
-                            onChange={e => setPictures(e.target.value)}
-                        />
+                        <div>
+                            <div><label> Upload Image </label></div>
+                            <input
+                                placeholder='Image URL'
+                                type='text'
+                                value={pictures}
+                                onChange={e => setPictures(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <div><label> Description </label></div>
+                            <textarea
+                                placeholder='Description of your task'
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+                        </div>
                     </div>
                     <button>
                         Submit

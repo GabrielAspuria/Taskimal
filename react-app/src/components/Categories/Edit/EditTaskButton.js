@@ -10,7 +10,6 @@ const EditTaskButton = (props) => {
     const [editPrice, setPrice] = useState(props.task.price)
     const [editPictures, setPictures] = useState(props.task.pictures)
 
-
     const handleEdit = async (e) => {
         e.preventDefault()
         const editedTask = {
@@ -27,51 +26,66 @@ const EditTaskButton = (props) => {
     return (
         <form onSubmit={handleEdit}>
             <div>
-                <label> Animal </label>
-                <select
-                value={editAnimal}
-                onChange={(e) => setAnimal(e.target.value)}
-                >
-                    <option value='Any'> Any </option>
-                    <option value='Dog'> Dog </option>
-                    <option value='Cat'> Cat </option>
-                    <option value='Bird'> Bird </option>
-                    <option value='Reptile'> Reptile </option>
-                    <option value='Misc'> Misc </option>
-                </select>
+                <div>
+                    <div><label> Animal </label></div>
+                    {/* <select
+                    value={editAnimal}
+                    onChange={(e) => setAnimal(e.target.value)}
+                    >
+                        <option value='Any'> Any </option>
+                        <option value='Dog'> Dog </option>
+                        <option value='Cat'> Cat </option>
+                        <option value='Bird'> Bird </option>
+                        <option value='Reptile'> Reptile </option>
+                        <option value='Misc'> Misc </option>
+                    </select> */}
+                    <input
+                                placeholder='What kind of animal(s)?'
+                                type='text'
+                                value={editAnimal}
+                                onChange={e => setAnimal(e.target.value)}
+                            ></input>
+                </div>
             </div>
+
             <div>
-                <label> Name </label>
-                <input
-                    type='text'
-                    value={editName}
-                    onChange={e => setName(e.target.value)}
-                />
+                <div>
+                    <div><label> Name </label></div>
+                    <input
+                        type='text'
+                        value={editName}
+                        onChange={e => setName(e.target.value)}
+                    />
+                </div>
             </div>
+
             <div>
-                <label> Description </label>
-                <textarea
-                    type='text'
-                    value={editDescription}
-                    onChange={e => setDescription(e.target.value)}
-                />
-            </div>
-            <div>
-                <label> Price: </label>
+                <div><label> Price: </label></div>
                 <input
                     type='text'
                     value={editPrice}
                     onChange={e => setPrice(e.target.value)}
                 />
             </div>
+
             <div>
-                <label> Picture </label>
+                <div><label> Picture </label></div>
                 <input
                     type='text'
                     value={editPictures}
                     onChange={e => setPictures(e.target.value)}
                 />
             </div>
+
+            <div>
+                <div><label> Description </label></div>
+                <textarea
+                    type='text'
+                    value={editDescription}
+                    onChange={e => setDescription(e.target.value)}
+                />
+            </div>
+
             <button>Submit</button>
         </form>
     )
