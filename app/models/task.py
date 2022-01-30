@@ -13,7 +13,7 @@ class Task(db.Model):
     pictures = db.Column(db.String(500))
 
     user = db.relationship('User', back_populates='tasks')
-    appointments = db.relationship('Appointment', back_populates='tasks')
+    appointments = db.relationship('Appointment', cascade=('all, delete'), back_populates='tasks')
 
     def to_dict(self):
         return {
