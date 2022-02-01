@@ -46,6 +46,7 @@ const BookAppointmentButton = (props) => {
             }
             await dispatch(bookAppointment(newAppointment))
             history.push('/appointments')
+
         }
     }
 
@@ -118,7 +119,7 @@ const BookAppointmentButton = (props) => {
                         </div>
                     </div>
                 </div>
-                <button className="book-app">
+                <button onClick="window.location.reload()" className="book-app">
                     Book Appointment
                 </button>
             </form>

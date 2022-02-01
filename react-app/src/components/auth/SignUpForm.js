@@ -3,8 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import '../CSS/SignUpPage.css'
+import { allUsers } from '../../store/users';
 
 const SignUpForm = () => {
+  const usersObj = useSelector(state => state.users)
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');

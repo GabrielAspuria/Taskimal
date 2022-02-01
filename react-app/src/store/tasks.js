@@ -76,7 +76,8 @@ const tasksReducer = (state = {}, action) => {
             return newState;
 
         case ADD_TASK:
-            return { ...state, [action.task.userId]: action.task }
+            newState = { ...state, [action.task.userId]: action.task }
+            return newState;
 
         case EDIT_TASK:
             newState = { ...state }

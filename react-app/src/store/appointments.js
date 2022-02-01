@@ -57,7 +57,7 @@ const appointmentsReducer = (state = {}, action) => {
             return newState;
 
         case ADD_APPOINTMENT:
-            return { ...state, [action.appointment.userId]: action.appointment }
+            return { ...state, [action.appointment.id]: action.appointment }
 
         case DELETE_APPOINTMENT:
             newState = { ...state };
