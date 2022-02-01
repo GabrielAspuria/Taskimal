@@ -10,18 +10,15 @@ const AppointmentsPage = () => {
     const appsObj = useSelector(state => state.appointments)
     const tasksObj = useSelector(state => state.tasks)
     const sessionUser = useSelector(state => state.session.user)
-    console.log("USER:",sessionUser)
     const dispatch = useDispatch();
     const history = useHistory()
     const apps = Object.values(appsObj);
     apps.forEach((app) => {
         app.task = tasksObj[app?.taskId];
-        console.log("APP:", app)
     });
     const date = Date()
     const month = date.split(' ')[1]
     const today = date.split(' ')[2]
-    console.log('TODAY', today)
 
     useEffect(() => {
         dispatch(allAppointments())
@@ -34,7 +31,6 @@ const AppointmentsPage = () => {
     const handleDelete = async (e) => {
         e.preventDefault()
         await dispatch(cancelAppointment(e.target.id))
-        // history.push('/appointments')
     }
 
     return (
@@ -47,13 +43,10 @@ const AppointmentsPage = () => {
                             <img src={app?.task?.pictures} className="app-img"/>
                         </NavLink>
                         <div className="app-info">
-                            {/* {sessionUser?.id === app?.task?.userId && (
-
-                                )} */}
-                                <div>{app?.task?.name}</div>
-                                <div> Payment: ${app?.task?.price}</div>
-                                <div>Day: {app?.month} {app?.day}</div>
-                                <div>Time: {app.time} {app.ap} </div>
+                            <div>{app?.task?.name}</div>
+                            <div> Payment: ${app?.task?.price}</div>
+                            <div>Day: {app?.month} {app?.day}</div>
+                            <div>Time: {app.time} {app.ap} </div>
                         <button
                             onClick={handleDelete}
                             id={app.id}

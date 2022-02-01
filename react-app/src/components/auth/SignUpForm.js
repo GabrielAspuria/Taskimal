@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
@@ -7,6 +7,16 @@ import { allUsers } from '../../store/users';
 
 const SignUpForm = () => {
   const usersObj = useSelector(state => state.users)
+  const usernames = []
+  const emails = []
+  const unames = Object.values(usersObj).forEach((uname) => {
+    Object.values(uname).forEach((u) => {
+      usernames.push(u.username)
+      emails.push(u.email)
+    })
+  })
+  console.log("usernames:",usernames)
+  console.log("emails", emails)
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -18,15 +28,21 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+  useEffect(()=> {
+    dispatch(allUsers())
+  }, [dispatch])
+
   const onSignUp = async (e) => {
     e.preventDefault();
 
     const validationErrors = []
     const regex = /^\S+@\S+\.\S+$/;
-    if (!regex.test(email)) validationErrors.push('Please enter a valid email')
+    if (username.length < 1) validationErrors.push('Please enter a User Name')
+    if (usernames.includes(username)) validationErrors.push('Username already exists')
     if (firstname.length < 1) validationErrors.push('Please enter your First Name')
     if (lastname.length < 1) validationErrors.push('Please enter your Last Name')
-    if (username.length < 1) validationErrors.push('Please enter a User Name')
+    if (!regex.test(email)) validationErrors.push('Please enter a valid email')
+    if (emails.includes(email)) validationErrors.push('Email already exists')
     if (password !== repeatPassword) validationErrors.push('Password and Repeat Password inputs must match')
     if (validationErrors.length === 0) {
     const data = await dispatch(signUp(username, email, firstname, lastname, profilePic, password));

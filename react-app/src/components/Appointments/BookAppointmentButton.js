@@ -119,7 +119,7 @@ const BookAppointmentButton = (props) => {
                         </div>
                     </div>
                 </div>
-                <button onClick="window.location.reload()" className="book-app">
+                <button className="book-app">
                     Book Appointment
                 </button>
             </form>
