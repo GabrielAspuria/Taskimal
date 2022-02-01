@@ -8,12 +8,13 @@ const BookAppointmentButton = (props) => {
     const dispatch = useDispatch()
     const date = Date()
     const thisMonth = date.split(' ')[1]
-    const today = date.split('')[2]
+    const today = date.split(' ')[2]
+    console.log(today)
     const signedInUser = useSelector(state => state.session.user)
     const history = useHistory()
 
     const [errors, setErrors] = useState([])
-    const [month, setMonth] = useState("Jan")
+    const [month, setMonth] = useState(thisMonth)
     const [day, setDay] = useState('1')
     const [time, setTime] = useState(1)
     const [ap, setAp] = useState('AM')
@@ -26,11 +27,11 @@ const BookAppointmentButton = (props) => {
 
         const validationErrors = []
         const dayRegex = /^[0-9]+(\.[0-9][0-9])?$/;
-        if(thisMonth === month && day < today && day > 0 && day < 31) validationErrors.push('Cannot schedule day in the past')
+        if(day < today && day > 0 && day <= 31) validationErrors.push('Cannot schedule day in the past')
         if(day < 1 || day > 31) validationErrors.push('Please enter a valid day')
         if(thirtyMonths.includes(month) && day > 30) validationErrors.push('Please enter a valid day')
         if(!dayRegex.test(day)) validationErrors.push('Please enter a numeric day')
-        if(month === 'Feb' && day > 28) validationErrors.push('Please enter a valid day')
+        if(month === 'Feb' && day > 28) validationErrors.push("February doesn't have that many days")
         if(ap === 'AM' && tooEarly.includes(time)) validationErrors.push('Appointment is too early. Please choose a time between 8 AM and 10 PM')
         if(ap === 'PM' && tooLate.includes(time)) validationErrors.push('Appointment is too late. Please choose a time between 8 AM and 10 PM')
         setErrors(validationErrors)
