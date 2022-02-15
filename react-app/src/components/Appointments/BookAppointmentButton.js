@@ -9,7 +9,6 @@ const BookAppointmentButton = (props) => {
     const date = Date()
     const thisMonth = date.split(' ')[1]
     const today = date.split(' ')[2]
-    console.log(today)
     const signedInUser = useSelector(state => state.session.user)
     const history = useHistory()
 
@@ -18,6 +17,7 @@ const BookAppointmentButton = (props) => {
     const [day, setDay] = useState('1')
     const [time, setTime] = useState(1)
     const [ap, setAp] = useState('AM')
+    console.log("MONTH", month)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -27,7 +27,7 @@ const BookAppointmentButton = (props) => {
 
         const validationErrors = []
         const dayRegex = /^[0-9]+(\.[0-9][0-9])?$/;
-        if(day < today && day > 0 && day <= 31) validationErrors.push('Cannot schedule day in the past')
+        if(month === thisMonth && day < today && day > 0) validationErrors.push('Cannot schedule day in the past')
         if(day < 1 || day > 31) validationErrors.push('Please enter a valid day')
         if(thirtyMonths.includes(month) && day > 30) validationErrors.push('Please enter a valid day')
         if(!dayRegex.test(day)) validationErrors.push('Please enter a numeric day')
