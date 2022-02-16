@@ -8,29 +8,29 @@ const BookAppointmentButton = (props) => {
     const dispatch = useDispatch()
     const date = Date()
     const thisMonth = date.split(' ')[1]
-    const today = date.split(' ')[2]
+    const today = parseInt(date.split(' ')[2])
     const signedInUser = useSelector(state => state.session.user)
     const history = useHistory()
 
     const [errors, setErrors] = useState([])
     const [month, setMonth] = useState(thisMonth)
-    const [day, setDay] = useState('1')
+    const [day, setDay] = useState(1)
     const [time, setTime] = useState('1')
     const [ap, setAp] = useState('AM')
-
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         const thirtyMonths = ['Apr', 'Jun', 'Sep', 'Nov']
         const tooEarly = ['12', '1', '2', '3', '4', '5', '6', '7']
         const tooLate = ['9', '10', '11']
 
         const validationErrors = []
         // const dayRegex = /^[0-9]+(\.[0-9][0-9])?$/;
-        if(month === thisMonth && day < today && day > 0) validationErrors.push('Cannot schedule day in the past')
-        if(day < 1 || day > 31) validationErrors.push('Please enter a valid day')
-        if(thirtyMonths.includes(month) && day > 30) validationErrors.push('Please enter a valid day')
+        if(month === thisMonth && day < today && day > 0 || (months.indexOf(month) < months.indexOf(thisMonth))) validationErrors.push('Cannot schedule day in the past')
+        if(day < 1 || day > 31 || (month === 'Feb' && day > 28) || (thirtyMonths.includes(month) && day > 30)) validationErrors.push('Please enter a valid day')
+        // if(thirtyMonths.includes(month) && day > 30) validationErrors.push('Please enter a valid day')
         // if(!dayRegex.test(day)) validationErrors.push('Please enter a numeric day')
-        if(month === 'Feb' && day > 28) validationErrors.push("Please enter a valid day")
+        // if(month === 'Feb' && day > 28) validationErrors.push("Please enter a valid day")
         if(ap === 'AM' && tooEarly.includes(time)) validationErrors.push('Please choose a time between 8 AM and 8 PM')
         if(ap === 'PM' && tooLate.includes(time)) validationErrors.push('Please choose a time between 8 AM and 8 PM')
         setErrors(validationErrors)
