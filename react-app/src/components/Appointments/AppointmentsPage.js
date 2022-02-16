@@ -30,14 +30,18 @@ const AppointmentsPage = () => {
 
     const handleDelete = async (e) => {
         e.preventDefault()
-        await dispatch(cancelAppointment(e.target.id))
+        const confirmed = window.confirm('Cancel appointment?')
+        if(confirmed) await dispatch(cancelAppointment(e.target.id))
+        // await dispatch(cancelAppointment(e.target.id))
     }
+
+    const userApps = apps.filter((app) => app?.userId === sessionUser?.id)
 
     return (
         <div>
             <h1 className="title"> Appointments </h1>
             <div className="app-box">
-                {apps?.map((app) => (
+                {userApps?.map((app) => (
                     <div className="app-container">
                         <NavLink to={`/tasks/${app?.taskId}`}>
                             <img src={app?.task?.pictures} className="app-img"/>
