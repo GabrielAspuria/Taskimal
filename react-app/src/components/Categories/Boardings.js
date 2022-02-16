@@ -36,10 +36,11 @@ const Boardings = () => {
         e.preventDefault();
 
         const validationErrors = []
-        const priceRegex = /^[0-9]+(\.[0-9][0-9])?$/;
+        // const priceRegex = /^[0-9]+(\.[0-9][0-9])?$/;
         const imgRegex = /(http(s?):)|([/|.|\w|\s])*\.(?:jpg|gif|png)/;
         if (!name) validationErrors.push('Please provide a name for this task')
-        if (!priceRegex.test(price)) validationErrors.push('Please provide a numeric price')
+        // if (!priceRegex.test(price)) validationErrors.push('Please provide a numeric price')
+        if (price <= 0) validationErrors.push('Please provide a price greater than 0')
         if (!price) validationErrors.push('Please provide a price per session')
         if (!imgRegex.test(pictures) && pictures) validationErrors.push('Please enter a valid image URL for your product')
         if (!pictures) validationErrors.push('Please provide a picture representing your task')
@@ -128,7 +129,7 @@ const Boardings = () => {
                             <div><label> Price </label></div>
                             <input
                                 placeholder='Price'
-                                type='text'
+                                type='number'
                                 value={price}
                                 onChange={e => setPrice(e.target.value)}
                             />
