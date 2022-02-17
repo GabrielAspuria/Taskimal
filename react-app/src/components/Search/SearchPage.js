@@ -1,13 +1,12 @@
 import { useSelector } from "react-redux";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-
 
 const SearchPage = () => {
     const resultsObj = useSelector(state => state.search)
-    console.log("RESULTS OBJ", resultsObj)
 
     const results = Object.values(resultsObj)
-    console.log("RESULTS", results)
+    
 
     return (
         <>
@@ -21,7 +20,10 @@ const SearchPage = () => {
                 {results?.length > 0 &&
                     results.map(result => (
                         <div>
-                            <h2>{result.animal}{result.category}</h2>
+                            <h2>{result?.animal} {result?.category}</h2>
+                            <NavLink to={'/search'}>
+                                <img src={result?.pictures}/>
+                            </NavLink>
                         </div>
                     ))
                 }

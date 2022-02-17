@@ -17,7 +17,7 @@ const SearchBar = () => {
         if (input) {
             await dispatch(searchResults(search))
             setInput('')
-            history.push('/search/')
+            history.push(`/search/`)
         }
     }
 

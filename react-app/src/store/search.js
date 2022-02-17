@@ -8,7 +8,7 @@ const getResults = (search) => ({
 export const searchResults = (task) => async (dispatch) => {
     const res = await fetch('/api/search/', {
         method: 'POST',
-        headers: {'Content-Type' : 'application/json'},
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(task)
     })
     const data = await res.json()
@@ -20,7 +20,7 @@ const searchReducer = (state = {}, action) => {
     let newState;
     switch (action.type) {
         case GET_RESULTS:
-            newState = {}
+            newState = { ...state }
             action.search.tasks.forEach(task => {
                 newState[task.id] = task
             })

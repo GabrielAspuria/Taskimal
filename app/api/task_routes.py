@@ -30,7 +30,7 @@ def add_task():
         db.session.add(task)
         db.session.commit()
         return task.to_dict()
-    return form.errors
+    # return form.errors
 
 @task_routes.route('/<int:id>', methods=['PUT'])
 def edit_task(id):

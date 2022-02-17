@@ -12,11 +12,11 @@ def search():
     results = []
     if form.validate_on_submit():
         search = form.data['search']
-        animal = Task.query.filter(Task.animal.ilike(f'%{search}%')).all()
-        results.append(animal)
-        name = Task.query.filter(Task.name.ilike(f'%{search}%')).all()
-        results.append(name)
+        animal_results = Task.query.filter(Task.animal.ilike(f'%{search}%')).all()
+        results.append(animal_results)
+        name_results = Task.query.filter(Task.name.ilike(f'%{search}%')).all()
+        results.append(name_results)
 
         search_results = [task for subtask in results for task in subtask]
-
         return {'tasks': [task.to_dict() for task in set(search_results)]}
+    return form.errors
