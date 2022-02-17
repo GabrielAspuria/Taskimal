@@ -6,7 +6,6 @@ const SearchPage = () => {
     const resultsObj = useSelector(state => state.search)
 
     const results = Object.values(resultsObj)
-    
 
     return (
         <>

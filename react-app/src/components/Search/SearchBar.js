@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { searchResults } from '../../store/search';
 import '../CSS/SearchBar.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const SearchBar = () => {
     const [input, setInput] = useState('')
