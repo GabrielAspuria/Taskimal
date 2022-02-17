@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from app.forms import SearchForm
-from app.models.task import task
+from app.models.task import Task
 
 search_routes = Blueprint('search', __name__, url_prefix='/search')
 
@@ -16,4 +16,7 @@ def search():
         results.append(animal)
         name = Task.query.filter(Task.name.ilike(f'%{search}%')).all()
         results.append(name)
-        
+
+        search_results = [task for subtask in results for task in subtask]
+
+        return {'tasks': [task.to_dict() for task in set(search_results)]}

@@ -119,7 +119,7 @@ const Exercises = () => {
                             <div><label> Name </label></div>
                             <input
                                 placeholder='Name of your task'
-                                type='number'
+                                type='text'
                                 value={name}
                                 onChange={e => setName(e.target.value)}
                             />

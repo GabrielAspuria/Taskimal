@@ -46,7 +46,6 @@ const BookAppointmentButton = (props) => {
             }
             await dispatch(bookAppointment(newAppointment))
             history.push('/appointments')
-
         }
     }
 
