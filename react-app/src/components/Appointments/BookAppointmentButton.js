@@ -27,7 +27,7 @@ const BookAppointmentButton = (props) => {
     const [ap, setAp] = useState('AM')
 
     // const checkAppointments = appointments.forEach((appointment) => apps.push(appointment))
-    const checkApps = appointments.filter((app) => (signedInUser.id === app.userId) && month === app.month && day === app.day)
+    const checkApps = appointments.filter((app) => (signedInUser.id === app.userId) && month === app.month && parseInt(day) === app.day)
     console.log("CHECK", checkApps.length)
     const handleSubmit = async (e) => {
         e.preventDefault()
