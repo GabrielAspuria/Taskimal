@@ -27,14 +27,14 @@
 }
 
 .app-input {
-    width: 100px;
-    margin-left: 95px;
+    width: 50px;
+    margin-left: 80px;
     border-radius: 5px;
     border-color: #bdd5ea;
 }
 
 .time-input {
-    width: 80px;
+    width: 50px;
     height: 25px;
     border-radius: 5px;
     border-color: #bdd5ea;
@@ -46,4 +46,9 @@
     height: 25px;
     border-radius: 5px;
     border-color: #bdd5ea;
+}
+
+.year-input {
+    width: 50px;
+    margin-left: 20px;
 }

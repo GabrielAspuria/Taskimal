@@ -9,6 +9,7 @@ const BookAppointmentButton = (props) => {
     const date = Date()
     const thisMonth = date.split(' ')[1]
     const today = parseInt(date.split(' ')[2])
+    const thisYear = parseInt(date.split(' ')[3])
     const signedInUser = useSelector(state => state.session.user)
     const history = useHistory()
     const appointmentsObj = useSelector(state => state.appointments)
@@ -21,14 +22,16 @@ const BookAppointmentButton = (props) => {
 
 
     const [errors, setErrors] = useState([])
+    const [year, setYear] = useState(thisYear)
     const [month, setMonth] = useState(thisMonth)
     const [day, setDay] = useState(1)
     const [time, setTime] = useState('1')
     const [ap, setAp] = useState('AM')
-
     // const checkAppointments = appointments.forEach((appointment) => apps.push(appointment))
-    const checkApps = appointments.filter((app) => (signedInUser.id === app.userId) && month === app.month && parseInt(day) === app.day)
+    const checkApps = appointments.filter((app) => (signedInUser.id === app.userId) && month === app.month && parseInt(day) === app.day && parseInt(year) === app.year)
     console.log("CHECK", checkApps.length)
+    console.log("YEEEEEEEET", year < thisYear)
+    console.log("YEAR:", parseInt(year))
     const handleSubmit = async (e) => {
         e.preventDefault()
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -38,7 +41,8 @@ const BookAppointmentButton = (props) => {
 
         const validationErrors = []
         // const dayRegex = /^[0-9]+(\.[0-9][0-9])?$/;
-        if(month === thisMonth && day < today && day > 0 || (months.indexOf(month) < months.indexOf(thisMonth))) validationErrors.push('Cannot schedule day in the past')
+        // if(parseInt(year) < thisYear) validationErrors.push ('Cannot schedule a day in the past')
+        if((parseInt(year) === thisYear && month === thisMonth && day < today && day > 0) || (months.indexOf(month) < months.indexOf(thisMonth) && year < thisYear)) validationErrors.push('Cannot schedule day in the past')
         if(day < 1 || day > 31 || (month === 'Feb' && day > 28) || (thirtyMonths.includes(month) && day > 30)) validationErrors.push('Please enter a valid day')
         // if(thirtyMonths.includes(month) && day > 30) validationErrors.push('Please enter a valid day')
         // if(!dayRegex.test(day)) validationErrors.push('Please enter a numeric day')
@@ -50,6 +54,7 @@ const BookAppointmentButton = (props) => {
 
         if(validationErrors.length === 0) {
             const newAppointment = {
+                year,
                 month,
                 day,
                 time,
@@ -76,8 +81,15 @@ const BookAppointmentButton = (props) => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <div className='app-form-info'>
-                        <div><label className="month"> Month </label> <label className="day"> Day </label> <label className="time"> Time </label></div>
+                        <div><label className="year"> Year </label><label className="month"> Month </label> <label className="day"> Day </label> <label className="time"> Time </label></div>
                         <div>
+                            <input
+                                className="year-input"
+                                type='number'
+                                value={year}
+                                onChange={(e) => setYear(e.target.value)}
+                            >
+                            </input>
                             <select
                             className="month-button"
                             value={month}

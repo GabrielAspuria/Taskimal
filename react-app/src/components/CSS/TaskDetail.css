@@ -65,15 +65,19 @@ h3 {
 }
 
 .day {
-    margin-left: 130px;
+    margin-left: 90px;
 }
 
 .time {
-    margin-left: 135px;
+    margin-left: 105px;
 }
 
 .month {
-    margin-left: 67px;
+    margin-left: 77px;
+}
+
+.year {
+    margin-left: 20px;
 }
 
 .month-button {
@@ -81,5 +85,5 @@ h3 {
     height: 25px;
     border-radius: 5px;
     border-color: #bdd5ea;
-    margin-left: 65px;
+    margin-left: 55px;
 }

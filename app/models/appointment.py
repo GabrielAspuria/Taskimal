@@ -6,6 +6,7 @@ class Appointment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     taskId = db.Column(db.Integer, db.ForeignKey('tasks.id'))
+    year = db.Column(db.Integer, nullable=False)
     month = db.Column(db.String(50), nullable=False)
     day = db.Column(db.Integer, nullable=False)
     time = db.Column(db.Integer, nullable=False)
@@ -20,6 +21,7 @@ class Appointment(db.Model):
             'id': self.id,
             'userId': self.userId,
             'taskId': self.taskId,
+            'year': self.year,
             'month': self.month,
             'day': self.day,
             'time': self.time,

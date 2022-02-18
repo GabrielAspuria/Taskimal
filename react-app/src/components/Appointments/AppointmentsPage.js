@@ -49,7 +49,7 @@ const AppointmentsPage = () => {
                         <div className="app-info">
                             <div>{app?.task?.name}</div>
                             <div> Payment: ${app?.task?.price}</div>
-                            <div>Day: {app?.month} {app?.day}</div>
+                            <div>Date: {app?.month} {app?.day}, {app?.year}</div>
                             <div>Time: {app.time} {app.ap} </div>
                         <button
                             onClick={handleDelete}
