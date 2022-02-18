@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import React, {useState } from "react";
-import { bookAppointment } from "../../store/appointments";
+import React, {useState, useEffect } from "react";
+import { bookAppointment, allAppointments } from "../../store/appointments";
 import { useHistory } from "react-router-dom";
 import '../CSS/BookAppointment.css'
 
@@ -11,12 +11,24 @@ const BookAppointmentButton = (props) => {
     const today = parseInt(date.split(' ')[2])
     const signedInUser = useSelector(state => state.session.user)
     const history = useHistory()
+    const appointmentsObj = useSelector(state => state.appointments)
+    const appointments = Object.values(appointmentsObj)
+    console.log("APPOINTMENTS:", appointments)
+
+    useEffect(() => {
+        dispatch(allAppointments())
+    }, [dispatch])
+
 
     const [errors, setErrors] = useState([])
     const [month, setMonth] = useState(thisMonth)
     const [day, setDay] = useState(1)
     const [time, setTime] = useState('1')
     const [ap, setAp] = useState('AM')
+
+    // const checkAppointments = appointments.forEach((appointment) => apps.push(appointment))
+    const checkApps = appointments.filter((app) => (signedInUser.id === app.userId) && month === app.month && day === app.day)
+    console.log("CHECK", checkApps.length)
     const handleSubmit = async (e) => {
         e.preventDefault()
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -31,6 +43,7 @@ const BookAppointmentButton = (props) => {
         // if(thirtyMonths.includes(month) && day > 30) validationErrors.push('Please enter a valid day')
         // if(!dayRegex.test(day)) validationErrors.push('Please enter a numeric day')
         // if(month === 'Feb' && day > 28) validationErrors.push("Please enter a valid day")
+        if(checkApps.length) validationErrors.push('You already have an appointment for that day')
         if(ap === 'AM' && tooEarly.includes(time)) validationErrors.push('Please choose a time between 8 AM and 8 PM')
         if(ap === 'PM' && tooLate.includes(time)) validationErrors.push('Please choose a time between 8 AM and 8 PM')
         setErrors(validationErrors)
