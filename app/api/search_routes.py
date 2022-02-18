@@ -19,4 +19,4 @@ def search():
 
         search_results = [task for subtask in results for task in subtask]
         return {'tasks': [task.to_dict() for task in set(search_results)]}
-    return form.errors
+    # return form.errors

@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const SearchPage = () => {
     const resultsObj = useSelector(state => state.search)
+    console.log("RESULTSOBJ:", resultsObj)
 
     const results = Object.values(resultsObj)
 

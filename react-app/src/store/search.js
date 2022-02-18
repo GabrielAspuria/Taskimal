@@ -20,7 +20,7 @@ const searchReducer = (state = {}, action) => {
     let newState;
     switch (action.type) {
         case GET_RESULTS:
-            newState = { ...state }
+            newState = {}
             action.search.tasks.forEach(task => {
                 newState[task.id] = task
             })
