@@ -41,8 +41,8 @@ const BookAppointmentButton = (props) => {
 
         const validationErrors = []
         // const dayRegex = /^[0-9]+(\.[0-9][0-9])?$/;
-        if(parseInt(year) < thisYear) validationErrors.push ('Cannot schedule a day in the past')
-        if((parseInt(year) === thisYear && month === thisMonth && day < today && day > 0) || (months.indexOf(month) < months.indexOf(thisMonth) && year < thisYear)) validationErrors.push('Cannot schedule a day in the past')
+        // if(parseInt(year) < thisYear) validationErrors.push ('Cannot schedule a day in the past')
+        if((parseInt(year) === thisYear && month === thisMonth && day < today && day > 0) || ((months.indexOf(month) < months.indexOf(thisMonth) && parseInt(year) <= thisYear)) || parseInt(year) < thisYear) validationErrors.push('Cannot schedule a day in the past')
         if(day < 1 || day > 31 || (month === 'Feb' && day > 28) || (thirtyMonths.includes(month) && day > 30)) validationErrors.push('Please enter a valid day')
         // if(thirtyMonths.includes(month) && day > 30) validationErrors.push('Please enter a valid day')
         // if(!dayRegex.test(day)) validationErrors.push('Please enter a numeric day')
