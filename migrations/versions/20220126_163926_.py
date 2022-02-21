@@ -46,6 +46,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=True),
     sa.Column('taskId', sa.Integer(), nullable=True),
+    sa.Column('year', sa.Integer(), nullable=False),
     sa.Column('month', sa.String(50), nullable=False),
     sa.Column('day', sa.Integer(), nullable=False),
     sa.Column('time', sa.Integer(), nullable=False),

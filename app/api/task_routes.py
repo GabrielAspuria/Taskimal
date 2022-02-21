@@ -61,6 +61,7 @@ def add_appointment(id):
         appointment = Appointment(
             userId=current_user.id,
             taskId=task.id,
+            year=form.data['year'],
             month=form.data['month'],
             day=form.data['day'],
             time=form.data['time'],
