@@ -17,6 +17,7 @@ def search():
         name_results = Task.query.filter(Task.name.ilike(f'%{search}%')).all()
         results.append(name_results)
 
-        search_results = [task for subtask in results for task in subtask]
+        search_results = [task for result in results for task in result]
+        print("RESULTSSSSSSSSSSS:", {'tasks': [task.to_dict() for task in set(search_results)]})
         return {'tasks': [task.to_dict() for task in set(search_results)]}
     # return form.errors

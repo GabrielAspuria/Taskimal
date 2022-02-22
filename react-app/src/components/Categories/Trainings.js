@@ -59,7 +59,7 @@ const Trainings = () => {
             }
             await dispatch(createTask(newTraining))
             resetForm()
-            history.push(`/user/${signedInUser.id}`)
+            history.push(`/user/${signedInUser.username}`)
         }
     }
 

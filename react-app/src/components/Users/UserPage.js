@@ -5,7 +5,7 @@ import { allUsers } from "../../store/users";
 import { allTasks } from "../../store/tasks";
 import '../CSS/UserPage.css'
 
-const UserPage = ({id}) => {
+const UserPage = ({username}) => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const tasksObj = useSelector(state => state.tasks)

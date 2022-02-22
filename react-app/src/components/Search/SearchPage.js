@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { searchResults } from '../../store/search';
 import SearchBar from "./SearchBar";
+import { allTasks } from "../../store/tasks";
 import '../CSS/SearchPage.css'
 
 const SearchPage = (props) => {
     const resultsObj = useSelector(state => state.search)
+    const tasksObj = useSelector(state => state.tasks)
     const dispatch = useDispatch()
 
     const results = Object.values(resultsObj)
@@ -17,7 +19,6 @@ const SearchPage = (props) => {
     const submitSearch = async (e) => {
         e.preventDefault()
         const search = { search: input}
-        console.log("SEARCH:",search)
         if (input) {
             await dispatch(searchResults(search))
             setInput('')
@@ -39,7 +40,7 @@ const SearchPage = (props) => {
                     results.map(result => (
                         <div>
                             <h2>{result?.animal}: {result?.name}</h2>
-                            <NavLink to={'/search'}>
+                            <NavLink to={`/tasks/${result.id}`}>
                                 <img src={result?.pictures} className='search-img'/>
                             </NavLink>
                         </div>
