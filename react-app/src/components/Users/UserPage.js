@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { allUsers } from "../../store/users";
-import { allTasks, editTask, removeTask } from "../../store/tasks";
+import { allTasks } from "../../store/tasks";
 import '../CSS/UserPage.css'
 
 const UserPage = ({id}) => {
@@ -17,12 +17,6 @@ const UserPage = ({id}) => {
     useEffect(() => {
         dispatch(allTasks())
     }, [dispatch])
-
-    const onSubmit = async (e) => {
-        e.preventDefault()
-        await dispatch(removeTask(id))
-    }
-
 
     const tasks = Object.values(tasksObj)
     const userTasks = tasks.filter((task) => task?.userId === user?.id)
