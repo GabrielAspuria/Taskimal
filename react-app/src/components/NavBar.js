@@ -15,40 +15,40 @@ const NavBar = () => {
           <a href='https://www.linkedin.com/in/gabriel-aspuria-032398226/'><img src='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643135711/Taskimal/linkedin_black_logo_icon_147114_3_goqfve.png' className='linkedin'></img></a>
         </li>
         {sessionUser && (
-          <h1 className='greeting'>Hello {sessionUser.username}! </h1>
+          <h2 className='navbar'>Hello {sessionUser.username}! </h2>
         )}
         {!sessionUser && (
-          <h1 className='greeting'>Welcome to Taskimal! </h1>
+          <h2 className='navbar'>Welcome to Taskimal! </h2>
         )}
         <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
+          <NavLink to='/' exact={true} className='navbar'>
             Home
           </NavLink>
         </li>
         {sessionUser && (
           <li>
-            <NavLink to={`/user/${sessionUser.id}`}>
+            <NavLink to={`/user/${sessionUser.username}` } className='navbar'>
               Profile
             </NavLink>
           </li>
         )}
         {sessionUser && (
           <li>
-            <NavLink to='/appointments'>
+            <NavLink to='/appointments' className='navbar'>
               Appointments
             </NavLink>
           </li>
         )}
         {!sessionUser && (
           <li>
-            <NavLink to='/login' exact={true} activeClassName='active'>
+            <NavLink to='/login' exact={true} className='navbar'>
               Login
             </NavLink>
           </li>
         )}
         {!sessionUser && (
           <li>
-            <NavLink to='/sign-up' exact={true} activeClassName='active'>
+            <NavLink to='/sign-up' exact={true} className='navbar'>
               Sign Up
             </NavLink>
           </li>
