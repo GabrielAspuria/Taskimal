@@ -133,7 +133,7 @@ const Exercises = () => {
                         <div>
                             <div><label> Price </label></div>
                             <input
-                                placeholder='Price'
+                                placeholder='Price($1 - $100)'
                                 type='number'
                                 value={price}
                                 onChange={e => setPrice(e.target.value)}
@@ -158,7 +158,7 @@ const Exercises = () => {
                         <div>
                             <div><label> Description </label></div>
                             <textarea
-                                placeholder='Description of your task'
+                                placeholder='Description of your task(max: 500)'
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                                 maxLength='500'

@@ -68,9 +68,12 @@ input {
 
 textarea {
     resize: none;
-    width: 450px;
+    width: 448px;
     height: 110px;
     border-radius: 5px;
+    padding-top: 3px;
+    padding-left: 3px;
+    border: 2px solid #577399;
 }
 
 .add-task-input {

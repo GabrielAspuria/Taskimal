@@ -134,7 +134,7 @@ const Trainings = () => {
                         <div>
                             <div><label> Price </label></div>
                             <input
-                                placeholder='Price'
+                                placeholder='Price($1 - $100)'
                                 type='number'
                                 value={price}
                                 onChange={e => setPrice(e.target.value)}
