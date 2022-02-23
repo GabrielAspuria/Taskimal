@@ -14,6 +14,10 @@ ul {
     box-shadow: 6px 6px #bdd5ea;
 }
 
+.errors {
+    border: none;
+    border-bottom: 6px 6px #bdd5ea;
+}
 
 .category-container {
     display: grid;
@@ -33,7 +37,7 @@ ul {
     border: #ceeaf7 1px solid;
     grid-column: 2 / 2;
     grid-row: 1 / 2;
-    margin-top: 90px;
+    margin-top: 190px;
 }
 
 .task {
@@ -65,7 +69,7 @@ input {
 textarea {
     resize: none;
     width: 450px;
-    height: 100px;
+    height: 110px;
     border-radius: 5px;
 }
 

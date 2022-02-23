@@ -21,19 +21,8 @@ def seed_appointments():
         ap='AM'
     )
 
-    puppy_playdate_appointment_2 = Appointment(
-        userId=1,
-        taskId=6,
-        year=2022,
-        month='Jan',
-        day='31',
-        time=10,
-        ap='AM'
-    )
-
     db.session.add(cat_boarding_appointment)
     db.session.add(puppy_playdate_appointment)
-    db.session.add(puppy_playdate_appointment_2)
     db.session.commit()
 
 def undo_appointments():

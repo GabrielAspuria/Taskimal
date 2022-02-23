@@ -2,7 +2,7 @@ from app.models.task import db, Task
 
 def seed_tasks():
     walking_all = Task(
-        userId=1,
+        userId=2,
         animal='Any',
         name='Walking',
         description='Will walk any animal, any size for the low low price of $20 per session! Each session is one hour long with leashes but not harnesses provided!',
@@ -11,7 +11,7 @@ def seed_tasks():
         pictures='https://res.cloudinary.com/gabrielaspuria/image/upload/v1642791299/Taskimal/chicken_walking_nu6rmi.jpg'
     )
     crate_training_all = Task(
-        userId=1,
+        userId=2,
         animal='Any',
         name='Crate Training',
         description='Will train any animal, any size to stay in and love being in their crate! Each session is 40 an hour with treats provided!',
@@ -21,7 +21,7 @@ def seed_tasks():
     )
 
     boarding_camels = Task(
-        userId=1,
+        userId=2,
         animal='Camel',
         name='Housing',
         description='Love camels. Drop them off here when you need to rest up and get away from the burning sun.',
@@ -41,7 +41,7 @@ def seed_tasks():
     )
 
     hippo_teeth_cleaning = Task(
-        userId=1,
+        userId=2,
         animal='Hippo',
         name='Teeth Cleaning',
         description='Hippos are scary and brushing their teeth is dangerous. But I will do it and do it well.',

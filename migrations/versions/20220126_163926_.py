@@ -35,7 +35,7 @@ def upgrade():
     sa.Column('userId', sa.Integer(), nullable=True),
     sa.Column('animal', sa.String(length=50), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
-    sa.Column('description', sa.String(length=300), nullable=False),
+    sa.Column('description', sa.String(length=500), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
     sa.Column('category', sa.String(length=20), nullable=False),
     sa.Column('pictures', sa.String(length=500), nullable=True),

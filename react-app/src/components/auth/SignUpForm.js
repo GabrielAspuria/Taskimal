@@ -15,8 +15,7 @@ const SignUpForm = () => {
       emails.push(u.email)
     })
   })
-  console.log("usernames:",usernames)
-  console.log("emails", emails)
+
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -37,13 +36,15 @@ const SignUpForm = () => {
 
     const validationErrors = []
     const regex = /^\S+@\S+\.\S+$/;
+    const imgRegex = /(http(s?):)|([/|.|\w|\s])*\.(?:jpg|gif|png)/;
     if (username.length < 1) validationErrors.push('Please enter a User Name')
     if (usernames.includes(username)) validationErrors.push('Username already exists')
     if (firstname.length < 1) validationErrors.push('Please enter your First Name')
     if (lastname.length < 1) validationErrors.push('Please enter your Last Name')
     if (!regex.test(email)) validationErrors.push('Please enter a valid email')
     if (emails.includes(email)) validationErrors.push('Email already exists')
-    if (password !== repeatPassword) validationErrors.push('Password and Repeat Password inputs must match')
+    if (!imgRegex.test(profilePic) && profilePic || (!profilePic)) validationErrors.push('Please enter a valid image URL for your profile')
+    if (password !== repeatPassword) validationErrors.push('Passwords must match')
     if (validationErrors.length === 0) {
     const data = await dispatch(signUp(username, email, firstname, lastname, profilePic, password));
       if (data) {
@@ -73,7 +74,11 @@ const SignUpForm = () => {
   }
 
   const updateProfilePic = (e) => {
-    setProfilePic(e.target.value)
+    // if(!e.target.value) {
+    //   setProfilePic('https://res.cloudinary.com/gabrielaspuria/image/upload/v1643131788/Taskimal/paw_goc9fo.png')
+    // } else {
+      setProfilePic(e.target.value)
+    // }
   }
 
   const updatePassword = (e) => {

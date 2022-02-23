@@ -7,7 +7,7 @@ class Task(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     animal = db.Column(db.String(50), nullable=False)
     name = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.String(300), nullable=False)
+    description = db.Column(db.String(500), nullable=False)
     price = db.Column(db.Integer(),nullable=False)
     category = db.Column(db.String(20), nullable=False)
     pictures = db.Column(db.String(500))
