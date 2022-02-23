@@ -1,39 +1,28 @@
 from app.models.appointment import db, Appointment
 
 def seed_appointments():
-    cat_boarding_appointment = Appointment(
+    camel_boarding_appointment = Appointment(
         userId=1,
-        taskId=4,
+        taskId=3,
         year=2022,
-        month='Jan',
+        month='Mar',
         day='29',
         time=12,
         ap='PM'
     )
 
-    puppy_playdate_appointment = Appointment(
+    hippo_cleaning_appointment = Appointment(
         userId=1,
-        taskId=6,
+        taskId=5,
         year=2022,
-        month='Jan',
+        month='Mar',
         day='30',
         time=10,
         ap='AM'
     )
 
-    puppy_playdate_appointment_2 = Appointment(
-        userId=1,
-        taskId=6,
-        year=2022,
-        month='Jan',
-        day='31',
-        time=10,
-        ap='AM'
-    )
-
-    db.session.add(cat_boarding_appointment)
-    db.session.add(puppy_playdate_appointment)
-    db.session.add(puppy_playdate_appointment_2)
+    db.session.add(camel_boarding_appointment)
+    db.session.add(hippo_cleaning_appointment)
     db.session.commit()
 
 def undo_appointments():

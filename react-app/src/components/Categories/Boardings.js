@@ -38,11 +38,12 @@ const Boardings = () => {
         const validationErrors = []
         // const priceRegex = /^[0-9]+(\.[0-9][0-9])?$/;
         const imgRegex = /(http(s?):)|([/|.|\w|\s])*\.(?:jpg|gif|png)/;
+        if (!animal) validationErrors.push('Please specify what type of animal(s) this task is for')
         if (!name) validationErrors.push('Please provide a name for this task')
         // if (!priceRegex.test(price)) validationErrors.push('Please provide a numeric price')
-        if (price <= 0) validationErrors.push('Please provide a price greater than 0')
+        if (price && (price <= 0 || price > 100)) validationErrors.push('Please provide a price between $1 and $100')
         if (!price) validationErrors.push('Please provide a price per session')
-        if (!imgRegex.test(pictures) && pictures) validationErrors.push('Please enter a valid image URL for your product')
+        if (!imgRegex.test(pictures) && pictures) validationErrors.push('Please enter a valid image URL for your task')
         if (!pictures) validationErrors.push('Please provide a picture representing your task')
         if (!description) validationErrors.push('Please describe your task')
         setErrors(validationErrors)
@@ -83,7 +84,7 @@ const Boardings = () => {
                 <form onSubmit={handleSubmit} className='add-task-form'>
                     <h2> Add A Task </h2>
                     <div>
-                        <ul>
+                        <ul className='errors'>
                             {errors.length > 0 &&
                             errors.map(error => (
                                 <li key={error}> {error} </li>
@@ -109,6 +110,7 @@ const Boardings = () => {
                                 type='text'
                                 value={animal}
                                 onChange={e => setAnimal(e.target.value)}
+                                maxLength='50'
                             >
                             </input>
                         </div>
@@ -121,6 +123,7 @@ const Boardings = () => {
                                 type='text'
                                 value={name}
                                 onChange={e => setName(e.target.value)}
+                                maxLength='50'
                             />
                         </div>
                     </div>
@@ -128,10 +131,11 @@ const Boardings = () => {
                         <div className='add-task-input'>
                             <div><label> Price </label></div>
                             <input
-                                placeholder='Price'
+                                placeholder='Price($1 - $100)'
                                 type='number'
                                 value={price}
                                 onChange={e => setPrice(e.target.value)}
+                                maxLength='3'
                             />
                         </div>
                     </div>
@@ -139,7 +143,7 @@ const Boardings = () => {
                         <div className='add-task-input'>
                             <div><label> Upload Image </label></div>
                             <input
-                                placeholder='Image URL'
+                                placeholder='JPG, PNG, or GIF URL'
                                 type='text'
                                 value={pictures}
                                 onChange={e => setPictures(e.target.value)}
@@ -149,9 +153,10 @@ const Boardings = () => {
                         <div className='add-task-input'>
                             <div><label> Description </label></div>
                             <textarea
-                                placeholder='Description of your task'
+                                placeholder='Description of your task(max: 500)'
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
+                                maxLength='500'
                             />
                         </div>
                     </div>

@@ -21,31 +21,36 @@ const EditTaskButton = (props) => {
         await dispatch(removeTask(id))
         history.push(`/user/${sessionUser.id}`)
     }
+    const numRegex = /^[0-9]+(\.[0-9][0-9])?$/;
 
 
     const handleEdit = async (e) => {
         e.preventDefault()
 
+
         const validationErrors = []
-        const priceRegex = /^[0-9]+(\.[0-9][0-9])?$/;
         const imgRegex = /(http(s?):)|([/|.|\w|\s])*\.(?:jpg|gif|png)/;
+        if (!editAnimal) validationErrors.push('Please specify what type of animal(s) this task is for')
         if (!editName) validationErrors.push('Please provide a name for this task')
-        if (!priceRegex.test(editPrice) && editPrice) validationErrors.push('Please provide a numeric price')
+        // if (!priceRegex.test(editPrice) && editPrice) validationErrors.push('Please provide a numeric price')
+        if (editPrice && (editPrice > 100 || editPrice <= 0)) validationErrors.push('Please provide a price between $1 and $100')
         if (!editPrice) validationErrors.push('Please provide a price per session')
-        if (!imgRegex.test(editPictures) && editPictures) validationErrors.push('Please enter a valid image URL for your product')
+        if (!imgRegex.test(editPictures) && editPictures) validationErrors.push('Please enter a valid image URL for your task')
         if (!editPictures) validationErrors.push('Please provide a picture representing your task')
         if (!editDescription) validationErrors.push('Please describe your task')
         setErrors(validationErrors)
 
-        const editedTask = {
-            animal: editAnimal,
-            name: props.task.name,
-            category: props.task.category,
-            description: editDescription,
-            price: editPrice,
-            pictures: editPictures,
+        if(validationErrors.length === 0) {
+            const editedTask = {
+                animal: editAnimal,
+                name: editName,
+                category: props.task.category,
+                description: editDescription,
+                price: editPrice,
+                pictures: editPictures,
+            }
+            await dispatch(editTask(editedTask, props.task?.id))
         }
-        await dispatch(editTask(editedTask, props.task?.id))
     }
 
     return (
@@ -79,6 +84,8 @@ const EditTaskButton = (props) => {
                             type='text'
                             value={editAnimal}
                             onChange={e => setAnimal(e.target.value)}
+                            maxLength='50'
+                            onKeyPress={(e) => {e.key === 'Enter' && e.preventDefault()}}
                         ></input>
             </div>
 
@@ -91,6 +98,8 @@ const EditTaskButton = (props) => {
                         type='text'
                         value={editName}
                         onChange={e => setName(e.target.value)}
+                        maxLength='50'
+                        onKeyPress={(e) => {e.key === 'Enter' && e.preventDefault()}}
                     />
                 </div>
             </div>
@@ -98,9 +107,10 @@ const EditTaskButton = (props) => {
             <div className='add-task-input'>
                 <div><label> Price: </label></div>
                 <input
-                    type='text'
+                    type='number'
                     value={editPrice}
                     onChange={e => setPrice(e.target.value)}
+                    onKeyPress={(e) => {e.key === 'Enter' && e.preventDefault()}}
                 />
             </div>
 
@@ -110,6 +120,8 @@ const EditTaskButton = (props) => {
                     type='text'
                     value={editPictures}
                     onChange={e => setPictures(e.target.value)}
+                    placeholder='JPG, PNG, or GIF'
+                    onKeyPress={(e) => {e.key === 'Enter' && e.preventDefault()}}
                 />
             </div>
 
@@ -119,6 +131,7 @@ const EditTaskButton = (props) => {
                     type='text'
                     value={editDescription}
                     onChange={e => setDescription(e.target.value)}
+                    maxLength='500'
                 />
             </div>
                 <div className='edit-buttons'>
