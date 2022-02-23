@@ -18,8 +18,11 @@ const EditTaskButton = (props) => {
 
     const handleDelete = async (e) => {
         e.preventDefault()
-        await dispatch(removeTask(id))
-        history.push(`/user/${sessionUser.id}`)
+        const confirmed = window.confirm('Delete task?')
+        if (confirmed) {
+            await dispatch(removeTask(id))
+            history.push(`/user/${sessionUser.id}`)
+        }
     }
     const numRegex = /^[0-9]+(\.[0-9][0-9])?$/;
 
