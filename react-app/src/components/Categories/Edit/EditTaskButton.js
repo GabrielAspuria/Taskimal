@@ -21,14 +21,14 @@ const EditTaskButton = (props) => {
         await dispatch(removeTask(id))
         history.push(`/user/${sessionUser.id}`)
     }
+    const numRegex = /^[0-9]+(\.[0-9][0-9])?$/;
 
 
     const handleEdit = async (e) => {
         e.preventDefault()
-        console.log("YEEEEEET", editPrice > 10)
+
 
         const validationErrors = []
-        // const priceRegex = /^[0-9]+(\.[0-9][0-9])?$/;
         const imgRegex = /(http(s?):)|([/|.|\w|\s])*\.(?:jpg|gif|png)/;
         if (!editAnimal) validationErrors.push('Please specify what type of animal(s) this task is for')
         if (!editName) validationErrors.push('Please provide a name for this task')
@@ -85,6 +85,7 @@ const EditTaskButton = (props) => {
                             value={editAnimal}
                             onChange={e => setAnimal(e.target.value)}
                             maxLength='50'
+                            onKeyPress={(e) => {e.key === 'Enter' && e.preventDefault()}}
                         ></input>
             </div>
 
@@ -98,6 +99,7 @@ const EditTaskButton = (props) => {
                         value={editName}
                         onChange={e => setName(e.target.value)}
                         maxLength='50'
+                        onKeyPress={(e) => {e.key === 'Enter' && e.preventDefault()}}
                     />
                 </div>
             </div>
@@ -108,6 +110,7 @@ const EditTaskButton = (props) => {
                     type='number'
                     value={editPrice}
                     onChange={e => setPrice(e.target.value)}
+                    onKeyPress={(e) => {e.key === 'Enter' && e.preventDefault()}}
                 />
             </div>
 
@@ -118,6 +121,7 @@ const EditTaskButton = (props) => {
                     value={editPictures}
                     onChange={e => setPictures(e.target.value)}
                     placeholder='JPG, PNG, or GIF'
+                    onKeyPress={(e) => {e.key === 'Enter' && e.preventDefault()}}
                 />
             </div>
 

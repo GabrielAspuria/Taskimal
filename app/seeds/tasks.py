@@ -31,7 +31,7 @@ def seed_tasks():
     )
 
     boarding_cats = Task(
-        userId=2,
+        userId=1,
         animal='Cat',
         name='Housing',
         description='Need a getaway but have a cat(s)? Mi casa is your cat(s) casa! Food, water, bed, and kitty litter provided.',
@@ -51,7 +51,7 @@ def seed_tasks():
     )
 
     puppy_playdate = Task(
-        userId=3,
+        userId=1,
         animal='Dog',
         name='Playdate',
         description='I just got a new puppy and willing to watch over your puppies/dogs to get him socialized! Only $1 per hour with food/water/toys provided!',
@@ -71,7 +71,7 @@ def seed_tasks():
     )
 
     puppy_fetch = Task(
-        userId=2,
+        userId=1,
         animal='Dog',
         name='Fetch',
         description='Fetch and puppy is an iconic duo and I will teach your little puppy how to play fetch and do it right!',
