@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 import { allTasks } from "../../store/tasks";
 import '../CSS/SearchPage.css'
 
-const SearchPage = (props) => {
+const SearchPage = () => {
     const resultsObj = useSelector(state => state.search)
     const tasksObj = useSelector(state => state.tasks)
     const dispatch = useDispatch()
