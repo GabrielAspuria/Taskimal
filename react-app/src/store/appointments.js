@@ -50,7 +50,8 @@ const appointmentsReducer = (state = {}, action) => {
     let newState;
     switch(action.type) {
         case GET_APPOINTMENTS:
-            newState = { ...state };
+            
+            newState = {}
             action.appointments.appointments.forEach((appointment) => {
                 newState[appointment.id] = appointment;
             })

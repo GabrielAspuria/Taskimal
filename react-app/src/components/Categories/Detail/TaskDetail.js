@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 import { allTasks } from '../../../store/tasks'
 import { allUsers } from '../../../store/users'
+import { allAppointments, cancelAppointment } from '../../../store/appointments'
 import { removeTask } from '../../../store/tasks'
 import EditTaskButton from '../Edit/EditTaskButton'
 import BookAppointmentButton from '../../Appointments/BookAppointmentButton'
@@ -12,6 +13,7 @@ const TaskDetail = () => {
     const dispatch = useDispatch()
     const tasksObj = useSelector(state => state.tasks)
     const usersObj = useSelector(state => state.users.users)
+    const appoinmentsObj = useSelector(state => state.appointments)
     const sessionUser = useSelector(state => state.session.user)
     const { id } = useParams();
     const history = useHistory()
@@ -24,9 +26,14 @@ const TaskDetail = () => {
         dispatch(allUsers())
     }, [dispatch])
 
+    useEffect(() => {
+        dispatch(allAppointments())
+    },[dispatch])
+
     const handleDelete = async (e) => {
         e.preventDefault()
         await dispatch(removeTask(id))
+        await dispatch(cancelAppointment(id))
         history.push('/')
     }
 
