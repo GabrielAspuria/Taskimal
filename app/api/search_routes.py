@@ -33,7 +33,6 @@ def search():
     name_search = Task.query.filter(Task.name.ilike(f'%{search}%')).all()
     if animal_search:
         result = {task.id : task.to_dict() for task in animal_search}
-        print("RESULTTTTTTTTTTTTTTT", result)
         return { "tasks" : result }
     if name_search:
         result = {task.id : task.to_dict() for task in name_search}
