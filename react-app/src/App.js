@@ -45,7 +45,7 @@ function App() {
         <Route path='/appointments' exact={true}>
           <AppointmentsPage />
         </Route>
-        <Route path='/search/:id' exact={true}>
+        <Route path='/search' exact={true}>
           <SearchPage />
         </Route>
         <Route path='/tasks/exercise' exact={true}>
