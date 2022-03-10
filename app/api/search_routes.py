@@ -29,9 +29,14 @@ search_routes = Blueprint('search', __name__, url_prefix='/search')
 @search_routes.route('')
 def search():
     search = request.args.get('q')
-    search_result = Task.query.filter(Task.animal.ilike(f'%{search}%')).all()
-    if search_result:
-        result = {task.id : task.to_dict() for task in search_result}
+    animal_search = Task.query.filter(Task.animal.ilike(f'%{search}%')).all()
+    name_search = Task.query.filter(Task.name.ilike(f'%{search}%')).all()
+    if animal_search:
+        result = {task.id : task.to_dict() for task in animal_search}
+        print("RESULTTTTTTTTTTTTTTT", result)
         return { "tasks" : result }
+    if name_search:
+        result = {task.id : task.to_dict() for task in name_search}
+        return { "tasks": result }
     else:
         return { "tasks" : {}}
