@@ -15,6 +15,7 @@ import Miscs from './components/Categories/Miscs';
 import TaskDetail from './components/Categories/Detail/TaskDetail';
 import UserPage from './components/Users/UserPage';
 import AppointmentsPage from './components/Appointments/AppointmentsPage';
+import SearchPage from './components/Search/SearchPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -43,6 +44,9 @@ function App() {
         </Route>
         <Route path='/appointments' exact={true}>
           <AppointmentsPage />
+        </Route>
+        <Route path='/search' exact={true}>
+          <SearchPage />
         </Route>
         <Route path='/tasks/exercise' exact={true}>
           <Exercises />
