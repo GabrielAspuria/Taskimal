@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { allUsers } from "../../store/users";
 import { allTasks } from "../../store/tasks";
 import '../CSS/UserPage.css'
 
-const UserPage = () => {
+const UserPage = ({id}) => {
     const dispatch = useDispatch()
-    const usersObj = useSelector(state => state.users)
+    const user = useSelector(state => state.session.user)
     const tasksObj = useSelector(state => state.tasks)
 
     useEffect(() => {
@@ -19,14 +19,9 @@ const UserPage = () => {
     }, [dispatch])
 
     const tasks = Object.values(tasksObj)
-    const user = Object.values(usersObj)
     const userTasks = tasks.filter((task) => task?.userId === user?.id)
-    console.log("USER", user)
-    console.log("ID", user.map((u) => u?.id))
-    console.log("USERTASKS", tasks)
 
     return (
-        // <h1> HELLO </h1>
         <div>
             <div className="user-info">
                 {user?.profilePic === null && (
