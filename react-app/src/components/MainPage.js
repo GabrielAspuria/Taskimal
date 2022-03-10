@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 import { NavLink } from 'react-router-dom';
 import { allTasks } from '../store/tasks';
 import { allUsers } from '../store/users';
+import SearchBar from './Search/SearchBar';
 import './CSS/MainPage.css'
 
 const MainPage = () => {
@@ -29,8 +30,9 @@ const MainPage = () => {
             <div className='header-background'>
                 <img src='https://res.cloudinary.com/gabrielaspuria/image/upload/v1643416678/Taskimal/background_omaeag.png' className='background-img'></img>
                     <h2 className='header'> From your chicken's morning walks, to brushing your hippo's teeth, book an appointment for that task today! </h2>
-                <div className='header-container'>
-                </div>
+            </div>
+            <div>
+                <SearchBar />
             </div>
             <h1 className='title'> Task Categories</h1>
             <div className='category-links'>
