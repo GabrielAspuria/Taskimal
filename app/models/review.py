@@ -7,10 +7,10 @@ class Review(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     taskId = db.Column(db.Integer, db.ForeignKey('tasks.id'))
     rating = db.Column(db.Integer, nullable=False)
-    review = db.ColumnI(db.String(500), nullable=False)
+    review = db.Column(db.String(500), nullable=False)
 
-    user = db.relationship('User', back_populates='review')
-    task = db.relationship('Task', back_populates='review')
+    user = db.relationship('User', back_populates='reviews')
+    tasks = db.relationship('Task', back_populates='reviews')
 
     def to_dict(self):
         return {
