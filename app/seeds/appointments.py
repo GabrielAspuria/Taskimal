@@ -26,5 +26,5 @@ def seed_appointments():
     db.session.commit()
 
 def undo_appointments():
-    db.session.execute('TRUNCATE tasks RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE appointments RESTART IDENTITY CASCADE;')
     db.session.commit()
