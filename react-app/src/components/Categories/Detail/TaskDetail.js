@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory, NavLink } from 'react-router-dom'
 import { allTasks } from '../../../store/tasks'
 import { allUsers } from '../../../store/users'
 import { allAppointments, cancelAppointment } from '../../../store/appointments'
@@ -52,6 +52,11 @@ const TaskDetail = () => {
                 <p> Price: ${task?.price} </p>
                 <p> Tasker: {creator[0]?.firstname} {creator[0]?.lastname} </p>
                 <p> Description: {task?.description} </p>
+            </div>
+            <div id='not-logged'>
+                {!sessionUser && (
+                    <p id='not-logged'> <NavLink to='/login'>Login to book an appointment!</NavLink></p>
+                )}
             </div>
             <div>
                 {sessionUser && sessionUser?.id !== creator[0]?.id && (

@@ -87,3 +87,14 @@ h3 {
     border-color: #bdd5ea;
     margin-left: 55px;
 }
+
+.task-detail > #not-logged {
+    display: grid;
+    grid-column: 2;
+    grid-row: 2;
+    align-items: start;
+    justify-content: center;
+    position: absolute;
+    top: 80%;
+    left: 43%;
+}

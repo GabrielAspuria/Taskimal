@@ -9,11 +9,11 @@ const EditTaskButton = (props) => {
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user)
     const [errors, setErrors] = useState([])
-    const [editAnimal, setAnimal] = useState(props.task.animal)
-    const [editName, setName] = useState(props.task.name)
-    const [editDescription, setDescription] = useState(props.task.description)
-    const [editPrice, setPrice] = useState(props.task.price)
-    const [editPictures, setPictures] = useState(props.task.pictures)
+    const [editAnimal, setAnimal] = useState(props.task?.animal)
+    const [editName, setName] = useState(props.task?.name)
+    const [editDescription, setDescription] = useState(props.task?.description)
+    const [editPrice, setPrice] = useState(props.task?.price)
+    const [editPictures, setPictures] = useState(props.task?.pictures)
     const { id } = useParams();
 
     const handleDelete = async (e) => {
