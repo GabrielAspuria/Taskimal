@@ -5,6 +5,7 @@ import tasksReducer from './tasks';
 import userReducer from './users';
 import appointmentsReducer from './appointments';
 import searchReducer from './search';
+import reviewsReducer from './review';
 
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   users: userReducer,
   appointments: appointmentsReducer,
   search: searchReducer,
+  reviews: reviewsReducer,
 });
 
 

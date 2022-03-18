@@ -8,6 +8,7 @@ import { removeTask } from '../../../store/tasks'
 import EditTaskButton from '../Edit/EditTaskButton'
 import BookAppointmentButton from '../../Appointments/BookAppointmentButton'
 import '../../CSS/TaskDetail.css'
+import Reviews from '../../Reviews/Review'
 
 const TaskDetail = () => {
     const dispatch = useDispatch()
@@ -74,6 +75,7 @@ const TaskDetail = () => {
                     </p>
                 )}
             </div>
+            <Reviews task={task}/>
         </div>
     )
 

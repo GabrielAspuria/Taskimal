@@ -81,3 +81,8 @@ def delete_task(id):
     db.session.delete(task)
     db.session.commit()
     return {"Delete":"Success"}
+
+@task_routes.route('/<int:id>/reviews')
+def get_reviews(id):
+    reviews = Review.query.filter(Review.taskId == id).all()
+    return {'reviews': [review.to_dict() for review in reviews]}
