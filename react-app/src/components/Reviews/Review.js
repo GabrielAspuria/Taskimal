@@ -15,8 +15,6 @@ const Reviews = ({ task }) => {
     const taskReview = reviews?.filter(review => {
         return review?.taskId === task?.id
     })
-    console.log("REVIEWS", reviews)
-
 
     useEffect(() => {
         dispatch(taskReviews(task?.id))
