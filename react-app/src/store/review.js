@@ -1,8 +1,26 @@
 const GET_REVIEWS = 'reviews/GET_REVIEWS'
+const ADD_REVIEW = 'reviews/ADD_REVIEW'
+const EDIT_REVIEW = 'reviews/EDIT_REVIEW'
+const DELETE_REVIEW = 'reviews/DELETE_REVIEW'
 
 const getTaskReviews = (reviews) => ({
     type: GET_REVIEWS,
     reviews
+})
+
+const addReview = (review) => ({
+    type: ADD_REVIEW,
+    review
+})
+
+const editReview = (review) => ({
+    type: EDIT_REVIEW,
+    review
+})
+
+const deleteReview = (id) => ({
+    type: DELETE_REVIEW,
+    id
 })
 
 export const taskReviews = (id) => async (dispatch) => {
@@ -10,6 +28,37 @@ export const taskReviews = (id) => async (dispatch) => {
     const data = await res.json()
     dispatch(getTaskReviews(data))
     return data
+}
+
+export const newReview = (review) => async (dispatch) => {
+    const res = await fetch(`/api/reviews/`, {
+        methods: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(review)
+    })
+    const data = await res.json()
+    dispatch(addReview(data))
+    return data
+}
+
+export const updateReview = (review, id) => async (dispatch) => {
+    const res = await fetch(`/api/reviews/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(review)
+    });
+    const data = await res.json()
+    dispatch(editReview(data))
+    return data
+}
+
+export const removeReview = (id) => async (dispatch) => {
+    const res = await fetch(`/api/comments/${id}`, {
+        method: 'DELETE'
+    })
+    if (res.ok) {
+        dispatch(deleteReview)
+    }
 }
 
 const reviewsReducer = (state = {}, action) => {
@@ -21,6 +70,16 @@ const reviewsReducer = (state = {}, action) => {
                 newState[review.id] = review
             })
             return newState;
+        case ADD_REVIEW:
+            return { ...state, [action.review.id]: action.review}
+        case EDIT_REVIEW:
+            newState = { ...state }
+            newState[action.review.id] = action.review
+            return newState;
+        case DELETE_REVIEW:
+            newState = { ...state }
+            delete newState[action.id]
+            return newState
 
         default:
             return state;

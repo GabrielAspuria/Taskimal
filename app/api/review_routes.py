@@ -5,7 +5,24 @@ from app.forms import AddReviewForm
 
 review_routes = Blueprint('reviews', __name__)
 
-@review_routes.route('/<int:id>', methods=['POST'])
+@review_routes.route('/', methods=['POST'])
+@login_required
+def add_review():
+    form = Review()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        review = Review(
+            rating=form.data['rating'],
+            review=form.data['review'],
+            taskId=form.data['taskId'],
+            userId=current_user.id
+        )
+
+    db.session.add(review)
+    db.session.commit()
+    return review.to_dict()
+
+@review_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def edit_review(id):
     form = Review()
@@ -19,7 +36,7 @@ def edit_review(id):
         edited_review.userId = current_user.id
 
         db.session.commit()
-        return edited_comment.to_dict()
+        return edited_review.to_dict()
 
 @review_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
@@ -28,4 +45,3 @@ def delete_review(id):
     db.session.delete(review)
     db.session.commit()
     return {'DELETE':'SUCCESS'}
-    
