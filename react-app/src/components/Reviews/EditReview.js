@@ -2,21 +2,23 @@ import { useState } from 'react';
 import { useDispatch} from 'react-redux';
 import { updateReview } from '../../store/review';
 import DeleteReviewButton from './DeleteReviewbutton';
+import '../CSS/TaskDetail.css'
 
-const EditReview = ({review, rating, sessionUser}) => {
+const EditReview = ({id, review, rating, sessionUser}) => {
     const dispatch = useDispatch()
     const [editReview, setReview] = useState(review)
     const [editRating, setRating] = useState(rating)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
         const newReview = {
             review: editReview,
             rating: +editRating,
             taskId: review?.taskId,
             userId: sessionUser.id
         }
-        await dispatch(updateReview(newReview, review?.id))
+        await dispatch(updateReview(newReview, id))
     }
 
     return (
@@ -29,11 +31,11 @@ const EditReview = ({review, rating, sessionUser}) => {
                         value={editRating}
                         onChange={(e) => setRating(e.target.value)}
                         >
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
-                        <option value='4'>4</option>
-                        <option value='5'>5</option>
+                        <option value='1'>★</option>
+                        <option value='2'>★★</option>
+                        <option value='3'>★★★</option>
+                        <option value='4'>★★★★</option>
+                        <option value='5'>★★★★★</option>
                     </select>
                 </div>
                 <div>
@@ -45,8 +47,9 @@ const EditReview = ({review, rating, sessionUser}) => {
                     onChange={(e) => setReview(e.target.value)}
                     />
                 </div>
-                <div>
-                <button className="submit-review">Submit</button>
+                <div className='edit-review-buttons'>
+                    <button className="submit-review">Edit</button>
+                    <DeleteReviewButton id={id}/>
                 </div>
             </form>
         </div>

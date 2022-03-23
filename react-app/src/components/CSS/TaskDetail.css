@@ -98,3 +98,14 @@ h3 {
     top: 80%;
     left: 43%;
 }
+
+.reviews {
+    grid-column: 3;
+    grid-row: 2;
+    margin-top: -755px;
+    height: 100px;
+}
+
+.edit-review-buttons {
+    display: flex;
+}

@@ -6,18 +6,21 @@ import { useParams } from 'react-router-dom';
 import { createReview } from '../../store/review';
 import EditReview from './EditReview';
 import DeleteReviewButton from './DeleteReviewbutton';
+import '../CSS/TaskDetail.css'
 
 const Reviews = ({ task, users }) => {
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
     const reviewsObj = useSelector(state => state.reviews)
-    console.log("SESSION",sessionUser)
     const reviews = Object.values(reviewsObj)
     reviews.forEach((user) => {
         user.username = users[user?.userId]
-
-        console.log("USER",user.username, user?.userId)
     })
+    const check = reviews?.filter((user) => {
+        return sessionUser.id === user.userId
+    })
+
+
     const { id } = useParams()
     const taskReview = reviews?.filter(review => {
         return review?.taskId === task?.id
@@ -36,7 +39,7 @@ const Reviews = ({ task, users }) => {
     }, [dispatch])
 
     const resetForm = () => {
-        setRating('5')
+        setRating('★★★★★')
         setReview('')
     }
 
@@ -61,7 +64,7 @@ const Reviews = ({ task, users }) => {
                 {taskReview?.length > 0 &&
                     taskReview?.map(review => (
                         <div>
-                            <p>{review.username.firstname} {review.username.lastname}: {review.rating}</p>
+                            <p>{review.username.firstname} {review.username.lastname}: {review.rating === 5? "★★★★★" : review.rating === 4? "★★★★" : review.rating === 3? "★★★" : review.rating === 2? "★★" : "★"}</p>
                             <p>{review.review}</p>
                             {sessionUser?.id === review?.userId && (
                                 <div>
@@ -69,8 +72,8 @@ const Reviews = ({ task, users }) => {
                                         sessionUser={sessionUser}
                                         rating={review?.rating}
                                         review={review?.review}
+                                        id={review?.id}
                                     />
-                                    <DeleteReviewButton id={review?.id}/>
                                 </div>
                             )}
                         </div>
@@ -79,7 +82,7 @@ const Reviews = ({ task, users }) => {
             </div>
             <div>
 
-            {sessionUser !== null && (
+            {sessionUser !== null && !check.length && (
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label className='rating-label'>Rating:</label>
@@ -88,11 +91,11 @@ const Reviews = ({ task, users }) => {
                             value={rating}
                             onChange={(e) => setRating(e.target.value)}
                             >
-                            <option value='1'>1</option>
-                            <option value='2'>2</option>
-                            <option value='3'>3</option>
-                            <option value='4'>4</option>
-                            <option value='5'>5</option>
+                            <option value='1'>★</option>
+                            <option value='2'>★★</option>
+                            <option value='3'>★★★</option>
+                            <option value='4'>★★★★</option>
+                            <option value='5'>★★★★★</option>
                         </select>
                     </div>
                     <div>

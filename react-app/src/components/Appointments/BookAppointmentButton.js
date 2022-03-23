@@ -14,7 +14,6 @@ const BookAppointmentButton = (props) => {
     const history = useHistory()
     const appointmentsObj = useSelector(state => state.appointments)
     const appointments = Object.values(appointmentsObj)
-    console.log("APPOINTMENTS:", appointments)
 
     useEffect(() => {
         dispatch(allAppointments())
@@ -29,9 +28,6 @@ const BookAppointmentButton = (props) => {
     const [ap, setAp] = useState('AM')
     // const checkAppointments = appointments.forEach((appointment) => apps.push(appointment))
     const checkApps = appointments.filter((app) => (signedInUser.id === app.userId) && month === app.month && parseInt(day) === app.day && parseInt(year) === app.year)
-    console.log("CHECK", checkApps.length)
-    console.log("YEEEEEEEET", year < thisYear)
-    console.log("YEAR:", parseInt(year))
     const handleSubmit = async (e) => {
         e.preventDefault()
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
