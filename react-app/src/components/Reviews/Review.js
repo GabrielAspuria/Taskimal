@@ -5,6 +5,7 @@ import { allUsers } from '../../store/users';
 import { useParams } from 'react-router-dom';
 import { createReview } from '../../store/review';
 import EditReview from './EditReview';
+import DeleteReviewButton from './DeleteReviewbutton';
 
 const Reviews = ({ task, users }) => {
     const dispatch = useDispatch()
@@ -55,6 +56,7 @@ const Reviews = ({ task, users }) => {
 
     return (
         <div className='reviews'>
+            <h1>Reviews</h1>
             <div>
                 {taskReview?.length > 0 &&
                     taskReview?.map(review => (
@@ -62,19 +64,22 @@ const Reviews = ({ task, users }) => {
                             <p>{review.username.firstname} {review.username.lastname}: {review.rating}</p>
                             <p>{review.review}</p>
                             {sessionUser?.id === review?.userId && (
-                                <EditReview
-                                    sessionUser={sessionUser}
-                                    rating={review?.rating}
-                                    review={review?.review}
-                                />
+                                <div>
+                                    <EditReview
+                                        sessionUser={sessionUser}
+                                        rating={review?.rating}
+                                        review={review?.review}
+                                    />
+                                    <DeleteReviewButton id={review?.id}/>
+                                </div>
                             )}
                         </div>
                     )
                 )}
             </div>
             <div>
-            {sessionUser !== null && (
 
+            {sessionUser !== null && (
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label className='rating-label'>Rating:</label>

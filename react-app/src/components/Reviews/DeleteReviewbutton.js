@@ -7,6 +7,7 @@ const DeleteReviewButton = ({id}) => {
     const onSubmit = async (e) => {
         e.preventDefault()
         await dispatch(removeReview(id))
+        console.log("ID",id)
     }
 
     return (

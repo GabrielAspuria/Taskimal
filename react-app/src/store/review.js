@@ -55,11 +55,11 @@ export const updateReview = (review, id) => async (dispatch) => {
 }
 
 export const removeReview = (id) => async (dispatch) => {
-    const res = await fetch(`/api/comments/${id}`, {
+    const res = await fetch(`/api/reviews/${id}`, {
         method: 'DELETE'
     })
     if (res.ok) {
-        dispatch(deleteReview)
+        dispatch(deleteReview(id))
     }
 }
 

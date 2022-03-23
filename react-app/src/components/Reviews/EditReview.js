@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch} from 'react-redux';
 import { updateReview } from '../../store/review';
 import DeleteReviewButton from './DeleteReviewbutton';
@@ -47,7 +47,6 @@ const EditReview = ({review, rating, sessionUser}) => {
                 </div>
                 <div>
                 <button className="submit-review">Submit</button>
-                <DeleteReviewButton id={review?.id}/>
                 </div>
             </form>
         </div>
