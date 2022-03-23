@@ -9,7 +9,7 @@ def seed_reviews():
     )
 
     demo_review_two = Review(
-        userId=2,
+        userId=3,
         taskId=1,
         rating=5,
         review='Always go to Marnie for walks!'

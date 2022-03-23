@@ -11,18 +11,30 @@ import '../CSS/TaskDetail.css'
 const Reviews = ({ task, users }) => {
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
+    const userlist = useSelector(state => state.users)
+    const eachUser = Object.values(Object.values(userlist)[0])
     const reviewsObj = useSelector(state => state.reviews)
     const reviews = Object.values(reviewsObj)
     reviews.forEach((user) => {
-        user.username = users[user?.userId]
+        console.log("USER", user)
+        user.username = users[user?.userId - 1]
     })
+    console.log("REVIEWS",reviews)
     const check = reviews?.filter((user) => {
-        return sessionUser.id === user.userId
+        return sessionUser?.id === user?.userId
     })
 
 
     const { id } = useParams()
     const taskReview = reviews?.filter(review => {
+        // console.log('REVIEW', review)
+        // const checkUser = eachUser.map((user) => {
+        //     console.log("USER", user)
+        //     if (user.id === review.userId) {
+        //         // review.firstname === true
+        //     }
+        // })
+        // console.log("CHECKUSER", checkUser)
         return review?.taskId === task?.id
     })
     const taskId = task?.id
