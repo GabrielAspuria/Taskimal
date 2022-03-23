@@ -8,6 +8,17 @@ const EditReview = ({id, review, rating, sessionUser}) => {
     const dispatch = useDispatch()
     const [editReview, setReview] = useState(review)
     const [editRating, setRating] = useState(rating)
+    const [check, setCheck] = useState(true)
+    let change = async (e) => {
+        if(check === true) {
+            console.log(check)
+            setCheck(false)
+        } else {
+            console.log(check)
+            setCheck(true)
+            
+        }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -23,35 +34,39 @@ const EditReview = ({id, review, rating, sessionUser}) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label className='rating-label'>Rating:</label>
-                    <select
-                        className="rating"
-                        value={editRating}
-                        onChange={(e) => setRating(e.target.value)}
-                        >
-                        <option value='1'>★</option>
-                        <option value='2'>★★</option>
-                        <option value='3'>★★★</option>
-                        <option value='4'>★★★★</option>
-                        <option value='5'>★★★★★</option>
-                    </select>
-                </div>
-                <div>
-                    <textarea
-                    className='add-review-box'
-                    placeholder='leave a review'
-                    value={editReview}
-                    maxLength='500'
-                    onChange={(e) => setReview(e.target.value)}
-                    />
-                </div>
-                <div className='edit-review-buttons'>
-                    <button className="submit-review">Edit</button>
-                    <DeleteReviewButton id={id}/>
-                </div>
-            </form>
+            <button onClick={change}>Edit</button>
+            {check === false && (
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        
+                        <label className='rating-label'>Rating:</label>
+                        <select
+                            className="rating"
+                            value={editRating}
+                            onChange={(e) => setRating(e.target.value)}
+                            >
+                            <option value='1'>★</option>
+                            <option value='2'>★★</option>
+                            <option value='3'>★★★</option>
+                            <option value='4'>★★★★</option>
+                            <option value='5'>★★★★★</option>
+                        </select>
+                    </div>
+                    <div>
+                        <textarea
+                        className='add-review-box'
+                        placeholder='leave a review'
+                        value={editReview}
+                        maxLength='500'
+                        onChange={(e) => setReview(e.target.value)}
+                        />
+                    </div>
+                    <div className='edit-review-buttons'>
+                        <button className="submit-review">Edit</button>
+                        <DeleteReviewButton id={id}/>
+                    </div>
+                </form>            
+            )}
         </div>
     )
 
