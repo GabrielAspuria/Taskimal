@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '49020ea24619'
+revision = '49020ea24618'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -55,6 +55,16 @@ def upgrade():
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('reviews',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('userId', sa.Integer(), nullable=False),
+    sa.Column('taskId', sa.Integer(), nullable=False),
+    sa.Column('rating', sa.Integer(), nullable=False),
+    sa.Column('review', sa.String(500), nullable=False),
+    sa.ForeignKeyConstraint(['userId'], ['users.id']),
+    sa.ForeignKeyConstraint(['taskId'], ['tasks.id']),
+    sa.PrimaryKeyConstraint('id')
+    )
     # ### end Alembic commands ###
 
 
@@ -63,4 +73,5 @@ def downgrade():
     op.drop_table('appointments')
     op.drop_table('tasks')
     op.drop_table('users')
+    op.drop_table('reviews')
     # ### end Alembic commands ###
