@@ -75,7 +75,7 @@ const TaskDetail = () => {
                     </p>
                 )}
             </div>
-            <Reviews task={task}/>
+            <Reviews task={task} users={users}/>
         </div>
     )
 

@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from flask_login import current_user, login_required
 from app.models import db, Review, Task, User
 from app.forms import AddReviewForm
@@ -8,19 +8,21 @@ review_routes = Blueprint('reviews', __name__)
 @review_routes.route('/', methods=['POST'])
 @login_required
 def add_review():
-    form = Review()
+    form = AddReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
         review = Review(
+            userId=current_user.id,
+            taskId=form.data['taskId'],
             rating=form.data['rating'],
             review=form.data['review'],
-            taskId=form.data['taskId'],
-            userId=current_user.id
         )
 
-    db.session.add(review)
-    db.session.commit()
-    return review.to_dict()
+        db.session.add(review)
+        db.session.commit()
+        return review.to_dict()
+    return form.errors
 
 @review_routes.route('/<int:id>', methods=['PUT'])
 @login_required
@@ -30,10 +32,10 @@ def edit_review(id):
     edited_review = Review.query.get(id)
 
     if form.validate_on_submit():
+        edited_review.userId = current_user.id
+        edited_review.taskId = form.data['taskId']
         edited_review.rating = form.data['rating']
         edited_review.review = form.data['review']
-        edited_review.taskId = form.data['taskId']
-        edited_review.userId = current_user.id
 
         db.session.commit()
         return edited_review.to_dict()

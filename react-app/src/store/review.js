@@ -30,15 +30,17 @@ export const taskReviews = (id) => async (dispatch) => {
     return data
 }
 
-export const newReview = (review) => async (dispatch) => {
+export const createReview = (review) => async (dispatch) => {
     const res = await fetch(`/api/reviews/`, {
-        methods: 'POST',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(review)
     })
-    const data = await res.json()
-    dispatch(addReview(data))
-    return data
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(addReview(data))
+        return data
+    }
 }
 
 export const updateReview = (review, id) => async (dispatch) => {
@@ -70,12 +72,16 @@ const reviewsReducer = (state = {}, action) => {
                 newState[review.id] = review
             })
             return newState;
+
         case ADD_REVIEW:
-            return { ...state, [action.review.id]: action.review}
+            newState = { ...state, [action.review.userId]: action.review }
+            return newState
+
         case EDIT_REVIEW:
             newState = { ...state }
             newState[action.review.id] = action.review
             return newState;
+
         case DELETE_REVIEW:
             newState = { ...state }
             delete newState[action.id]
