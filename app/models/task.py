@@ -14,6 +14,7 @@ class Task(db.Model):
 
     user = db.relationship('User', back_populates='tasks')
     appointments = db.relationship('Appointment', cascade=('all, delete'), back_populates='tasks')
+    reviews = db.relationship('Review', cascade=('all', 'delete'), back_populates='tasks')
 
     def to_dict(self):
         return {
