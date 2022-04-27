@@ -1,5 +1,5 @@
 const GET_ALL_TASKS = 'tasks/GET_ALL_TASKS';
-const ADD_TASK = 'tasks/ADD_TASK'
+const ADD_TASK = 'file/ADD_TASK'
 const EDIT_TASK = 'tasks/EDIT_TASK'
 const DELETE_TASK = 'tasks/DELETE_TASK'
 

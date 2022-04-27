@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import React, {useState, useEffect} from 'react';
 import { NavLink,useHistory } from 'react-router-dom';
-import { allTasks, createTask } from '../../store/tasks';
+import { allTasks, createTask, uploadFile } from '../../store/tasks';
 import '../CSS/Category.css'
 
 const Exercises = () => {

@@ -2,6 +2,10 @@ from flask import Blueprint, request, jsonify
 from flask_login import current_user, login_required
 from app.models import Task, db, Appointment, Review
 from app.forms import AddTaskForm, AddAppointmentForm
+import boto3
+import botocore
+from app.config import Config
+from app.aws_s3 import *
 
 task_routes = Blueprint('tasks', __name__)
 
@@ -26,7 +30,6 @@ def add_task():
             pictures=form.data['pictures'],
             userId=current_user.id
         )
-
         db.session.add(task)
         db.session.commit()
         return task.to_dict()
