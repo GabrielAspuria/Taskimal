@@ -21,8 +21,9 @@
     border: #ceeaf7 1px solid;
     grid-column: 1;
     grid-row: 1;
-    margin-top: -300px;
+    margin-top: -360px;
     margin-left: 30px;
+    position: absolute;
 }
 
 .submit-edit-button {
@@ -102,10 +103,25 @@ h3 {
 .reviews {
     grid-column: 3;
     grid-row: 2;
-    margin-top: -755px;
+    margin-top: -640px;
     height: 100px;
 }
 
 .edit-review-buttons {
     display: flex;
+}
+
+.edit-task-button {
+    width: 80px;
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.edit-task-button-div {
+    margin-left: 240px;
+    margin-top: -420px;
+    position: absolute;
+    display: flex;
+
+    
 }
