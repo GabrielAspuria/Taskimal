@@ -23,16 +23,6 @@ const deleteTask = id => ({
     id
 })
 
-const form = new FormData()
-form.append('userId', userId)
-form.append('animal', animal)
-form.append('name', name)
-form.append('description', description)
-form.append('price', price)
-form.append('category', category)
-form.append('file', file)
-
-
 export const allTasks = () => async (dispatch) => {
     const response = await fetch("/api/tasks/");
     const data = await response.json();

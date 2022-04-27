@@ -11,8 +11,8 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         'DATABASE_URL').replace('postgres://', 'postgresql://')
     SQLALCHEMY_ECHO = True
-    
-    S3_BUCKET = os.environ.get("taskimalbucket")
-    S3_KEY = os.environ.get("AKIASWBZI4G4MPZYMVMU")
-    S3_SECRET = os.environ.get("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")
+
+    S3_BUCKET = os.environ.get("S3_BUCKET_NAME")
+    S3_KEY = os.environ.get("S3_ACCESS_KEY")
+    S3_SECRET = os.environ.get("S3_SECRET_ACCESS_KEY")
     S3_LOCATION = f"http://{S3_BUCKET}.s3.amazonaws.com/"
