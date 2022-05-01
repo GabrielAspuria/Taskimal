@@ -17,6 +17,9 @@ const Exercises = () => {
     const [price, setPrice] = useState('')
     const [category, setCategory] = useState('Exercise')
     const [pictures, setPictures] = useState('')
+    const [image, setImage] = useState(null)
+    const [imageLoading, setImageLoading] = useState(false)
+    const [disableButton, setDisableButton] = useState(false)
 
 
     useEffect(() => {
@@ -43,30 +46,61 @@ const Exercises = () => {
         // if (!priceRegex.test(price)) validationErrors.push('Please provide a numeric price')
         if (price && (price <= 0 || price > 100)) validationErrors.push('Please provide a price between $1 and $100')
         if (!price) validationErrors.push('Please provide a price per session')
-        if (!imgRegex.test(pictures) && pictures) validationErrors.push('Please enter a valid image URL for your task')
-        if (!pictures) validationErrors.push('Please provide a picture representing your task')
+        // if (!imgRegex.test(pictures) && pictures) validationErrors.push('Please enter a valid image URL for your task')
+        // if (!pictures) validationErrors.push('Please provide a picture representing your task')
         if (!description) validationErrors.push('Please describe your task')
         setErrors(validationErrors)
 
         if (validationErrors.length === 0) {
-            const newTraining = {
-                animal,
-                name,
-                description,
-                price,
-                category,
-                pictures,
-                userId: sessionUser.id
+            // const newTraining = {
+            //     animal,
+            //     name,
+            //     description,
+            //     price,
+            //     category,
+            //     pictures,
+            //     userId: sessionUser.id
+            // }
+
+            const formData = new FormData();
+            formData.append('image', image)
+            formData.set('animal', animal)
+            formData.set('name', name)
+            formData.set('description', description)
+            formData.set('price', price)
+            formData.set('category', category)
+            formData.set('userId', sessionUser.id)
+
+            setImageLoading(true);
+            setDisableButton(true);
+
+            const res = await fetch(`/api/tasks/`, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (res.ok) {
+                await res.json()
+                setImageLoading(false)
+                // resetForm()
+                await dispatch(createTask(formData))
+                history.push(`/user/${sessionUser.id}`)
+            } else {
+                console.log("error")
             }
-            await dispatch(createTask(newTraining))
-            resetForm()
-            history.push(`/user/${sessionUser.id}`)
+            // await dispatch(createTask(newTraining))
+            // resetForm()
+            // history.push(`/user/${sessionUser.id}`)
         }
     }
 
     const tasks = Object.values(tasksObj)
     const exercises = tasks.filter((task) => task?.category === 'Exercise')
 
+    const updateImage = (e) => {
+        const file = e.target.files[0]
+        setImage(file)
+    }
     return (
         <div className='category-container'>
             {exercises.map((exercise) => (
@@ -94,17 +128,6 @@ const Exercises = () => {
                     <div className='add-task-input'>
                         <div><label> Animal </label></div>
                         <div>
-                            {/* <select
-                            value={animal}
-                            onChange={(e) => setAnimal(e.target.value)}
-                            >
-                                <option value='Any'> Any </option>
-                                <option value='Dog'> Dog </option>
-                                <option value='Cat'> Cat </option>
-                                <option value='Bird'> Bird </option>
-                                <option value='Reptile'> Reptile </option>
-                                <option value='Misc'> Misc </option>
-                            </select> */}
                             <input
                                 placeholder='What kind of animal(s)?'
                                 type='text'
@@ -146,11 +169,15 @@ const Exercises = () => {
                         <div>
                             <div><label> Upload Image </label></div>
                             <input
-                                placeholder='JPG, PNG, or GIF URL'
-                                type='text'
-                                value={pictures}
-                                onChange={e => setPictures(e.target.value)}
+                                // placeholder='JPG, PNG, or GIF URL'
+                                // type='text'
+                                // value={pictures}
+                                // onChange={e => setPictures(e.target.value)}
+                                type='file'
+                                accept='image/*'
+                                onChange={updateImage}
                             />
+                            {(imageLoading) && <p> Loading...</p>}
                         </div>
                     </div>
 

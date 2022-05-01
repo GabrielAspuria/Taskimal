@@ -10,7 +10,7 @@ class Task(db.Model):
     description = db.Column(db.String(500), nullable=False)
     price = db.Column(db.Integer(),nullable=False)
     category = db.Column(db.String(20), nullable=False)
-    pictures = db.Column(db.String(500))
+    pictures = db.Column(db.String(), nullable=False)
 
     user = db.relationship('User', back_populates='tasks')
     appointments = db.relationship('Appointment', cascade=('all, delete'), back_populates='tasks')

@@ -14,7 +14,7 @@ class Appointment(db.Model):
 
 
     user = db.relationship('User', back_populates='appointments')
-    tasks = db.relationship('Task', back_populates='appointments')
+    tasks = db.relationship('Task', cascade=('all', 'delete'), back_populates='appointments')
 
     def to_dict(self):
         return {

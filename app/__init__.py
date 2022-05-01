@@ -12,7 +12,6 @@ from .api.task_routes import task_routes
 from .api.appointment_routes import appointment_routes
 from .api.search_routes import search_routes
 from .api.review_routes import review_routes
-from .api.aws_routes import file_routes
 
 from .seeds import seed_commands
 
@@ -40,7 +39,6 @@ app.register_blueprint(task_routes, url_prefix='/api/tasks')
 app.register_blueprint(appointment_routes, url_prefix='/api/appointments')
 app.register_blueprint(search_routes, url_prefix='/api/search')
 app.register_blueprint(review_routes, url_prefix='/api/reviews')
-app.register_blueprint(file_routes, url_prefix='/api/file')
 db.init_app(app)
 Migrate(app, db)
 
