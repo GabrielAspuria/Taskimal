@@ -33,27 +33,13 @@ def add_task():
     #     db.session.commit()
     #     return task.to_dict()
     # return form.errors
-    # if "image" not in request.files:
-    #     return {"errors": "image required"}, 400
 
-
-    # if not allowed_file(image.filename):
-    #     return {"errors": "file type not permitted"}, 400
-
-    # userId = request.form["userId"]
-    # animal = request.form["animal"]
-    # name = request.form["name"]
-    # description = request.form["description"]
-    # price = request.form["price"]
-    # category = request.form["category"]
-
-    print('QQQQQQQQQQ',request.files)
     if "file" not in request.files:
         return "no user_file key in request.files"
 
     file = request.files["file"]
+    print('QQQQQQQQQQ', file)
 
-    # image = request.files["image"]
     upload = upload_file_to_s3(file, Config.S3_BUCKET)
 
     if file:
@@ -70,53 +56,6 @@ def add_task():
         db.session.commit()
         return file.to_dict()
     return "No file attached!"
-
-    # image.filename = get_unique_filename(image.filename)
-
-    # new_task = Task(
-    #     userId=userId,
-    #     animal=animal,
-    #     name=name,
-    #     description=description,
-    #     price=price,
-    #     category=category,
-    # )
-    # db.session.add(new_task)
-    # db.session.commit()
-    # return {'pictures': url}
-
-    # try:
-    #     new_task = {
-    #         'userId': userId,
-    #         'animal': animal,
-    #         'description': description,
-    #         'name': name,
-    #         'price': price,
-    #         'category': category,
-    #         'pictures': url,
-    #     }
-
-    #     new_task_db = Task(
-    #         **new_task
-    #     )
-    #     db.session.add(new_task_db)
-    #     db.session.commit()
-    #     # return task.to_dict()
-
-    #     new_task_return = {
-    #         'id': new_task_db.id,
-    #         'userId': new_task_db.userId,
-    #         'animal': new_task_db.animal,
-    #         'description': new_task_db.description,
-    #         'name': new_task_db.name,
-    #         'price': new_task_db.price,
-    #         'category': new_task_db.category,
-    #         'pictures': new_task_db.pictures
-    #     }
-    #     return jsonify(new_task_return)
-    # except IntegrityError as e:
-    #     return jsonify('Data error'), 400
-
 
 @task_routes.route('/<int:id>', methods=['PUT'])
 def edit_task(id):

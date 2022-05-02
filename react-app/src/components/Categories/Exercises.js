@@ -88,9 +88,9 @@ const Exercises = () => {
             if (res.ok) {
                 await res.json()
                 setImageLoading(false)
-                // resetForm()
-                await dispatch(createTask(formData))
+                resetForm()
                 history.push(`/user/${sessionUser.id}`)
+                await dispatch(createTask(formData))
             } else {
                 console.log("error")
             }
