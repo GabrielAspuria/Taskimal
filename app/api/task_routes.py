@@ -5,8 +5,7 @@ from app.forms import AddTaskForm, AddAppointmentForm
 import boto3
 import botocore
 from app.config import Config
-from app.aws_s3 import upload_file_to_s3, allowed_file, get_unique_filename
-
+from app.aws_s3 import upload_file_to_s3
 task_routes = Blueprint('tasks', __name__)
 
 @task_routes.route('/')
@@ -37,63 +36,97 @@ def add_task():
     # if "image" not in request.files:
     #     return {"errors": "image required"}, 400
 
-    image = request.files["image"]
+    # image = request.files["image"]
 
-    userId = request.form["userId"]
-    animal = request.form["animal"]
-    name = request.form["name"]
-    description = request.form["description"]
-    price = request.form["price"]
-    category = request.form["category"]
+    # if not allowed_file(image.filename):
+    #     return {"errors": "file type not permitted"}, 400
 
-    if not allowed_file(image.filename):
-        return {"errors": "file type not permitted"}, 400
+    # userId = request.form["userId"]
+    # animal = request.form["animal"]
+    # name = request.form["name"]
+    # description = request.form["description"]
+    # price = request.form["price"]
+    # category = request.form["category"]
 
-    image.filename = get_unique_filename(image.filename)
+    print('QQQQQQQQQQ',request.files)
+    if "file" not in request.files:
+        return "no user_file key in request.files"
 
-    upload = upload_file_to_s3(image)
+    file = request.files["file"]
 
-    if "url" not in upload:
-        # if the dictionary doesn't have a url key
-        # it means that there was an error when we tried to upload
-        # so we send back that error message
-        return upload, 400
-
-    url = upload["url"]
-
-
-
-    try:
-        new_task = {
-            'userId': userId,
-            'animal': animal,
-            'description': description,
-            'name': name,
-            'price': price,
-            'category': category,
-            'pictures': url,
-        }
-
-        new_task_db = Task(
-            **new_task
-        )
-        db.session.add(new_task_db)
+    if file:
+        file_url = upload_file_to_s3(file, Config.S3_BUCKET)
+        file = Task(
+            userId=request.form.get('userId'),
+            animal=request.form.get('animal'),
+            name=request.form.get('name'),
+            description=request.form.get('description'),
+            price=request.form.get('price'),
+            category=request.form.get('category'),
+            pictures=file_urlell,
+    )
+        db.session.add(file)
         db.session.commit()
-        # return task.to_dict()
+        return file.to_dict()
+    return "No file attached!"
 
-        new_task_return = {
-            'id': new_task_db.id,
-            'userId': new_task_db.userId,
-            'animal': new_task_db.animal,
-            'description': new_task_db.description,
-            'name': new_task_db.name,
-            'price': new_task_db.price,
-            'category': new_task_db.category,
-            'pictures': new_task_db.pictures
-        }
-        return jsonify(new_task_return)
-    except IntegrityError as e:
-        return jsonify('Data error'), 400
+    # print("REQQQQQQQQQQQQQQQQQQQQ", request.files)
+
+    # image.filename = get_unique_filename(image.filename)
+
+    # upload = upload_file_to_s3(image)
+
+    # if "url" not in upload:
+    #     # if the dictionary doesn't have a url key
+    #     # it means that there was an error when we tried to upload
+    #     # so we send back that error message
+    #     return upload, 400
+
+    # url = upload["url"]
+
+    # new_task = Task(
+    #     userId=userId,
+    #     animal=animal,
+    #     name=name,
+    #     description=description,
+    #     price=price,
+    #     category=category,
+    # )
+    # db.session.add(new_task)
+    # db.session.commit()
+    # return {'pictures': url}
+
+    # try:
+    #     new_task = {
+    #         'userId': userId,
+    #         'animal': animal,
+    #         'description': description,
+    #         'name': name,
+    #         'price': price,
+    #         'category': category,
+    #         'pictures': url,
+    #     }
+
+    #     new_task_db = Task(
+    #         **new_task
+    #     )
+    #     db.session.add(new_task_db)
+    #     db.session.commit()
+    #     # return task.to_dict()
+
+    #     new_task_return = {
+    #         'id': new_task_db.id,
+    #         'userId': new_task_db.userId,
+    #         'animal': new_task_db.animal,
+    #         'description': new_task_db.description,
+    #         'name': new_task_db.name,
+    #         'price': new_task_db.price,
+    #         'category': new_task_db.category,
+    #         'pictures': new_task_db.pictures
+    #     }
+    #     return jsonify(new_task_return)
+    # except IntegrityError as e:
+    #     return jsonify('Data error'), 400
 
 
 @task_routes.route('/<int:id>', methods=['PUT'])

@@ -1,14 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux'
 import React, {useState, useEffect} from 'react';
 import { NavLink,useHistory } from 'react-router-dom';
-import { allTasks, createTask, uploadFile } from '../../store/tasks';
+import { allTasks, createTask } from '../../store/tasks';
 import '../CSS/Category.css'
 
 const Exercises = () => {
     const tasksObj = useSelector(state => state.tasks)
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user)
+    // const uploadedFile = useSelector((state) => state.tasks)
     const history = useHistory()
+    // console.log("YEEEEEET",uploadedFile)
 
     const [errors, setErrors] = useState([])
     const [animal, setAnimal] = useState('')
@@ -19,8 +21,7 @@ const Exercises = () => {
     const [pictures, setPictures] = useState('')
     const [image, setImage] = useState(null)
     const [imageLoading, setImageLoading] = useState(false)
-    const [disableButton, setDisableButton] = useState(false)
-
+    const [file, setFile] = useState()
 
     useEffect(() => {
         dispatch(allTasks())
@@ -61,23 +62,28 @@ const Exercises = () => {
             //     pictures,
             //     userId: sessionUser.id
             // }
+            const userId = sessionUser.id
 
-            const formData = new FormData();
-            formData.append('image', image)
+            let formData = new FormData();
+            // formData.append('image', image)
+            formData.append('file', file)
             formData.set('animal', animal)
+            formData.set('userId', userId)
             formData.set('name', name)
             formData.set('description', description)
             formData.set('price', price)
             formData.set('category', category)
-            formData.set('userId', sessionUser.id)
+            formData.set('pictures', image)
+            // console.log(formData)
 
             setImageLoading(true);
-            setDisableButton(true);
 
             const res = await fetch(`/api/tasks/`, {
                 method: 'POST',
                 body: formData,
             });
+
+            console.log(res)
 
             if (res.ok) {
                 await res.json()
@@ -99,7 +105,7 @@ const Exercises = () => {
 
     const updateImage = (e) => {
         const file = e.target.files[0]
-        setImage(file)
+        setFile(file)
     }
     return (
         <div className='category-container'>
@@ -197,6 +203,7 @@ const Exercises = () => {
                     </button>
                 </form>
             }
+            {/* {createTask && <img src={uploadedFile.pictures} alt={uploadedFile.userid} />} */}
         </div>
     )
 }

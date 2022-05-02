@@ -30,17 +30,41 @@ export const allTasks = () => async (dispatch) => {
     return data;
 }
 
-export const createTask = (task) => async (dispatch) => {
+export const createTask = (fileForm) => async (dispatch) => {
+    const {
+        userId,
+        animal,
+        name,
+        description,
+        price,
+        category,
+        pictures,
+        file,
+    } = fileForm
+
+    const form = new FormData()
+    form.append('animal', animal)
+    form.append('userId', userId)
+    form.append('name', name)
+    form.append('description', description)
+    form.append('price', price)
+    form.append('category', category)
+    form.append('pictures', pictures)
+    form.append('file', file)
     const res = await fetch('/api/tasks/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify(task)
+        body: form
     });
-    if (res.ok) {
-        const data = await res.json()
-        dispatch(addTask(data))
-        return data
+    // if (res.ok) {
+    //     const data = await res.json()
+    //     dispatch(addTask(data))
+    //     return data
+    // }
+    const uploadedFile = await res.json()
+    if (!uploadedFile.errors){
+        dispatch(addTask(uploadedFile))
     }
+    return uploadedFile
 }
 
 export const editTask = (task, id) => async(dispatch) => {
