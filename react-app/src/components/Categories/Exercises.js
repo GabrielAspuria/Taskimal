@@ -180,7 +180,6 @@ const Exercises = () => {
                                 // value={pictures}
                                 // onChange={e => setPictures(e.target.value)}
                                 type='file'
-                                accept='image/*'
                                 onChange={updateImage}
                             />
                             {(imageLoading) && <p> Loading...</p>}
