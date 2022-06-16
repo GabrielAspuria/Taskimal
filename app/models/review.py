@@ -10,7 +10,7 @@ class Review(db.Model):
     review = db.Column(db.String(500), nullable=False)
 
     user = db.relationship('User', back_populates='reviews')
-    tasks = db.relationship('Task', cascade=('all', 'delete'),  back_populates='reviews')
+    tasks = db.relationship('Task',  back_populates='reviews')
 
     def to_dict(self):
         return {
@@ -20,5 +20,3 @@ class Review(db.Model):
             'rating' : self.rating,
             'review' : self.review
         }
-
-
